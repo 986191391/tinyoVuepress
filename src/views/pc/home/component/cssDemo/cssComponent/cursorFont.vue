@@ -11,7 +11,6 @@ export default {
     }
   },
   mounted () {
-    console.log('onmounted!!!')
     this.onFlash()
   },
   methods: {

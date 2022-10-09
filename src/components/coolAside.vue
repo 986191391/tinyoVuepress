@@ -64,7 +64,6 @@ export default {
   watch: {
     $route: {
       handler: function (to, from) {
-        console.log('too', to)
         const curNav = this.asideData.find(itm => itm.nav === to.fullPath)
         this.menuActive = curNav && curNav.index
       },

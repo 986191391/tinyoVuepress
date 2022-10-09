@@ -5,6 +5,7 @@ import PcHome from '../views/pc/home/home.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
+import PcHomeCopyparse from '../views/pc/home/component/copyparse/copyparse.vue'
 // import PcPlan from '../views/pc/plan/plan.vue'
 // import PcLegends from '../views/pc/legends/legends.vue'
 // import PcMine from '../views/pc/mine/mine.vue'
@@ -52,6 +53,12 @@ const pcRoutes = [
         name: 'cssDemo',
         component: PcHomeCssDemo,
         meta: 'cssDemo'
+      },
+      {
+        path: 'copyparse',
+        name: 'copyparse',
+        component: PcHomeCopyparse,
+        meta: 'copyparse'
       }
     ]
   }

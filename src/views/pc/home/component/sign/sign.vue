@@ -59,13 +59,10 @@ export default {
         imgUrl: stampSecond
       })
       this.stampList = newStampList
-      console.log('this.stampList', newStampList)
     }
   },
   methods: {
     stampSelectChange (value) {
-      console.log('value', value)
-
       const imgUrl = value === '0' ? stampSecond : stampFirst
       const newStampList = this.stampList.map((item) => {
         if (!item.custom) return item
@@ -76,14 +73,11 @@ export default {
       this.stampList = newStampList
     },
     onCustomSignMouseDown (e, index) {
-      console.log('down', e, index)
       e.preventDefault()
       
       // 获取并记录 基于拖拽图片左上角 的 X Y值
       let currentSelfX = e.clientX - this.stampList[index].left - 210
       let currentSelfY = e.clientY - this.stampList[index].top - 129
-      console.log('currentSelfX', currentSelfX)
-      console.log('currentSelfY', currentSelfY)
       this.isDrag = true
       this.stampIndex = index
       this.currentSelfX = currentSelfX
@@ -91,7 +85,6 @@ export default {
     },
     onCustomSignMouseMove (e) {
       if (!this.isDrag) return
-      console.log('move')
       const newStampList = this.stampList
       let newLeft = e.clientX - 210 - this.currentSelfX
       let newTop = e.clientY - 129 - this.currentSelfY
@@ -105,10 +98,8 @@ export default {
       this.stampList = newStampList
     },
     onCustomSignMoveUp (e) {
-      console.log('up')
       if (!this.isDrag) return
       this.isDrag = false
-      console.log('onCustomSignMoveUp', e)
 
       let newLeft = e.clientX - 210 - this.currentSelfX
       let newTop = e.clientY - 129 - this.currentSelfY

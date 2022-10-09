@@ -1,6 +1,5 @@
 <template>
   <div 
-    draggable
     class="mac-window" 
     :style="{ width: windowWidth || '100%'}"
   >
