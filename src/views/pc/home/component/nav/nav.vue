@@ -2,12 +2,12 @@
   <div class="directory-container">
     <div ref="main" class="content-main">
       <h1>主标题 h1, 最重要的部分 </h1>
-      <h2>h2是主标题的子标题</h2>
+      <h2>h2标签,子标题</h2>
       <h3>h3则是h2的子标题</h3>
       <p>这里是h3 的内容区域咯 11111111111111111111111111111111111111111111111111111111</p>
       <h3>第二个h3子标题</h3>
       <p>这里是h3 的内容区域咯 222222222222222222222222222222222222222222222222222222222</p>
-      <h2>可以同时拥有多个子标题</h2>
+      <h2>h2标签,可以同时拥有多个子标题</h2>
     </div>
     <div class="directory">
       <template v-if="showDirectory">
@@ -30,10 +30,8 @@ export default {
   },
   methods: {
     onShowDirectory () {
-      console.log('111', this.$refs)
       const tlearr = ['h1', 'h2', 'h3', 'h4', 'h5']
       const mainDomsChildren = this.$refs.main.children
-      console.log('111', mainDomsChildren)
       // 把h1 - h5的标签过滤出来
       const titleTagArr = [...mainDomsChildren].filter(itm => tlearr.includes(itm.localName))
       // 构建目录

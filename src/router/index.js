@@ -8,6 +8,7 @@ import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
 import PcHomeCopyparse from '../views/pc/home/component/copyparse/copyparse.vue'
 import PcHomeMusicbox from '../views/pc/home/component/musicbox/musicbox.vue'
 import PcHomeNav from '../views/pc/home/component/nav/nav.vue'
+import PcHomeGoBang from '../views/pc/home/component/gobang/gobang.vue'
 // import PcPlan from '../views/pc/plan/plan.vue'
 // import PcLegends from '../views/pc/legends/legends.vue'
 // import PcMine from '../views/pc/mine/mine.vue'
@@ -73,6 +74,12 @@ const pcRoutes = [
         name: 'directory',
         component: PcHomeNav,
         meta: 'directory'
+      },
+      {
+        path: 'gobang',
+        name: 'gobang',
+        component: PcHomeGoBang,
+        meta: 'gobang'
       }
     ]
   }
