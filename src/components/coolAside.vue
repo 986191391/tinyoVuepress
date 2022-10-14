@@ -50,7 +50,7 @@ export default {
         index: '6'
       }, {
         title: '语义话标签目录',
-        nav: '/home/catalogue',
+        nav: '/home/directory',
         index: '7'
       }]
     }

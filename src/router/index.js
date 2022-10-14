@@ -6,6 +6,8 @@ import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
 import PcHomeCopyparse from '../views/pc/home/component/copyparse/copyparse.vue'
+import PcHomeMusicbox from '../views/pc/home/component/musicbox/musicbox.vue'
+import PcHomeNav from '../views/pc/home/component/nav/nav.vue'
 // import PcPlan from '../views/pc/plan/plan.vue'
 // import PcLegends from '../views/pc/legends/legends.vue'
 // import PcMine from '../views/pc/mine/mine.vue'
@@ -59,6 +61,18 @@ const pcRoutes = [
         name: 'copyparse',
         component: PcHomeCopyparse,
         meta: 'copyparse'
+      },
+      {
+        path: 'musicbox',
+        name: 'musicbox',
+        component: PcHomeMusicbox,
+        meta: 'musicbox'
+      },
+      {
+        path: 'directory',
+        name: 'directory',
+        component: PcHomeNav,
+        meta: 'directory'
       }
     ]
   }
