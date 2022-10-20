@@ -1,5 +1,5 @@
 <template>
-  <div ref={ref} class="action-bar-container" >
+  <div ref="actionBar" class="action-bar-container" >
     <div class="bar-left">
       <i class="el-icon-back" title="返回" @click="onBack" />
     </div>
@@ -75,7 +75,7 @@ export default {
     },
     onSwitchEdit () {
       this.editable = !this.editable
-      onSwitchEditStatus(!this.editable)
+      this.onSwitchEditStatus(this.editable)
     }
   }
 }
