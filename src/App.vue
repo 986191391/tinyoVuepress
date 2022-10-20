@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition :name="isMobile ? 'mobileRouter' : 'pcRouter'" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -32,6 +34,33 @@ body, html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  // 路由切换时的效果
+  .mobileRouter-enter-active,
+  .mobileRouter-leave-active {
+    opacity: 1;
+    transition: all 0.65s;
+  }
+  .mobileRouter-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .mobileRouter-leave-to{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .pcRouter-enter-active,
+  .pcRouter-leave-active {
+    opacity: 1;
+    transition: all 0.5s;
+  }
+  .pcRouter-enter {
+    opacity: 0;
+  }
+  .pcRouter-leave-to{
+    opacity: 0;
+  }
 }
 
 ::-webkit-scrollbar {

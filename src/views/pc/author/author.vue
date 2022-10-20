@@ -256,7 +256,7 @@ export default {
 
     .base-info {
       width: 100%;
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 0;
       padding: 0.5rem 0;
       display: flex;
       justify-content: flex-start;
@@ -282,18 +282,19 @@ export default {
       .author-info {
         .author-name {
           font-size: 1.8rem;
-          margin-bottom: 0;
+          margin: 0;
           color: #46a6ff;
         }
     
         .work-times {
-          margin-bottom: 0;
+          margin: 0;
           font-weight: bold;
         }
 
         .info-item {
-          padding: 0.1rem 0;
+          padding: 0.15rem 0;
           font-size: 0.6rem;
+          line-height: 16px;
         }
       }
     }
