@@ -6,7 +6,8 @@
         <div >动画</div>｜
         <div >操作面板</div>｜
         <div >看板</div>｜
-        <div @click="onNavClick">关于我</div>
+        <div @click="() => onNavClick('/author')">关于我</div>｜
+        <div @click="() => onNavClick('/threeJs')">threeJS</div>
       </div>
     </div>
     <div class="action-wrapper">
@@ -29,8 +30,8 @@ export default {
     }
   },
   methods: {
-    onNavClick () {
-      this.$router.push('/author')
+    onNavClick (route) {
+      this.$router.push(route)
     }
   }
 }

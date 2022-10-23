@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import PcLogin from '../views/pc/login/login.vue'
 import PcHome from '../views/pc/home/home.vue'
 import PcAuthor from '../views/pc/author/author.vue'
+import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
@@ -89,6 +90,12 @@ const pcRoutes = [
     name: 'author',
     component: PcAuthor,
     meta: '作者'
+  },
+  {
+    path: '/threeJs',
+    name: 'threeJs',
+    component: PcThreeJs,
+    meta: 'threeJs'
   },
   // {
   //   path: '/legends',
