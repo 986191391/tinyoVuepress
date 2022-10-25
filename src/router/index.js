@@ -4,6 +4,7 @@ import PcLogin from '../views/pc/login/login.vue'
 import PcHome from '../views/pc/home/home.vue'
 import PcAuthor from '../views/pc/author/author.vue'
 import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
+import PcBoard from '../views/pc/board/board.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
@@ -97,6 +98,12 @@ const pcRoutes = [
     component: PcThreeJs,
     meta: 'threeJs'
   },
+  {
+    path: '/board',
+    name: 'board',
+    component: PcBoard,
+    meta: 'board'
+  }
   // {
   //   path: '/legends',
   //   name: 'legends',

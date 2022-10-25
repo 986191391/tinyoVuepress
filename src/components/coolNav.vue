@@ -5,7 +5,7 @@
       <div class="nav-list">
         <div >动画</div>｜
         <div >操作面板</div>｜
-        <div >看板</div>｜
+        <div @click="() => onNavClick('/board')">看板</div>｜
         <div @click="() => onNavClick('/author')">关于我</div>｜
         <div @click="() => onNavClick('/threeJs')">threeJS</div>
       </div>
