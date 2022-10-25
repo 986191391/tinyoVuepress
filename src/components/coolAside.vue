@@ -1,7 +1,7 @@
 <template>
   <div class="cool-aside">
     <div class="logo">
-      <img class="logo-label" title="回到首页" src="@/assets/logo.jpg" />
+      <img class="logo-label" title="回到首页" src="@/assets/logo.png" />
     </div>
     <el-menu
       :default-active="menuActive"

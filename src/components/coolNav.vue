@@ -1,7 +1,7 @@
 <template>
   <div class="cool-nav">
     <div class="nav-wrapper">
-      <div class="logo" @click="() => onNavClick('/home/sign')">@tinyo </div>
+      <div class="logo" @click="() => onNavClick('/home/sign')"><img :src="logo" alt="" />tinyo </div>
       <div class="nav-list">
         <div >动画</div>｜
         <div @click="() => onNavClick('/viewport')">操作面板</div>｜
@@ -11,13 +11,13 @@
       </div>
     </div>
     <div class="action-wrapper">
-      <div class="btn">注册/登录</div>
+      <!-- <div class="btn">注册/登录</div> -->
     </div>
   </div>
 </template>
 
 <script>
-import { theoneUrl } from '@/utils/env.js'
+import logo from '@/assets/logo.png'
 export default {
   name: 'YuanNav',
   props: {
@@ -27,6 +27,7 @@ export default {
   },
   data () {
     return {
+      logo
     }
   },
   methods: {
@@ -56,7 +57,7 @@ export default {
       flex: 1;
 
       .logo {
-        width: 210px;
+        width: 180px;
         height: 50px;
         display: flex;
         justify-content: center;
@@ -65,6 +66,12 @@ export default {
         cursor: pointer;
         user-select: none;
         transition: all 0.5s;
+
+        & > img {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+        }
 
         &:hover {
           color: #666;

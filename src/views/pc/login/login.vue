@@ -2,7 +2,7 @@
   <div class="app-root">
     <div class="app-content">
       <div class="logo-wrapper" @click="btnClick">
-        <img class="logo" src="@/assets/logo.jpg" />
+        <img class="logo" src="@/assets/logo.png" />
       </div>
       <p class="logo-hint">Click to Jump!</p>
     </div>
