@@ -13,11 +13,11 @@ export default {
     return {
       T0: new Date(),
       scene: new THREE.Scene(),
-      geometry: new THREE.BoxGeometry(100, 100, 100),
-      material: new THREE.MeshLambertMaterial({
-        color: 0xffffff
-      }),
-      mesh: {},
+      // geometry: new THREE.BoxGeometry(0, 0, 0),
+      // material: new THREE.MeshLambertMaterial({
+      //   color: 0xffffff
+      // }),
+      // mesh: {},
       point: {},
       camera: {},
       renderer: new THREE.WebGLRenderer()
@@ -55,17 +55,14 @@ export default {
       const x = e.x - this.canvasWidthCenter
       const y = this.canvasHeightCenter - e.y
       const z = 300
-      console.log(x, y, z)
+      // console.log(x, y, z)
       this.point.position.set(x, y, z); // 点光源位置
       this.renderer.render(this.scene, this.camera)
     }
   },
   mounted () {
-    console.log('geometry', this.$refs)
-    console.log('geometry', this.$refs['threeCanvas'].clientWidth)
-    this.geometry.rotateY(-0.8)
-    this.geometry.rotateX(0.6)
-    console.log('mesh', this.mesh)
+    // this.geometry.rotateY(-0.8)
+    // this.geometry.rotateX(0.6)
     // let scene = new THREE.Scene();
     /**
      * 创建网格模型
@@ -75,12 +72,12 @@ export default {
     // let material = new THREE.MeshLambertMaterial({
     //   color: 0xffffff
     // }); //材质对象Material
-    this.mesh = new THREE.Mesh(this.geometry, this.material); //网格模型对象Mesh
+    // this.mesh = new THREE.Mesh(this.geometry, this.material); //网格模型对象Mesh
     this.scene.add(this.mesh); //网格模型添加到场景中
 
     /* 光源设置 */
     //点光源
-    this.point = new THREE.PointLight(0xffffff);
+    this.point = new THREE.PointLight(0x999999);
     this.point.position.set(0, 0, 300); //点光源位置
     this.scene.add(this.point); //点光源添加到场景中
     //环境光
@@ -106,17 +103,24 @@ export default {
     this.renderer.setClearColor(0x000000, 1); //设置背景颜色
     this.$refs['threeCanvas'].appendChild(this.renderer.domElement); //body元素中插入canvas对象
 
-    // this.canvasRender();
-    // this.mesh.rotateY(-0.8)
-    // this.mesh.rotateX(0.1)
     this.renderer.render(this.scene, this.camera);//执行渲染操作
 
 
-    // let objLoader = new THREE.OBJLoader();
-    // objLoader.load('../../../assets/threejs.obj', (obj) => {
-    //   console.log('objjjj', obj)
-    // })
-    // console.log('pasdas', objLoader)
+    let objLoader = new THREE.OBJLoader();
+    objLoader.load('https://yuanjihua-oss.oss-cn-hangzhou.aliyuncs.com/scorerule/xdd.obj', (obj) => {
+      console.log('objjjj', obj)
+      obj.position.x = -120
+      obj.position.y = -200
+      obj.position.z = -300
+      obj.rotateX(-70.6)
+      obj.scale.set(3.7, 3.7, 3.7)
+      this.scene.add(obj)
+      setTimeout(this.renderer.render(this.scene, this.camera), 400)
+    }), () => {
+
+    }, (err) => {
+      console.log('errr', err)
+    }
   } 
 }
 </script>
