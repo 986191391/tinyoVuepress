@@ -1,10 +1,27 @@
 <template>
-  <div className="viewport-container">
+  <div class="viewport-container">
     <CoolNav />
     <main>
-      <Tree
+      <el-tree
+        :data="treeData"
+        node-key="id"
+        default-expand-all
+      >
+        <div class="custom-tree-node" slot-scope="{ node, data }">
+          <div><span class="tree-node-type">{{ data.type }}</span><span class="tree-node-id">{{ data.id }}</span></div>
+          <!-- <span>
+            <el-button
+              type="text"
+              size="mini"
+            >
+              Append
+            </el-button>
+          </span> -->
+        </div>
+      </el-tree>
+      <!-- <Tree
         ref={this.treeRef}
-        className="tree"
+        class="tree"
         treeData={this.treeData}
         blockNode
         selectedKeys={selectedKeys}
@@ -13,61 +30,64 @@
         defaultExpandAll
         onSelect={(e) => this.onTreeSelect(e)}
         // onExpand={(e) => this.onTreeExpand(e)}
-      />
+      /> -->
       <div
-        className="board-wrapper"
-        onMouseDown={(e) => this.onViewportMouseDown(e)}
-        onMouseMove={(e) => _.throttle(this.onViewportMouseMove.call(this, e), 100)}
-        onMouseUp={(e) => this.onViewportMouseUp(e)}
+        class="board-wrapper"
+        @mousedown="(e) => onViewportMouseDown(e)"
+        @mousemove="(e) => onViewportMouseMove(e)"
+        @mouseup="(e) => onViewportMouseUp(e)"
       >
-        <div className="action-wrapper">
-          <MinusCircleOutlined className="reduce-btn" title="缩小" onClick={() => this.onReduceScale()} />
-          <div className="scale-value">{(scaleValue * 100).toFixed(0)}%</div>
-          <PlusCircleOutlined className="add-btn" title="放大" onClick={() => this.onAddScale()} />
-          <BorderOuterOutlined className="default-position-btn" title="恢复默认" onClick={() => this.onSetVpAttrDefault()} />
-        </div>
-        <div className="viewport-wrapper">
+        <!-- onMouseDown={(e) => this.onViewportMouseDown(e)}
+        onMouseMove={(e) => _.throttle(this.onViewportMouseMove.call(this, e), 100)}
+        onMouseUp={(e) => this.onViewportMouseUp(e)} -->
+        <!-- <div class="action-wrapper">
+          <MinusCircleOutlined class="reduce-btn" title="缩小" onClick={() => this.onReduceScale()} />
+          <div class="scale-value">{(scaleValue * 100).toFixed(0)}%</div>
+          <PlusCircleOutlined class="add-btn" title="放大" onClick={() => this.onAddScale()} />
+          <BorderOuterOutlined class="default-position-btn" title="恢复默认" onClick={() => this.onSetVpAttrDefault()} />
+        </div> -->
+        <div class="viewport-wrapper">
           <div
-            className="viewport"
-            ref={this.highlightWrapperRef}
-            id={this.vData.__id}
-            data-nodeid={this.vData.__id}
-            style={{ 
+            class="viewport"
+            ref="highlightWrapperRef"
+            :id="vData.__id"
+            :data-nodeid="vData.__id"
+            :style="{ 
               position: 'relative', 
-              width: `${this.vData.frame.width}px`, 
-              height: `${this.vData.frame.height}px`, 
+              width: `${vData.frame.width}px`, 
+              height: `${vData.frame.height}px`, 
               outline: '1px solid #ccc',
               backgroundColor: '#fff',
-              zIndex: this.vData.zIndex,
+              zIndex: vData.zIndex,
               boxShadow: '0 0 8px 0 rgb(0 0 0 / 50%)',
               cursor: 'pointer',
-              transform: `matrix(1, 0, 0, 1, ${translateX}, ${translateY}) scale(${scaleValue})`,
-              transition: 'none 0s ease 0s',
-            }}
-            onFocus={() => {}}
-            onBlur={() => {}}
-            onMouseOver={(e) => this.onMouseOver(e)}
-            onMouseLeave={(e) => this.onMouseLeave(e)}
-            onMouseOut={(e) => this.onMouseOut(e)}
-            onClick={(e) => this.onNodeClick(e)}
+            }"
+            @focus="() => {}"
+            @blur="() => {}"
+            @mouseover="(e) => onMouseOver(e)"
+            @mouseleave="(e) => onMouseLeave(e)"
+            @mouseout="(e) => onMouseOut(e)"
+            @click="(e) => onNodeClick(e)"
           >
-            <div className="hover-highlightline-wrapper">
-              {
-                hoverHighLightLines.map(itm => (
-                  <div key={itm.id} style={itm.style}><div style={itm.labelStyle}>{itm.labelInnerHtml}</div></div>
-                ))
-              }
+            <!-- transform: `matrix(1, 0, 0, 1, ${translateX}, ${translateY}) scale(${scaleValue})`,
+            transition: 'none 0s ease 0s', -->
+            <div class="hover-highlightline-wrapper">
+              <template v-for="itm in hoverHighLightLines">
+                <div :key="`hover-${itm.id}`" :style="itm.style">
+                  <div :style="itm.labelStyle">{{itm.labelInnerHtml}}</div>
+                </div>
+              </template>
             </div>
-            <div className="focus-highlightline-wrapper" ref={this.focushighlightlineRef}>
-              {
-                focusHighLightLines.map(itm => (
-                  <div key={itm.id} style={itm.style}><div style={itm.labelStyle}>{itm.labelInnerHtml}</div></div>
-                ))
-              }
+            <div class="focus-highlightline-wrapper" ref={this.focushighlightlineRef}>
+              <template v-for="itm in focusHighLightLines">
+                <div :key="`active-${itm.id}`" :style="itm.style">
+                  <div :style="itm.labelStyle">{{itm.labelInnerHtml}}</div>
+                </div>
+              </template>
             </div>
-            {
-              this.buildChildren(this.vData.children)
-            }
+            <template v-for="(childData) in vData.children">
+              <BuildChildren :childData="childData" :key="`child-data-${childData.__id}`" />
+            </template>
           </div>
         </div>
       </div>
@@ -77,126 +97,242 @@
 
 <script>
 import CoolNav from '@/components/coolNav.vue'
-import YuanFooter from '@/components/YuanFooter.vue'
+import BuildChildren from './buildChildren.vue'
+import vData from './viewportJSON/ReGroup.json'
 
 export default {
-  components: { CoolNav, YuanFooter },
+  components: { CoolNav, BuildChildren },
   data () {
-    return {}
+    return {
+      vData,
+      treeData: [],
+      hoverHighLightLines: [],
+      focusHighLightLines: [],
+      selectedKeys: []
+    }
+  },
+  mounted () {
+    this.treeData = [{
+      id: this.vData.__id,
+      type: this.vData.type,
+      label: this.vData.type,
+      key: this.vData.__id,
+      children: this.buildTreeData(this.vData.children),
+    }];
+    console.log('this.treeData', this.treeData)
+  },
+  methods: {
+    onMouseOver(e) {
+      this.hoverHighLightLines = this.getLines(e, 99)
+    },
+    onMouseLeave(e) {
+      this.hoverHighLightLines = []
+    },
+    onMouseOut() {
+    },
+    onNodeClick(e) {
+      const noidId = e.target.dataset.nodeid
+      const lines = e.shiftKey ? [...this.focusHighLightLines, ...this.getLines(e, 97)] : this.getLines(e, 97)
+      this.focusHighLightLines = lines
+      this.selectedKeys = [noidId]
+      // setTimeout(() => {
+      //   document.getElementsByClassName('ant-tree-treenode-selected')[0].scrollIntoView();
+      // }, 0);
+    },
+    onViewportMouseDown (e) {
+      console.log('onViewportMouseDown', e)
+    },
+    onViewportMouseMove (e) {
+      // console.log('onViewportMouseOver', e)
+    },
+    onViewportMouseUp (e) {
+      console.log('onViewportMouseUp', e)
+    },
+    buildTreeData(children) {
+      return (
+        children.map((child) => {
+          if (child.type === 'Text' || child.type === 'Image') {
+            return {
+              id: child.__id,
+              type: child.type,
+              label: child.type,
+              key: child.__id,
+            };
+          }
+          const retObj = {
+            id: child.__id,
+            type: child.type,
+            label: child.type,
+            key: child.__id,
+          };
+          if (child.children) retObj.children = this.buildTreeData(child.children);
+          return retObj;
+        })
+      );
+    },
+    getLines(e, zIndex) {
+      e.stopPropagation();
+      const highlightWrapperTop = this.$refs['highlightWrapperRef'].getBoundingClientRect().top;
+      const highlightWrapperLeft = this.$refs['highlightWrapperRef'].getBoundingClientRect().left;
+      const eTop = e.target.getBoundingClientRect().top;
+      const eLeft = e.target.getBoundingClientRect().left;
+      const isBorder = e.target.style.border;
+      const width = e.target.clientWidth + (isBorder ? Number(isBorder.slice(0, 1)) * 2 : 0);
+      const height = e.target.clientHeight + (isBorder ? Number(isBorder.slice(0, 1)) * 2 : 0);
+
+      return [{
+        id: e.target.dataset.nodeid,
+        style: {
+          width: `${width}px`,
+          height: `${height}px`,
+          position: 'absolute',
+          left: `${eLeft - highlightWrapperLeft}px`,
+          top: `${eTop - highlightWrapperTop}px`,
+          border: '1px solid red',
+          zIndex,
+          pointerEvents: 'none',
+        },
+        labelStyle: {
+          position: 'absolute',
+          height: '25px',
+          top: '-25px',
+          left: '-1px',
+          padding: '5px',
+          background: 'red',
+          color: '#fff',
+          display: 'inline-block',
+          whiteSpace: 'noWrap',
+          fontSize: '10px',
+          zIndex: zIndex + 1,
+        },
+        labelInnerHtml: `${width}px * ${height}px`,
+      }];
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .home-main {
-    padding: 20px;
+  .viewport-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    user-select: none;
 
-    .slogan-wrapper {
-      padding: 64px 0;
+    & > main {
+      flex: 1;
       display: flex;
+      overflow: hidden;
 
-      .slogan-left {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 72px;
-        font-weight: bold;
+      .el-tree {
+        padding: 10px 0px 10px 10px;
+        width: 300px;
+        height: calc(100vh - 80px);
+        overflow: scroll;
+        scrollbar-width: none; // 清除firefox滚动条
+        border-right: 1px solid #f2f2f2;
 
-        .learn {
-          color: #ff7900;
+        ::v-deep .el-tree-node {
+           .el-tree-node__content {
+            height: auto;
+          }
         }
+        
+        .custom-tree-node {
+          padding: 6px 0;
+          flex: 1;
+          display: flex;
 
-        .desc {
-          margin: 44px 0 10px 0;
-          font-size: 22px;
-          font-weight: normal;
-        }
-
-        .more {
-          padding: 5px 10px;
-          font-size: 22px;
-          border-radius: 4px;
-          font-weight: normal;
-          cursor: pointer;
-
-          &:hover {
-            background: #f2f2f2;
+          .tree-node-type {
+            font-size: 16px;
+            color: #46a6ff;
+          }
+          .tree-node-id {
+            margin-left: 7px;
+            font-size: 10px;
           }
         }
       }
 
-      .slogan-right {
-        width: 60%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .board-wrapper {
+        flex: 1;
+        background-color: #f2f2f2;
+      }
+    } 
+
+    .viewport-wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+    }
+
+    .ant-tree {
+      height: 100%;
+      width: 250px;
+      border-left: 1px solid #ddd;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      
+      .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner {
+        .ant-tree-treenode {
+          transition: all 0.2s;
+          &:hover {
+            background-color: #f2f2f2;
+          }
+
+          .ant-tree-node-content-wrapper {
+            transition: none;
+
+            .class-name {
+              color: #ccc;
+              font-size: 12px;
+              margin-left: 5px;
+            }
+          }
+        }
+
+        // 选中状态 修改下颜色
+        .ant-tree-treenode-selected {
+          background-color: #026eff;
+          color: #fff;
+
+          .ant-tree-node-content-wrapper {
+            &.ant-tree-node-selected{
+              background-color: transparent;
+            }
+
+            .class-name {
+              color: #fff;
+            }
+          }
+
+          &:hover {
+            background-color: #026eff;
+            color: #fff;
+
+            .ant-tree-node-content-wrapper .class-name {
+              color: #fff;
+            }
+          }
+
+        }
+      }
+
+      .ant-tree-node-content-wrapper:hover {
+        background-color: transparent;
       }
     }
 
-    .demo-wrapper {
+    .hover-highlightline-wrapper, .focus-highlightline-wrapper {
       width: 100%;
-      padding: 0 20px;
-      margin-top: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .demo-title {
-        font-size: 48px;
-        font-weight: 600;
-      }
-
-      .demo-desc {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: 350;
-      }
-
-      .show-wrapper {
-        width: 100%;
-        height: 100%;
-        min-height: 100vh;
-        display: flex;
-    
-        .show-aside {
-          width: 180px;
-        }
-    
-        .show-main {
-          width: calc(100% - 180px);
-          height: 100vh;
-          overflow: scroll;
-        }
-      }
-    }
-
-    .desc-wrapper {
-      width: 100%;
-      padding: 0 20px;
-      margin-top: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .desc-title {
-        font-size: 42px;
-        font-weight: 600;
-      }
-
-      .desc-desc {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: 350;
-      }
-
-      .desc-main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 </style>

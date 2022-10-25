@@ -1,6 +1,5 @@
 <template>
   <div class="threejs-container">
-    <el-button @click="onthreeclick">click</el-button>
     <div class="three-canvas"  ref="threeCanvas" @mousemove="onCanvasMouseMove"/>
   </div>
 </template>
@@ -11,7 +10,6 @@ import CoolNav from '@/components/coolNav.vue'
 export default {
   data () {
     return {
-      T0: new Date(),
       scene: new THREE.Scene(),
       // geometry: new THREE.BoxGeometry(0, 0, 0),
       // material: new THREE.MeshLambertMaterial({
@@ -39,41 +37,20 @@ export default {
   },
   methods: {
     canvasRender () {
-      // let T1 = new Date();//本次时间
-      // let t = T1 - this.T0;//时间差
-      // this.T0 = T1;//把本次时间赋值给上次时间
       requestAnimationFrame(this.canvasRender);
       this.renderer.render(this.scene, this.camera);//执行渲染操作
       this.mesh.rotateY(0.001);//旋转角速度0.001弧度每毫秒
-    },
-    onthreeclick () {
-      console.log('this.scene', this.scene.children[1])
-      this.point.position.set(400, 200, 300)
-      this.renderer.render(this.scene, this.camera)
     },
     onCanvasMouseMove (e) {
       const x = e.x - this.canvasWidthCenter
       const y = this.canvasHeightCenter - e.y
       const z = 300
-      // console.log(x, y, z)
       this.point.position.set(x, y, z); // 点光源位置
       this.renderer.render(this.scene, this.camera)
     }
   },
   mounted () {
-    // this.geometry.rotateY(-0.8)
-    // this.geometry.rotateX(0.6)
-    // let scene = new THREE.Scene();
-    /**
-     * 创建网格模型
-     */
-    // let geometry = new THREE.SphereGeometry(60, 40, 40)
-    // let geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-    // let material = new THREE.MeshLambertMaterial({
-    //   color: 0xffffff
-    // }); //材质对象Material
-    // this.mesh = new THREE.Mesh(this.geometry, this.material); //网格模型对象Mesh
-    this.scene.add(this.mesh); //网格模型添加到场景中
+    // scene：创建的场景
 
     /* 光源设置 */
     //点光源
@@ -84,41 +61,31 @@ export default {
     let ambient = new THREE.AmbientLight(0x444444);
     this.scene.add(ambient);
 
-    /**
-     * 相机设置
-     */
+    /* 相机设置 */
     let width = window.innerWidth; //窗口宽度
     let height = window.innerHeight; //窗口高度
     let k = width / height; //窗口宽高比
     let s = 400; //三维场景显示范围控制系数，系数越大，显示的范围越大
 
-    //创建相机对象
+    // 创建相机对象
     this.camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
-    this.camera.position.set(0, 0, 300); //设置相机位置
-    this.camera.lookAt(this.scene.position); //设置相机方向(指向的场景对象)
-    /**
-     * 创建渲染器对象
-     */
-    this.renderer.setSize(width, height);//设置渲染区域尺寸
-    this.renderer.setClearColor(0x000000, 1); //设置背景颜色
-    this.$refs['threeCanvas'].appendChild(this.renderer.domElement); //body元素中插入canvas对象
-
-    this.renderer.render(this.scene, this.camera);//执行渲染操作
-
+    this.camera.position.set(0, 0, 300); // 设置相机位置
+    this.camera.lookAt(this.scene.position); // 设置相机方向(指向的场景对象)
+    /* 创建渲染器对象 */
+    this.renderer.setSize(width, height);//设 置渲染区域尺寸
+    this.renderer.setClearColor(0x000000, 1); // 设置背景颜色
+    this.$refs['threeCanvas'].appendChild(this.renderer.domElement); // body元素中插入canvas对象
 
     let objLoader = new THREE.OBJLoader();
     objLoader.load('https://yuanjihua-oss.oss-cn-hangzhou.aliyuncs.com/scorerule/xdd.obj', (obj) => {
-      console.log('objjjj', obj)
-      obj.position.x = -120
-      obj.position.y = -200
+      obj.position.x = -150
+      obj.position.y = -280
       obj.position.z = -300
       obj.rotateX(-70.6)
       obj.scale.set(3.7, 3.7, 3.7)
       this.scene.add(obj)
       setTimeout(this.renderer.render(this.scene, this.camera), 400)
-    }), () => {
-
-    }, (err) => {
+    }), () => {}, (err) => {
       console.log('errr', err)
     }
   } 
