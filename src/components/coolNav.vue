@@ -32,6 +32,8 @@ export default {
   },
   methods: {
     onNavClick (route) {
+      const curPath = this.$route.fullPath
+      if (curPath === route) return
       this.$router.push(route)
     }
   }
@@ -49,7 +51,7 @@ export default {
     position: sticky;
     top: 0px;
     border-bottom: 1px solid #eee;
-    background: #fff;
+    background: transparent;
     z-index: 99;
 
     .nav-wrapper {

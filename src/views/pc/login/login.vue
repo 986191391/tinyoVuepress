@@ -4,7 +4,7 @@
       <div class="logo-wrapper" @click="btnClick">
         <img class="logo" src="@/assets/logo.png" />
       </div>
-      <p class="logo-hint">Click to Jump!</p>
+      <!-- <p class="logo-hint">Click to Jump!</p> -->
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     btnClick () {
-      this.$router.push('/home')
+      this.$router.push('/home/sign')
     }
   }
 }

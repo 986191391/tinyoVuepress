@@ -37,15 +37,16 @@
         @mousemove="(e) => onViewportMouseMove(e)"
         @mouseup="(e) => onViewportMouseUp(e)"
       >
-        <!-- onMouseDown={(e) => this.onViewportMouseDown(e)}
-        onMouseMove={(e) => _.throttle(this.onViewportMouseMove.call(this, e), 100)}
-        onMouseUp={(e) => this.onViewportMouseUp(e)} -->
-        <!-- <div class="action-wrapper">
-          <MinusCircleOutlined class="reduce-btn" title="缩小" onClick={() => this.onReduceScale()} />
-          <div class="scale-value">{(scaleValue * 100).toFixed(0)}%</div>
-          <PlusCircleOutlined class="add-btn" title="放大" onClick={() => this.onAddScale()} />
-          <BorderOuterOutlined class="default-position-btn" title="恢复默认" onClick={() => this.onSetVpAttrDefault()} />
-        </div> -->
+        <div class="action-wrapper">
+          <i class="el-icon-remove-outline" title="缩小" @click="onReduceScale" />
+          <!-- <MinusCircleOutlined class="reduce-btn" title="缩小" @click={() => this.onReduceScale()} /> -->
+          <div class="scale-value">{{(scaleValue * 100).toFixed(0)}}%</div>
+          
+          <i class="el-icon-circle-plus-outline" title="放大" @click="onAddScale" />
+          <!-- <PlusCircleOutlined class="add-btn" title="放大" @click={() => this.onAddScale()} /> -->
+          <i class="el-icon-crop" title="恢复默认" @click="onSetVpAttrDefault" />
+          <!-- <BorderOuterOutlined class="default-position-btn" title="恢复默认" @click={() => this.onSetVpAttrDefault()} /> -->
+        </div>
         <div class="viewport-wrapper">
           <div
             class="viewport"
@@ -53,14 +54,16 @@
             :id="vData.__id"
             :data-nodeid="vData.__id"
             :style="{ 
-              position: 'relative', 
-              width: `${vData.frame.width}px`, 
-              height: `${vData.frame.height}px`, 
-              outline: '1px solid #ccc',
-              backgroundColor: '#fff',
-              zIndex: vData.zIndex,
-              boxShadow: '0 0 8px 0 rgb(0 0 0 / 50%)',
-              cursor: 'pointer',
+                position: 'relative', 
+                width: `${vData.frame.width}px`, 
+                height: `${vData.frame.height}px`, 
+                outline: '1px solid #ccc',
+                backgroundColor: '#fff',
+                zIndex: vData.zIndex,
+                boxShadow: '0 0 8px 0 rgb(0 0 0 / 50%)',
+                cursor: 'pointer',
+                transform: `matrix(1, 0, 0, 1, ${translateX}, ${translateY}) scale(${scaleValue})`,
+                transition: 'none 0s ease 0s',
             }"
             @focus="() => {}"
             @blur="() => {}"
@@ -69,8 +72,6 @@
             @mouseout="(e) => onMouseOut(e)"
             @click="(e) => onNodeClick(e)"
           >
-            <!-- transform: `matrix(1, 0, 0, 1, ${translateX}, ${translateY}) scale(${scaleValue})`,
-            transition: 'none 0s ease 0s', -->
             <div class="hover-highlightline-wrapper">
               <template v-for="itm in hoverHighLightLines">
                 <div :key="`hover-${itm.id}`" :style="itm.style">
@@ -108,7 +109,15 @@ export default {
       treeData: [],
       hoverHighLightLines: [],
       focusHighLightLines: [],
-      selectedKeys: []
+      selectedKeys: [],
+      mouseDown: false,
+      mousePositionX: 0,
+      mousePositionY: 0,
+      translateX: 0,
+      translateY: 50,
+      defaultPositionX: 0,
+      defaultPositionY: 50,
+      scaleValue: 1
     }
   },
   mounted () {
@@ -119,7 +128,6 @@ export default {
       key: this.vData.__id,
       children: this.buildTreeData(this.vData.children),
     }];
-    console.log('this.treeData', this.treeData)
   },
   methods: {
     onMouseOver(e) {
@@ -135,18 +143,36 @@ export default {
       const lines = e.shiftKey ? [...this.focusHighLightLines, ...this.getLines(e, 97)] : this.getLines(e, 97)
       this.focusHighLightLines = lines
       this.selectedKeys = [noidId]
-      // setTimeout(() => {
-      //   document.getElementsByClassName('ant-tree-treenode-selected')[0].scrollIntoView();
-      // }, 0);
     },
     onViewportMouseDown (e) {
       console.log('onViewportMouseDown', e)
+      this.mouseDown = true
+      this.mousePositionX = e.clientX
+      this.mousePositionY = e.clientY
+      this.defaultPositionX = this.translateX
+      this.defaultPositionY = this.translateY
     },
     onViewportMouseMove (e) {
-      // console.log('onViewportMouseOver', e)
+      if (!this.mouseDown) return;
+      const newTranslateX = this.defaultPositionX + e.clientX - this.mousePositionX
+      const newTranslateY = this.defaultPositionY + e.clientY - this.mousePositionY
+      this.translateX = newTranslateX
+      this.translateY = newTranslateY
     },
     onViewportMouseUp (e) {
       console.log('onViewportMouseUp', e)
+      this.mouseDown = false
+    },
+    onAddScale() {
+      this.scaleValue = this.scaleValue <= 2.9 ? this.scaleValue + 0.1 : 3
+    },
+    onReduceScale() {
+      this.scaleValue = this.scaleValue >= 0.2 ? this.scaleValue - 0.1 : 0.1
+    },
+    onSetVpAttrDefault() {
+      this.scaleValue = 1
+      this.translateX = 0
+      this.translateY = 50
     },
     buildTreeData(children) {
       return (
@@ -259,6 +285,37 @@ export default {
       .board-wrapper {
         flex: 1;
         background-color: #f2f2f2;
+
+        .action-wrapper {
+          width: 100%;
+          height: 40px;
+          padding: 0 20px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          background-color: #fff;
+          border-bottom: 1px solid #ddd;
+          color: #666;
+          user-select: none;
+
+          .el-icon-remove-outline, .el-icon-circle-plus-outline, .el-icon-crop {
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #f2f2f2;
+            }
+          }
+
+          .scale-value {
+            padding: 0 5px;
+            font-size: 12px;
+          }
+        }
       }
     } 
 
@@ -268,6 +325,7 @@ export default {
       justify-content: center;
       align-items: center;
       flex: 1;
+      overflow: hidden;
     }
 
     .ant-tree {
