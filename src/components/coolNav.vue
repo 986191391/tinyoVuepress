@@ -51,7 +51,7 @@ export default {
     position: sticky;
     top: 0px;
     border-bottom: 1px solid #eee;
-    background: transparent;
+    background: #fff;
     z-index: 99;
 
     .nav-wrapper {
