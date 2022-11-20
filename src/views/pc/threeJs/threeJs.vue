@@ -77,12 +77,12 @@ export default {
     this.$refs['threeCanvas'].appendChild(this.renderer.domElement); // body元素中插入canvas对象
 
     let objLoader = new THREE.OBJLoader();
-    objLoader.load('https://yuanjihua-oss.oss-cn-hangzhou.aliyuncs.com/scorerule/xdd.obj', (obj) => {
-      obj.position.x = -150
+    objLoader.load('./img/threejs.obj', (obj) => {
+      obj.position.x = 0
       obj.position.y = -280
       obj.position.z = -300
       obj.rotateX(-70.6)
-      obj.scale.set(3.7, 3.7, 3.7)
+      obj.scale.set(523.7, 523.7, 523.7)
       this.scene.add(obj)
       setTimeout(this.renderer.render(this.scene, this.camera), 400)
     }), () => {}, (err) => {
