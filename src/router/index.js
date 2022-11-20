@@ -145,6 +145,7 @@ const pcRoutes = [
 ]
 
 const router = new VueRouter({
+  mode: "history", 
   routes: pcRoutes
 })
 
