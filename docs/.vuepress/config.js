@@ -1,17 +1,17 @@
 module.exports = {
-  title: 'tinyo doc',
+  title: 'tinyo docs',
   description: 'Just playing around',
   themeConfig: {
     sidebar: [
       {
-        title: '基本',
+        title: '简介',
         collapsable: false,
         children: [
           '/'
         ]
       },
       {
-        title: 'guide',
+        title: 'CSDN文章',
         collapsable: false,
         children: [
           '/guide'
