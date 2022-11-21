@@ -1,6 +1,7 @@
 module.exports = {
   title: 'tinyo docs',
   description: 'Just playing around',
+  base: '/docs/',
   themeConfig: {
     sidebar: [
       {
