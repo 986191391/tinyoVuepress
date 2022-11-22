@@ -5,7 +5,8 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '文章', link: '/csdn/' }
+      { text: '文章', link: '/csdn/' },
+      { text: '心得', link: '/growth/' }
     ],
 		sidebar: {
       '/csdn/': [
@@ -18,6 +19,13 @@ module.exports = {
           title: '花里胡哨',
           collapsable: false,
           children: [ 'flower/bookmarks', 'flower/printWeb' ]
+        }
+      ],
+      '/growth/': [
+        {
+          title: '成长经历',
+          collapsable: false,
+          children: [ 'reacttovue', 'server' ]
         }
       ],
       '/': [
