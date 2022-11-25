@@ -16,6 +16,11 @@ module.exports = {
           children: [ 'base', 'css', 'vue', 'jstype', 'browser' ]
         },
         {
+          title: '功能性全局方法',
+          collapsable: false,
+          children: [ 'utils/debounceThrottle', 'utils/isInViewPort' ]
+        },
+        {
           title: '花里胡哨',
           collapsable: false,
           children: [ 'flower/bookmarks', 'flower/printWeb' ]
