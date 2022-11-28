@@ -9,7 +9,7 @@
 
 ## 浏览器滚动事件
 
-在全局的window对象中存在一个onscroll方法，默认为null，定义后当浏览器滚动则触发该方法。所以我们可以给滚动时间绑定一个方法:
+在全局的window对象中存在一个onscroll方法，默认为null，定义后当浏览器滚动则触发该方法。所以我们可以给滚动事件绑定一个方法:
 ```javascript
 // 定义方法
 function scrollFunc () {

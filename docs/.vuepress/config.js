@@ -13,7 +13,7 @@ module.exports = {
         {
           title: '文章',
           collapsable: false,
-          children: [ 'base', 'css', 'vue', 'jstype', 'browser' ]
+          children: [ 'base', 'css', 'vue', 'vuebind', 'jstype', 'browser', 'cssFun' ]
         },
         {
           title: '功能性全局方法',
