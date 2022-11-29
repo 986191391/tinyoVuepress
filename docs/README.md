@@ -20,9 +20,11 @@
 
 ## 相关作品
 
-元计划官方网站: [-点击跳转](http://www.yuanjihua.art)<br>
-codefun官方网站:  [-点击跳转](https://www.code.fun)<br>
-tinyo个人网站:  [-点击跳转](http://43.139.113.7:8081/)<br>
+元计划官方网站: [-**点击跳转**](http://www.yuanjihua.art)<br>
+codefun官方网站:  [-**点击跳转**](https://www.code.fun)<br>
+tinyo个人网站:  [-**点击跳转**](http://43.139.113.7:8081/)<br>
+小程序搜索: **yzfcool**<br>
+个人公众号: **不要只会想和说**
 
 
 ## 一段很喜欢的歌词
