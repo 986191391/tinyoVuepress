@@ -48,6 +48,7 @@ demo1有向下的marginBottom: 50px<br>
 父元素设置了margin值为0，但是因为子元素的缘故，导致视图上父元素距离顶部存在100px的距离。
 
 ## overflow: ellipsis的隐藏条件
+[codepen示例](https://codepen.io/986191391/pen/eYZVEjv)
 
 ```html
 <div class="ellipsis-demo">
@@ -75,11 +76,69 @@ demo1有向下的marginBottom: 50px<br>
   background-color: pink;
 }
 ```
+从结果来看，demo1不然展示超出部分省略号，而demo2是可以的！
 
-同样的宽度flex布局的
+设置为flex布局的元素，ellipsis是无效的！
 
 ## position: fixed的定位
+[codepen示例](https://codepen.io/986191391/pen/OJEapxw)
+
+从以往的学习资料，我们知道fixed的定位是相对于浏览器视口进行定位的。<br>
+而当我们给当前元素的父亲元素添加了transform属性后，这一规则就打破了！<br>
+实验证明scale/translateX等属性都存在该问题。
+
+```html
+<div class="father">
+  <div class="son1">son1</div>
+  <div class="son2">
+    son2
+    <div class="innerson">
+      innerson
+    </div>
+  </div>
+</div>
+```
+```css
+.father {
+  width: 100%;
+  height: 100%;
+}
+
+.son1 {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: red;
+}
+
+.son2 {
+  width: 200px;
+  height: 200px;
+  position: fixed;
+  left: 200px;
+  top: 200px;
+  background: pink;
+  transform: scale(1);
+  /* transform: translateX(10px); */
+}
+
+.innerson {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  background: blue;
+}
+
+```
 
 ## transform: scale()不改变dom大小
 
+transform的scale属性可以将dom元素放大显示，而该放大只是视觉上的放大，实际获取dom后读取高宽，会发现并没有发生变化。
+
 ## dispaly: inline-block的margintop/bottom无效
+
+其实inline-block就是行内元素的一种表现，所以也存在行内元素该有的特征。
