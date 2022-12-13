@@ -40,7 +40,6 @@ export default {
           } else {
             this.rotateDeg = rotateDeg += 10
           }
-          console.log('rotateDeg', this.rotateDeg)
         }, 10)
       } else {
         this.lock = true
@@ -49,24 +48,20 @@ export default {
           let targetDeg = Math.ceil(this.rotateDeg / 360) * 360 + stopDeg
           this.clearTimer()
           this.timer = setInterval(() => {
-            console.log('stopDeg', stopDeg)
-            console.log('targetDeg', targetDeg)
-            console.log('this.rotateDeg=', this.rotateDeg)
             const curVal = targetDeg - this.rotateDeg
-            console.log('curVal', curVal)
             if ( curVal === 0) {
               this.clearTimer()
-            } else if (curVal > 720) {
+            } else if (curVal > 920) {
               this.rotateDeg = this.rotateDeg + 10
-            } else if (curVal > 360 && curVal <= 720 ) {
+            } else if (curVal > 400 && curVal <= 920 ) {
               this.rotateDeg = this.rotateDeg + 8
-            } else if (curVal > 200 && curVal <= 360 ) {
-              this.rotateDeg = this.rotateDeg + 8
-            } else if (curVal > 50 && curVal <= 200 ) {
+            } else if (curVal > 150 && curVal <= 400 ) {
               this.rotateDeg = this.rotateDeg + 6
-            } else if (curVal > 5 && curVal <= 50) {
+            } else if (curVal > 80 && curVal <= 150 ) {
+              this.rotateDeg = this.rotateDeg + 4
+            } else if (curVal > 35 && curVal <= 80) {
               this.rotateDeg = this.rotateDeg + 2
-            } else if (curVal > 0 && curVal <= 5) {
+            } else if (curVal > 0 && curVal <= 35) {
               this.rotateDeg = this.rotateDeg + 1
             }
           }, 10)
