@@ -8,7 +8,8 @@
         <div @click="() => onNavClick('/board')">看板</div>｜
         <div @click="() => onNavClick('/author')">关于我</div>｜
         <div @click="() => onNavClick('/threeJs')">threeJS</div>｜
-        <div @click="() => onNavClick('/lottery')">抽奖</div>
+        <div @click="() => onNavClick('/lottery')">抽奖</div>｜
+        <div @click="() => onNavClick('/fabric')">fabric</div>
       </div>
     </div>
     <div class="action-wrapper">

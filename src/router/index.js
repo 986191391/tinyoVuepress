@@ -7,6 +7,7 @@ import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
 import PcBoard from '../views/pc/board/board.vue'
 import PcViewport from '../views/pc/viewport/viewport.vue'
 import PcLottery from '../views/pc/lottery/lottery.vue'
+import PcFabric from '../views/pc/fabric/fabric.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
@@ -117,6 +118,12 @@ const pcRoutes = [
     name: 'lottery',
     component: PcLottery,
     meta: 'lottery'
+  },
+  {
+    path: '/fabric',
+    name: 'fabric',
+    component: PcFabric,
+    meta: 'fabric'
   }
   // {
   //   path: '/legends',

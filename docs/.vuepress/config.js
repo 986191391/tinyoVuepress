@@ -30,7 +30,7 @@ module.exports = {
         {
           title: '成长经历',
           collapsable: false,
-          children: [ 'reacttovue', 'server' ]
+          children: [ 'reacttovue', 'server', 'fabric' ]
         }
       ],
       '/': [
