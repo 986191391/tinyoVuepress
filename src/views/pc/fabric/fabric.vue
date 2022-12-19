@@ -38,14 +38,27 @@
           <div class="action-items">
             <span class="action-items-label">上传图片:</span>
             <div class="action-items-value action-items-upload-image">
-              <el-upload
-                action=""
+              <template v-for="(item, index) in uploadList">
+                <div class="upload-list-item"
+                  :key="`upload-img-${index}`"
+                  :style="{backgroundImage: `url(${item.url})`}"
+                >
+                  <div class="item-mask">
+                    <i class="el-icon-delete" @click="() => onDelUpload(item)"/>
+                  </div>
+                </div>
+              </template>
+              <div class="upload-icon-add" @click="onInsertImage">
+                <i class="el-icon-plus"></i>
+              </div>
+              <!-- <el-upload
+                action="#"
                 list-type="picture-card"
                 :file-list="defaultFileList"
                 :on-change="onImageUpload"
                 :on-remove="onImageRemove">
                 <i class="el-icon-plus"></i>
-              </el-upload>
+              </el-upload> -->
             </div>
           </div>
           <div class="action-items">
@@ -81,12 +94,13 @@ export default {
       onresizeTips: _.debounce(() => {
         this.msgInfo('浏览器尺寸改变，请刷新页面！')
       }, 500),
+      imgIndex: 3,
       canvasContainer: null,
       backgroundColor: '#f2f2f2',
       canvasWidth: window.innerWidth - 350,
       canvasHeight: window.innerHeight - 80,
       inputText: '',
-      defaultFileList: [{ name: 'monkey.jpg', url: monkey, uid: 'img1' }, { name: 'cap.jpg', url: cap, uid: 'img2' }]
+      uploadList: [{ name: 'monkey.jpg', url: monkey, uid: 'img1' }, { name: 'cap.jpg', url: cap, uid: 'img2' }]
     }
   },
   mounted () {
@@ -205,44 +219,64 @@ export default {
       this.canvasContainer.add(text)
       this.inputText = ''
     },
-    // onInsertImage () {
-    //   const uploadInput = document.createElement('input')
-    //   uploadInput.setAttribute('type', 'file')
-    //   uploadInput.setAttribute('accept', 'image/*')
-    //   uploadInput.setAttribute('name', 'fujian')
-    //   uploadInput.click()
-    //   uploadInput.onchange = () => {
-    //     const file = uploadInput.files[0]
-    //     const reader = new FileReader()
-    //     reader.readAsDataURL(file)
-    //     reader.onload = e => this.addImgToCanvas(e)
-    //     uploadInput.remove()
-    //   }
-    // },
-    onImageUpload (file, fileList) {
-      if (file.status !== 'success') return
-      
-      const imgElement = document.createElement('img') // 声明我们的图片
-      imgElement.src = file.url
-      
-      imgElement.onload = () => {
-        this[file.uid] = new fabric.Image(imgElement, { // 设置图片位置和样子
-          evented: true,
-          selectable: true
-        })
-        this.canvasContainer.add(this[file.uid])
+    onInsertImage () {
+      const uploadInput = document.createElement('input')
+      uploadInput.setAttribute('type', 'file')
+      uploadInput.setAttribute('accept', 'image/*')
+      uploadInput.click()
+      uploadInput.onchange = () => {
+        const file = uploadInput.files[0]
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = e => {
+          const imgElement = document.createElement('img') // 声明我们的图片
+          imgElement.src = e.target.result
+          imgElement.onload = () => {
+            this[`img${this.imgIndex}`] = new fabric.Image(imgElement, { // 设置图片位置和样子
+              evented: true,
+              selectable: true
+            })
+            this.canvasContainer.add(this[`img${this.imgIndex}`])
+            this.uploadList = [...this.uploadList, { name: 'img.jpg', url: e.target.result, uid: `img${this.imgIndex}` }]
+            this.imgIndex = this.imgIndex + 1
+          }
+        }
+        uploadInput.remove()
       }
     },
-    onImageRemove (file) {
+    onDelUpload (file) {
+      const that = this
       this.canvasContainer.fxRemove(this[file.uid], {
-        onChange() {
-          console.log('在动画的每一步调用')
-        },
         onComplete() {
-          console.log('删除成功后调用')
+          that.uploadList = that.uploadList.filter(itm => itm.uid !== file.uid)
         }
       })
     },
+    // 用el的upload组件方法
+    // onImageUpload (file, fileList) {
+    //   if (file.status !== 'success') return
+      
+    //   const imgElement = document.createElement('img') // 声明我们的图片
+    //   imgElement.src = file.url
+      
+    //   imgElement.onload = () => {
+    //     this[file.uid] = new fabric.Image(imgElement, { // 设置图片位置和样子
+    //       evented: true,
+    //       selectable: true
+    //     })
+    //     this.canvasContainer.add(this[file.uid])
+    //   }
+    // },
+    // onImageRemove (file) {
+    //   this.canvasContainer.fxRemove(this[file.uid], {
+    //     onChange() {
+    //       console.log('在动画的每一步调用')
+    //     },
+    //     onComplete() {
+    //       console.log('删除成功后调用')
+    //     }
+    //   })
+    // },
     canvasToImage (format) {
       const dataURL = this.canvasContainer.toDataURL({
         width: this.canvasWidth,
@@ -359,11 +393,57 @@ export default {
               }
 
               &.action-items-upload-image {
-                & > div {
-                  display: flex;
-                  flex-wrap: wrap;
-                  width: 250px;
+                display: flex;
+                flex-wrap: wrap;
+                width: 220px;
+                .upload-list-item {
+                  margin-right: 10px;
+                  margin-bottom: 10px;
+                  width: 50px;
+                  height: 50px;
+                  border: 1px solid #ddd;
+                  background-size: 100% 100%;
+                  background-repeat: no-repeat;
+                  position: relative;
+
+                  &:hover {
+                    .item-mask {
+                      display: flex;
+                    }
+                  }
+                  .item-mask {
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    color: #fff;
+                    background: rgb(000, 000, 000, 0.5);
+
+                    .el-icon-delete {
+                      cursor: pointer;
+                    }
+                  }
                 }
+                .upload-icon-add {
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border: 1px solid #ddd;
+                  background-color: #fff;
+                  cursor: pointer;
+                }
+                // & > div {
+                //   display: flex;
+                //   flex-wrap: wrap;
+                //   width: 250px;
+                // }
                 ::v-deep .el-upload-list {
                   .el-upload-list__item {
                     width: 50px;
