@@ -292,6 +292,7 @@ export default {
     },
     clearCanvas () {
       this.canvasContainer.clear()
+      this.uploadList = []
       this.backgroundColor = '#fff'
     },
   }
