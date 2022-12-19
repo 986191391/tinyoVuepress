@@ -80,3 +80,38 @@ this.canvasContainer.add(text)
 ```
 
 插入文字的api比较简单，直接将需要插入的文字按照指定的样式加入到画板中即可。
+
+
+## 删除
+
+删除文字、图片的前提肯定是要有文字或者图片了，这里以文字作为参考。<br>
+需要将图片用变量记录下来，删除的使用选用这个变量即可实现。
+
+```javascript
+// 先上传一张图片
+const imgElement = document.createElement('img')
+imgElement.src = imgSrc
+
+imgElement.onload = () => {
+  this.imgInstance = new fabric.Image(imgElement, { // 将图片用imgInstance这个变量名记录下来
+    evented: true,
+    selectable: true
+  })
+  this.canvasContainer.add(this.imgInstance)
+}
+
+```
+删除图片有以下两种方法，一种是带渐变过渡的，另一种则没有
+```javascript
+// 渐变
+this.canvasContainer.fxRemove(this.imgInstance, {
+  onChange() {
+    console.log('在动画的每一步调用')
+  },
+  onComplete() {
+    console.log('删除成功后调用')
+  }
+})
+// 非渐变
+this.canvasContainer.remove(this.imgInstance)
+```

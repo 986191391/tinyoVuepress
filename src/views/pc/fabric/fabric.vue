@@ -29,10 +29,36 @@
               <el-button type="primary" size="mini" @click="onTextConfirm">确定</el-button>
             </div>
           </div>
-          <div class="action-items">
+          <!-- <div class="action-items">
             <span class="action-items-label">插入图片:</span>
             <div class="action-items-value action-items-insert-image">
               <el-button type="ghost" size="mini" @click="onInsertImage">点击插入图片</el-button>
+            </div>
+          </div> -->
+          <div class="action-items">
+            <span class="action-items-label">上传图片:</span>
+            <div class="action-items-value action-items-upload-image">
+              <el-upload
+                action=""
+                list-type="picture-card"
+                :file-list="defaultFileList"
+                :on-change="onImageUpload"
+                :on-remove="onImageRemove">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+            </div>
+          </div>
+          <div class="action-items">
+            <span class="action-items-label">生成图片:</span>
+            <div class="action-items-value action-items-insert-image">
+              <el-button type="ghost" size="mini" @click="() => canvasToImage('png')">导出PNG</el-button>
+              <el-button type="ghost" size="mini" @click="() => canvasToImage('jpg')">导出JPG</el-button>
+            </div>
+          </div>
+          <div class="action-items">
+            <span class="action-items-label">清空画布:</span>
+            <div class="action-items-value action-items-insert-image">
+              <el-button type="ghost" size="mini" @click="clearCanvas">点击清空画布</el-button>
             </div>
           </div>
         </div>
@@ -52,14 +78,19 @@ export default {
   components: { CoolNav },
   data () {
     return {
+      onresizeTips: _.debounce(() => {
+        this.msgInfo('浏览器尺寸改变，请刷新页面！')
+      }, 500),
       canvasContainer: null,
       backgroundColor: '#f2f2f2',
       canvasWidth: window.innerWidth - 350,
       canvasHeight: window.innerHeight - 80,
-      inputText: ''
+      inputText: '',
+      defaultFileList: [{ name: 'monkey.jpg', url: monkey, uid: 'img1' }, { name: 'cap.jpg', url: cap, uid: 'img2' }]
     }
   },
   mounted () {
+    window.onresize = () => this.onresizeTips()
     this.canvasContainer = new fabric.Canvas('canvas', {
       width: window.innerWidth - 350,
       height: window.innerHeight - 80,
@@ -75,7 +106,7 @@ export default {
     //   height: 30 // 方形的高度
     // })
 
-    Promise.all([this.buildImageCanvas(monkey, { left: 350, top: 150 }), this.buildImageCanvas(cap, { left: 450, top: 200 })])
+    Promise.all([this.buildImageCanvas(monkey, { left: 350, top: 150 }, 'img1'), this.buildImageCanvas(cap, { left: 450, top: 200 }, 'img2')])
       .then((result) => {
         this.canvasContainer.add(...result)
       })
@@ -84,7 +115,7 @@ export default {
 
     // 按下鼠标
     this.canvasContainer.on('mouse:down', (e) => {
-      console.log('111', e)
+      console.log('111', this.canvasContainer)
     })
 
     const canvasDom = document.getElementById('canvas')
@@ -141,18 +172,19 @@ export default {
   methods: {
     canvasOnMouseDown (e) {
     },
-    buildImageCanvas (imgSrc, positionInfo) {
+    // 初始化插入猴子默认照片
+    buildImageCanvas (imgSrc, positionInfo, dataKey) {
       return new Promise((resolve) => {
         const imgElement = document.createElement('img') // 声明我们的图片
         imgElement.src = imgSrc
 
         imgElement.onload = () => {
-          const imgInstance = new fabric.Image(imgElement, { // 设置图片位置和样子
+          this[dataKey] = new fabric.Image(imgElement, { // 设置图片位置和样子
             ...positionInfo,
             evented: true,
             selectable: true
           })
-          resolve(imgInstance)
+          resolve(this[dataKey])
         }
       })
     },
@@ -173,32 +205,60 @@ export default {
       this.canvasContainer.add(text)
       this.inputText = ''
     },
-    onInsertImage () {
-      const uploadInput = document.createElement('input')
-      uploadInput.setAttribute('type', 'file')
-      uploadInput.setAttribute('accept', 'image/*')
-      uploadInput.setAttribute('name', 'fujian')
-      uploadInput.click()
-      uploadInput.onchange = () => {
-        const file = uploadInput.files[0]
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = e => this.addImgToCanvas(e)
-        uploadInput.remove()
-      }
-    },
-    addImgToCanvas (e) {
+    // onInsertImage () {
+    //   const uploadInput = document.createElement('input')
+    //   uploadInput.setAttribute('type', 'file')
+    //   uploadInput.setAttribute('accept', 'image/*')
+    //   uploadInput.setAttribute('name', 'fujian')
+    //   uploadInput.click()
+    //   uploadInput.onchange = () => {
+    //     const file = uploadInput.files[0]
+    //     const reader = new FileReader()
+    //     reader.readAsDataURL(file)
+    //     reader.onload = e => this.addImgToCanvas(e)
+    //     uploadInput.remove()
+    //   }
+    // },
+    onImageUpload (file, fileList) {
+      if (file.status !== 'success') return
+      
       const imgElement = document.createElement('img') // 声明我们的图片
-      imgElement.src = e.target.result
+      imgElement.src = file.url
       
       imgElement.onload = () => {
-        const imgInstance = new fabric.Image(imgElement, { // 设置图片位置和样子
-          ...{ left: 0, top: 0 },
+        this[file.uid] = new fabric.Image(imgElement, { // 设置图片位置和样子
           evented: true,
           selectable: true
         })
-        this.canvasContainer.add(imgInstance)
+        this.canvasContainer.add(this[file.uid])
       }
+    },
+    onImageRemove (file) {
+      this.canvasContainer.fxRemove(this[file.uid], {
+        onChange() {
+          console.log('在动画的每一步调用')
+        },
+        onComplete() {
+          console.log('删除成功后调用')
+        }
+      })
+    },
+    canvasToImage (format) {
+      const dataURL = this.canvasContainer.toDataURL({
+        width: this.canvasWidth,
+        height: this.canvasHeight,
+        format: format,
+      });
+      const link = document.createElement('a');
+      link.download = `画板.${format}`;
+      link.href = dataURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    },
+    clearCanvas () {
+      this.canvasContainer.clear()
+      this.backgroundColor = '#fff'
     },
   }
 }
@@ -242,6 +302,7 @@ export default {
           padding: 10px 0;
           .action-items {
             padding: 0 10px;
+            width: 100%;
             min-height: 40px;
             display: flex;
             align-items: center;
@@ -295,6 +356,28 @@ export default {
 
               &.action-items-insert-image {
 
+              }
+
+              &.action-items-upload-image {
+                & > div {
+                  display: flex;
+                  flex-wrap: wrap;
+                  width: 250px;
+                }
+                ::v-deep .el-upload-list {
+                  .el-upload-list__item {
+                    width: 50px;
+                    height: 50px;
+                  }
+                }
+                ::v-deep .el-upload--picture-card {
+                  width: 50px;
+                  height: 50px;
+                  line-height: auto;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
               }
             }
 
