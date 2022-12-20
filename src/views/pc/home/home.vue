@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CoolNav />
     <div class="home-main">
+      <CoolNav />
       <div class="slogan-wrapper">
         <div class="slogan">tinyo {{cursorValue}}</div>
         <div class="desc">
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import logo from '@/assets/logo.png'
 import CoolNav from '@/components/coolNav.vue'
 import CoolAside from '@/components/coolAside.vue'
 import MacWindow from '@/components/macWindow.vue'
@@ -42,6 +43,7 @@ export default {
   components: { CoolNav, CoolAside, MacWindow },
   data () {
     return {
+      logo,
       cursorValue: ''
     }
   },
@@ -49,6 +51,11 @@ export default {
     this.sloganFlash()
   },
   methods: {
+    onNavClick (route) {
+      const curPath = this.$route.fullPath
+      if (curPath === route) return
+      this.$router.push(route)
+    },
     sloganFlash () {
       const simulationArr = ['', '', 'with ', 'Play ', '& ', 'Learn']
       let index = 0
@@ -66,13 +73,20 @@ export default {
 
 <style scoped lang="scss">
   .home-main {
-    padding: 20px;
+    padding: 0 20px 20px;
     min-width: 1200px;
     color: #fff;
     background-color: #000;
 
+    .cool-nav {
+      padding: 10px 0px;
+      background-color: #000;
+      border-bottom: none;
+    }
+
     .slogan-wrapper {
       min-height: calc(100vh - 80px);
+      margin-top: -80px;
       padding: 64px 0;
       display: flex;
       flex-direction: column;
