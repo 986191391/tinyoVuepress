@@ -78,7 +78,6 @@ export default {
   .cool-aside {
     width: 100%;
     height: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #f0f0f0;

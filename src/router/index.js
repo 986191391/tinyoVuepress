@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import PcLogin from '../views/pc/login/login.vue'
 import PcHome from '../views/pc/home/home.vue'
+import PcAnimate from '../views/pc/animate/animate.vue'
 import PcAuthor from '../views/pc/author/author.vue'
 import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
 import PcBoard from '../views/pc/board/board.vue'
@@ -88,6 +89,12 @@ const pcRoutes = [
         meta: 'gobang'
       }
     ]
+  },
+  {
+    path: '/animate',
+    name: 'animate',
+    component: PcAnimate,
+    meta: '动画'
   },
   {
     path: '/author',

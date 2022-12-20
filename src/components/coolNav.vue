@@ -3,7 +3,7 @@
     <div class="nav-wrapper">
       <div class="logo" @click="() => onNavClick('/home/sign')"><img :src="logo" alt="" />tinyo </div>
       <div class="nav-list">
-        <div >动画</div>｜
+        <div @click="() => onNavClick('/animate')">动画</div>｜
         <div @click="() => onNavClick('/viewport')">操作面板</div>｜
         <div @click="() => onNavClick('/board')">看板</div>｜
         <div @click="() => onNavClick('/author')">关于我</div>｜
