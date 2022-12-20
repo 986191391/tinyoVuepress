@@ -28,22 +28,7 @@
           · 无论何时，开心万岁！
         </div>
       </div>
-      <div class="desc-wrapper"> 
-        <div class="desc-title">认真且怂，从一而终</div>
-        <div class="desc-desc">2e4ong "是这样的"</div>
-        <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
-        <!-- <div class="desc-main">
-          {
-            this.state.myDesc.map(item => (
-              <div key={item.title}>
-                {
-                  item.title
-                }
-              </div>
-            ))
-          }
-        </div> -->
-      </div>
+      <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
     </div>
   </div> 
 </template>
@@ -183,34 +168,9 @@ export default {
       }
     }
 
-    .desc-wrapper {
-      width: 100%;
-      padding: 0 20px;
-      margin-top: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .desc-title {
-        font-size: 42px;
-        font-weight: 600;
-      }
-
-      .desc-desc {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: 350;
-      }
-
-      .desc-main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-    }
-
     .friend-wrapper {
       min-height: calc(100vh - 80px);
+      margin-top: 50px;
       padding: 200px 0 64px;
       display: flex;
       flex-direction: column;
