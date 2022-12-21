@@ -1,13 +1,26 @@
 <template>
   <div>
     <div class="home-main">
-      <CoolNav />
+      <!-- <CoolNav /> -->
       <div class="slogan-wrapper">
-        <div class="slogan">tinyo {{cursorValue}}</div>
-        <div class="desc">
+        <div class="slogan-title">tinyo {{cursorValue}}</div>
+        <div class="slogan-desc">
           · 无论何时，开心万岁
         </div>
         <img src="@/assets/ironheart.png" class="iron-heart" @click="sloganFlash" />
+      </div>
+      <div class="home-nav-wrapper">
+        <div class="home-nav-title">Something Cool</div>
+        <div class="home-nav-list">
+          <div @click="() => onNavClick('/animate')"><span>小动画</span></div>
+          <div @click="() => onNavClick('/viewport')"><span>操作面板</span></div>
+          <div @click="() => onNavClick('/board')"><span>敏捷看板</span></div>
+          <div @click="() => onNavClick('/author')"><span>关于tinyo</span></div>
+          <div @click="() => onNavClick('/threeJs')"><span>threeJS玩具</span></div>
+          <div @click="() => onNavClick('/lottery')"><span>抽奖转盘</span></div>
+          <div @click="() => onNavClick('/fabric')"><span>fabric画布</span></div>
+          <div @click="() => onNavClick('doc')"><span>doc文档</span></div>
+        </div>
       </div>
       <div class="demo-wrapper">
         <div class="demo-title">Demo Window</div>
@@ -28,6 +41,7 @@
           · 无论何时，开心万岁！
         </div>
       </div>
+      <footer>Design By 2e4ong</footer>
       <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
     </div>
   </div> 
@@ -52,6 +66,7 @@ export default {
   },
   methods: {
     onNavClick (route) {
+      if (route === 'doc') return window.open('http://43.139.113.7:8081/docs/')
       const curPath = this.$route.fullPath
       if (curPath === route) return
       this.$router.push(route)
@@ -73,7 +88,7 @@ export default {
 
 <style scoped lang="scss">
   .home-main {
-    padding: 0 20px 20px;
+    padding: 0 20px;
     min-width: 1200px;
     color: #fff;
     background-color: #000;
@@ -86,7 +101,6 @@ export default {
 
     .slogan-wrapper {
       min-height: calc(100vh - 80px);
-      margin-top: -80px;
       padding: 64px 0;
       display: flex;
       flex-direction: column;
@@ -101,7 +115,7 @@ export default {
       user-select: none;
       position: relative;
 
-      .slogan {
+      .slogan-title {
         font-size: 82px;
         position: relative;
         &::after {
@@ -113,7 +127,7 @@ export default {
           background-color: #fff;
           animation: flash 1.5s linear infinite;
         }
-        
+          
         @keyframes flash {
           0% {
             opacity: 1;
@@ -126,11 +140,13 @@ export default {
           }
         }
       }
-      .desc {
+
+      .slogan-desc {
         margin: 44px 0 10px 0;
         font-size: 22px;
         font-weight: normal;
       }
+
       .iron-heart {
         position: absolute;
         bottom: -70px;
@@ -145,6 +161,47 @@ export default {
         }
         to{
           transform: rotate(360deg);
+        }
+      }
+    }
+
+    .home-nav-wrapper {
+      width: 100%;
+      padding: 0 20px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .home-nav-title {
+        margin: 150px 0 0;
+        font-size: 52px;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .home-nav-list {
+        display: flex;
+
+        & > div {
+          width: 110px;
+          height: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          user-select: none;
+          cursor: pointer;
+
+          &:hover {
+            color: #ddc485;
+            text-decoration: underline;
+            background-image: url('~@/assets/navironman.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+          
         }
       }
     }
@@ -184,14 +241,13 @@ export default {
 
     .friend-wrapper {
       min-height: calc(100vh - 80px);
-      margin-top: 50px;
       padding: 200px 0 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       color: #fff;
       font-weight: bold;
-      background-image: url('~@/assets/fbg.jpg');
+      background-image: url('~@/assets/myfriendsbg.jpg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -205,6 +261,15 @@ export default {
         font-size: 22px;
         font-weight: normal;
       }
+    }
+
+    & > footer {
+      padding: 20px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
     }
   }
 </style>
