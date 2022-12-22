@@ -10,7 +10,9 @@
         <img src="@/assets/ironheart.png" class="iron-heart" @click="sloganFlash" />
       </div>
       <div class="home-nav-wrapper">
-        <div class="home-nav-title">Something Cool</div>
+        <div class="home-nav-title">
+          <span>S</span><span>o</span><span>m</span><span>e</span><span>t</span><span>h</span><span>i</span><span>n</span><span>g</span><span> Cool</span>
+        </div>
         <div class="home-nav-list">
           <div @click="() => onNavClick('/animate')"><span>小动画</span></div>
           <div @click="() => onNavClick('/viewport')"><span>操作面板</span></div>
@@ -23,7 +25,9 @@
         </div>
       </div>
       <div class="demo-wrapper">
-        <div class="demo-title">Demo Window</div>
+        <div class="demo-title">
+          <span>D</span><span>e</span><span>m</span><span>o</span><span> Win</span><span>dow</span>
+        </div>
         <MacWindow windowWidth="80%">
           <div class="show-wrapper">
             <div class="show-aside">
@@ -36,7 +40,9 @@
         </MacWindow>
       </div>
       <div class="friend-wrapper">
-        <div class="slogan">My Friends</div>
+        <div class="friend-title">
+          <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
+        </div>
         <div class="desc">
           · 无论何时，开心万岁！
         </div>
@@ -151,7 +157,7 @@ export default {
         position: absolute;
         bottom: -70px;
         left: calc(50% - 150px);
-        animation: move 10s linear infinite;
+        animation: move 15s linear infinite;
         cursor: pointer;
       }
       
@@ -178,6 +184,13 @@ export default {
         font-size: 52px;
         font-weight: 600;
         color: #fff;
+        cursor: default;
+
+        & > span {
+          &:hover {
+            color: #ddc485;
+          }
+        }
       }
 
       .home-nav-list {
@@ -189,6 +202,11 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
+          background-image: url('~@/assets/black.png');
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          transition: all 0.6s;
           color: #fff;
           user-select: none;
           cursor: pointer;
@@ -219,6 +237,12 @@ export default {
         font-size: 52px;
         font-weight: 600;
         color: #fff;
+        cursor: default;
+        & > span {
+          &:hover {
+            color: #7bf0ff;
+          }
+        }
       }
 
       .show-wrapper {
@@ -253,8 +277,14 @@ export default {
       background-repeat: no-repeat;
       user-select: none;
 
-      .slogan {
+      .friend-title {
         font-size: 52px;
+        cursor: default;
+        & > span {
+          &:hover {
+            color: #dc5b48;
+          }
+        }
       }
       .desc {
         margin: 44px 0 10px 0;
