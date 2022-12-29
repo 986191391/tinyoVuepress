@@ -2,14 +2,57 @@
   <div>
     <div class="home-main">
       <!-- <CoolNav /> -->
-      <div class="slogan-wrapper">
-        <div class="slogan-title">tinyo {{cursorValue}}</div>
-        <div class="slogan-desc">
-          · 无论何时，开心万岁
+      <div class="top-animate-nav">
+        <div class="top-animate-bg"
+          :style="{
+            width: `${isShowTopNav ? '100%' : '0px'}`
+          }"
+        >
+          <svg
+            class="top-right-svg"
+            version="1.1"
+            id="svg9-Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            width="22px"
+            height="20px"
+            viewBox="0 0 18 18"
+            enable-background="new 0 0 18 18"
+            xml:space="preserve"
+            @click="isNavScreenShown = true"
+          >
+            <rect fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+            <rect y="7" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+            <rect y="14" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+          </svg>
+          <!-- <img class="nav-animate" src="@/assets/moreIcon.png"> -->
         </div>
-        <img src="@/assets/ironheart.png" class="iron-heart" @click="sloganFlash" />
       </div>
-      <div class="home-nav-wrapper">
+      <transition name="navScreen">
+        <section v-if="isNavScreenShown" class="nav-full-screen" >
+          <p @click="() => onNavClick('/animate')">Animate Demo</p>
+          <p @click="() => onNavClick('/viewport')">Viewport</p>
+          <p @click="() => onNavClick('/board')">Job Board</p>
+          <p @click="() => onNavClick('/author')">About Tinyo</p>
+          <p @click="() => onNavClick('/threeJs')">ThreeJs Toys</p>
+          <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
+          <p @click="() => onNavClick('/fabric')">Fabric</p>
+          <p @click="() => onNavClick('doc')">Tinyo Docs</p>
+          <p @click="isNavScreenShown = false"><i class="el-icon-plus" /></p>
+        </section>
+      </transition>
+      <section class="top-section" :style="topSectionStyle">
+        <div class="slogan-wrapper">
+          <div class="slogan-title">tinyo {{cursorValue}}</div>
+          <div class="slogan-desc">
+            · 无论何时，开心万岁
+          </div>
+          <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
+        </div>
+      </section>
+      <!-- <div class="home-nav-wrapper">
         <div class="home-nav-title">
           <span>S</span><span>o</span><span>m</span><span>e</span><span>t</span><span>h</span><span>i</span><span>n</span><span>g</span><span> Cool</span>
         </div>
@@ -23,7 +66,7 @@
           <div @click="() => onNavClick('/fabric')"><span>fabric画布</span></div>
           <div @click="() => onNavClick('doc')"><span>doc文档</span></div>
         </div>
-      </div>
+      </div> -->
       <div class="demo-wrapper">
         <div class="demo-title">
           <span>D</span><span>e</span><span>m</span><span>o</span><span> Win</span><span>dow</span>
@@ -64,11 +107,27 @@ export default {
   data () {
     return {
       logo,
-      cursorValue: ''
+      // 以下用于控制第一屏文字的显示
+      cursorValue: '',
+      sloganModel: true, // true 显示play; flase显示cool;
+      // 以下变量用于顶部导航栏
+      isShowTopNav: false,
+      isNavScreenShown: false,
+      topSectionStyle: {
+        // transform: 'scale(1)',
+        opacity: 1
+      },
+      ironHeartStyle: {
+        transform: 'scale(1) rotate(0deg)',
+      }
     }
   },
   mounted () {
     this.sloganFlash()
+    window.addEventListener('scroll', this.watchWindowScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.watchWindowScroll);
   },
   methods: {
     onNavClick (route) {
@@ -78,26 +137,67 @@ export default {
       this.$router.push(route)
     },
     sloganFlash () {
-      const simulationArr = ['', '', 'with ', 'Play ', '& ', 'Learn']
       let index = 0
-      let cursorValue = ''
-      const timer = setInterval(() => {
-        index++
-        if (index === 5) clearInterval(timer)
-        cursorValue = `${cursorValue}${simulationArr[index]}`
-        this.cursorValue = cursorValue
-      }, 300)
+      if (this.sloganModel) {
+        const simulationArr = ['', '', 'with ', 'Play ', '& ', 'Learn']
+        let cursorValue = ''
+        const timer = setInterval(() => {
+          index++
+          if (index === 5) clearInterval(timer)
+          cursorValue = `${cursorValue}${simulationArr[index]}`
+          this.cursorValue = cursorValue
+        }, 300)
+      } else {
+        const simulationArr = ['with Play & Learn','with Play &', 'with Play', 'with', '', 'is', 'is cool']
+        const timer = setInterval(() => {
+          index++
+          if (index === 6) clearInterval(timer)
+          this.cursorValue = simulationArr[index]
+        }, 300)
+      }
+      this.sloganModel = !this.sloganModel
+    },
+    watchWindowScroll () {
+      const { scrollTop, clientHeight } = document.documentElement
+      this.isShowTopNav = scrollTop >= 300
+      if (scrollTop === 0) {
+        this.topSectionStyle.opacity = 1
+      }
+      // 0 - 500px： top-section , 1 - 0.5 倍数/透明度变换 
+      if (scrollTop > 0 && scrollTop < 900) {
+        this.topSectionStyle.opacity = 1.2 - (scrollTop / 900)
+        // this.ironHeartStyle.transform = `scale(1) rotate(${scrollTop/900 * 270}deg)`
+        // this.topSectionStyle.transform = `scale(${1 - (onePrecent > 0.5 ? 0.5 : onePrecent)})`
+      }
+
+      
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+  // navScreen打开时的渐变效果
+  .navScreen-enter-active,
+  .navScreen-leave-active {
+    opacity: 1;
+    transition: all 0.3s;
+  }
+  .navScreen-enter {
+    opacity: 0;
+  }
+  .navScreen-leave-to {
+    opacity: 0;
+  }
+
   .home-main {
-    padding: 0 20px;
     min-width: 1200px;
     color: #fff;
     background-color: #000;
+
+    ::selection {
+      background-color: #a1a1a1;
+    }
 
     .cool-nav {
       padding: 10px 0px;
@@ -105,121 +205,157 @@ export default {
       border-bottom: none;
     }
 
-    .slogan-wrapper {
-      min-height: calc(100vh - 80px);
-      padding: 64px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-weight: bold;
-      background-image: url('~@/assets/ironman.png');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      user-select: none;
-      position: relative;
-
-      .slogan-title {
-        font-size: 82px;
-        position: relative;
-        &::after {
-          content: '';
-          width: 1.5px;
-          height: 100px;
-          position: absolute;
-          right: -4px;
-          background-color: #fff;
-          animation: flash 1.5s linear infinite;
-        }
-          
-        @keyframes flash {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-      }
-
-      .slogan-desc {
-        margin: 44px 0 10px 0;
-        font-size: 22px;
-        font-weight: normal;
-      }
-
-      .iron-heart {
-        position: absolute;
-        bottom: -70px;
-        left: calc(50% - 150px);
-        animation: move 15s linear infinite;
-        cursor: pointer;
-      }
-      
-      @keyframes move{
-        from{
-          transform: rotate(0);
-        }
-        to{
-          transform: rotate(360deg);
-        }
-      }
-    }
-
-    .home-nav-wrapper {
+    .top-animate-nav {
+      position: fixed;
+      top: 0px;
+      left: 0px;
       width: 100%;
-      padding: 0 20px;
-      color: #fff;
+      height: 60px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      z-index: 1;
 
-      .home-nav-title {
-        margin: 150px 0 0;
-        font-size: 52px;
-        font-weight: 600;
-        color: #fff;
-        cursor: default;
-
-        & > span {
-          &:hover {
-            color: #ddc485;
-          }
-        }
-      }
-
-      .home-nav-list {
+      .top-animate-bg {
+        height: 100%;
+        transition: all 0.5s;
+        background-color: #111;
         display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        overflow: hidden;
 
-        & > div {
-          width: 110px;
-          height: 100px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-image: url('~@/assets/black.png');
-          background-size: contain;
-          background-position: center;
-          background-repeat: no-repeat;
-          transition: all 0.6s;
-          color: #fff;
-          user-select: none;
+        .top-right-svg {
+          fill: #d8d8d8;
+          margin-right: 20px;
+          transition: all 0.3s;
           cursor: pointer;
 
           &:hover {
-            color: #ddc485;
-            text-decoration: underline;
-            background-image: url('~@/assets/navironman.jpg');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
+            fill: #dc5b48;
           }
-          
+        }
+        // border-bottom: 1px solid #7bf0ff;
+      }
+    }
+
+    .nav-full-screen {
+      padding: 20px 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #080808;
+      z-index: 99;
+      overflow: scroll;
+      scrollbar-width: none; // 清除firefox滚动条
+
+      & > p {
+        margin: 0;
+        // padding: 10px 0;
+        font-size: 74px;
+        font-weight: 600;
+        font-family: 'FuturaStd';
+        color: #1a1c1e;
+        text-transform: uppercase;
+        transition: all 0.2s;
+        cursor: pointer;
+        
+        .el-icon-plus {
+          margin-top: 40px;
+          padding: 10px;
+          border: 1px solid #fff;
+          transform: rotate(45deg);
+          transition: all 0.3s;
+          font-size: 28px;
+          color: #fff;
+        }
+
+        &:hover {
+          color: #7bf0ff;
+          .el-icon-plus {
+            transform: rotate(135deg);
+            border-color: #dc5b48;
+            color: #dc5b48;
+          }
+        }
+      }
+
+    }
+
+    .top-section {
+      position: relative;
+      // height: 1400px;
+
+      .slogan-wrapper {
+        // position: sticky;
+        // left: 0px;
+        // top: 0px;
+        min-height: calc(100vh - 80px);
+        padding: 64px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        background-image: url('~@/assets/ironman.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        // user-select: none;
+
+        .slogan-title {
+          font-size: 82px;
+          position: relative;
+          &::after {
+            content: '';
+            width: 1.5px;
+            height: 100px;
+            position: absolute;
+            right: -4px;
+            background-color: #fff;
+            animation: flash 1.5s linear infinite;
+          }
+            
+          @keyframes flash {
+            0% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        }
+
+        .slogan-desc {
+          margin: 44px 0 10px 0;
+          font-size: 22px;
+          font-weight: normal;
+        }
+
+        .iron-heart {
+          position: absolute;
+          bottom: -70px;
+          left: calc(50% - 150px);
+          animation: move 15s linear infinite;
+          cursor: pointer;
+        }
+        
+        @keyframes move{
+          from{
+            transform: rotate(0);
+          }
+          to{
+            transform: rotate(360deg);
+          }
         }
       }
     }
@@ -231,6 +367,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      user-select: none;
 
       .demo-title {
         margin: 150px 0 50px;

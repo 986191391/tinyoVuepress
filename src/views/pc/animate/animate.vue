@@ -43,7 +43,7 @@ export default {
       if (scrollTop === 0) {
         this.sectionFirstFontStyle.fontSize = '12px'
       }
-      // 0 - 500 从12放大到48
+      // 0 - 500 从12放大到36
       if (scrollTop > 0 && scrollTop < 500) {
         this.sectionFirstFontStyle.fontSize = (scrollTop / 500) * 36 + 12 + 'px'
         this.sectionFirstFontStyle.transform = 'scale(1) rotate(0deg)'
