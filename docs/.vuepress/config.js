@@ -28,6 +28,11 @@ module.exports = {
       ],
       '/growth/': [
         {
+          title: '重点知识',
+          collapsable: false,
+          children: [ 'interview/this', 'interview/closure' ]
+        },
+        {
           title: '成长经历',
           collapsable: false,
           children: [ 'reacttovue', 'server', 'fabric' ]

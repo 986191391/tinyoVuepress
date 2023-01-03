@@ -144,7 +144,7 @@ export default {
     },
     watchWindowScroll () {
       const { scrollTop, clientHeight } = document.documentElement
-      this.isShowTopNav = scrollTop >= 300
+      this.isShowTopNav = scrollTop >= 100
       if (scrollTop === 0) {
         this.topSectionStyle.opacity = 1
       }

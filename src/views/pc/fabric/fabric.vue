@@ -120,7 +120,7 @@ export default {
     //   height: 30 // 方形的高度
     // })
 
-    Promise.all([this.buildImageCanvas(monkey, { left: 350, top: 150 }, 'img1'), this.buildImageCanvas(cap, { left: 450, top: 200 }, 'img2')])
+    Promise.all([this.buildImageCanvas(monkey, { left: 150, top: 50 }, 'img1'), this.buildImageCanvas(cap, { left: 250, top: 100 }, 'img2')])
       .then((result) => {
         this.canvasContainer.add(...result)
       })
