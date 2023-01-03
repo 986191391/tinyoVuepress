@@ -11,7 +11,7 @@ import './css/global.scss' // 全局css样式
 import './plugins/vant'
 import 'vant/lib/index.css'
 import * as R from 'ramda'
-import 'lodash'
+import * as _ from "lodash";
 import 'moment'
 // lodash
 // moment

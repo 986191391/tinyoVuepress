@@ -2,10 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import PcLogin from '../views/pc/login/login.vue'
 import PcHome from '../views/pc/home/home.vue'
+import PcAnimate from '../views/pc/animate/animate.vue'
 import PcAuthor from '../views/pc/author/author.vue'
 import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
 import PcBoard from '../views/pc/board/board.vue'
 import PcViewport from '../views/pc/viewport/viewport.vue'
+import PcLottery from '../views/pc/lottery/lottery.vue'
+import PcFabric from '../views/pc/fabric/fabric.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
@@ -88,6 +91,12 @@ const pcRoutes = [
     ]
   },
   {
+    path: '/animate',
+    name: 'animate',
+    component: PcAnimate,
+    meta: '动画'
+  },
+  {
     path: '/author',
     name: 'author',
     component: PcAuthor,
@@ -110,6 +119,18 @@ const pcRoutes = [
     name: 'viewport',
     component: PcViewport,
     meta: 'viewport'
+  },
+  {
+    path: '/lottery',
+    name: 'lottery',
+    component: PcLottery,
+    meta: 'lottery'
+  },
+  {
+    path: '/fabric',
+    name: 'fabric',
+    component: PcFabric,
+    meta: 'fabric'
   }
   // {
   //   path: '/legends',
@@ -145,7 +166,6 @@ const pcRoutes = [
 ]
 
 const router = new VueRouter({
-  mode: "history", 
   routes: pcRoutes
 })
 

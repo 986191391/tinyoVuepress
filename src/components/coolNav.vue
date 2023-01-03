@@ -3,11 +3,13 @@
     <div class="nav-wrapper">
       <div class="logo" @click="() => onNavClick('/home/sign')"><img :src="logo" alt="" />tinyo </div>
       <div class="nav-list">
-        <div >动画</div>｜
+        <div @click="() => onNavClick('/animate')">动画</div>｜
         <div @click="() => onNavClick('/viewport')">操作面板</div>｜
         <div @click="() => onNavClick('/board')">看板</div>｜
         <div @click="() => onNavClick('/author')">关于我</div>｜
-        <div @click="() => onNavClick('/threeJs')">threeJS</div>
+        <div @click="() => onNavClick('/threeJs')">threeJS练习</div>｜
+        <div @click="() => onNavClick('/lottery')">抽奖</div>｜
+        <div @click="() => onNavClick('/fabric')">fabric画布</div>
       </div>
     </div>
     <div class="action-wrapper">
@@ -50,6 +52,7 @@ export default {
     padding: 10px 20px;
     position: sticky;
     top: 0px;
+    left: 0px;
     border-bottom: 1px solid #eee;
     background: #fff;
     z-index: 99;
@@ -87,12 +90,12 @@ export default {
 
         & > div {
           padding: 5px;
-          // margin-left: 10px;
-          cursor: pointer;
+          font-size: 13px;
           user-select: none;
+          cursor: pointer;
 
           &:hover {
-            color: #000;
+            text-decoration: underline;
           }
         }
       }
@@ -100,15 +103,15 @@ export default {
 
     .action-wrapper {
       .btn {
-        color: #fff;
+        margin-left: 24px;
+        width: 116px;
+        height: 36px;
         background: #333;
+        color: #fff;
+        line-height: 36px;
+        text-align: center;
         border-radius: 2px;
         cursor: pointer;
-        height: 36px;
-        line-height: 36px;
-        margin-left: 24px;
-        text-align: center;
-        width: 116px;
       }
     }
 

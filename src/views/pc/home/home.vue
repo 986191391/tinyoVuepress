@@ -1,24 +1,77 @@
 <template>
   <div>
-    <CoolNav />
     <div class="home-main">
-      <div class="slogan-wrapper">
-        <div class="slogan-left">
-          <div>Play </div>
-          <div class="learn">Learn</div>
-          <div class="desc">
-            无论何时，开心万岁！
-          </div>
-          <div class="more">了解一下 &nbsp;</div>
-        </div>
-        <div class="slogan-right">
-          <img src="@/assets/hero.svg" />
+      <!-- <CoolNav /> -->
+      <div class="top-animate-nav">
+        <div class="top-animate-bg"
+          :style="{
+            width: `${isShowTopNav ? '100%' : '0px'}`
+          }"
+        >
+          <svg
+            class="top-right-svg"
+            version="1.1"
+            id="svg9-Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            width="22px"
+            height="20px"
+            viewBox="0 0 18 18"
+            enable-background="new 0 0 18 18"
+            xml:space="preserve"
+            @click="isNavScreenShown = true"
+          >
+            <rect fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+            <rect y="7" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+            <rect y="14" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+          </svg>
+          <!-- <img class="nav-animate" src="@/assets/moreIcon.png"> -->
         </div>
       </div>
+      <transition name="navScreen">
+        <section v-if="isNavScreenShown" class="nav-full-screen" >
+          <p @click="() => onNavClick('/animate')">Animate Demo</p>
+          <p @click="() => onNavClick('/viewport')">Viewport</p>
+          <p @click="() => onNavClick('/board')">Job Board</p>
+          <p @click="() => onNavClick('/author')">About Tinyo</p>
+          <p @click="() => onNavClick('/threeJs')">ThreeJs Toys</p>
+          <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
+          <p @click="() => onNavClick('/fabric')">Fabric</p>
+          <p @click="() => onNavClick('doc')">Tinyo Docs</p>
+          <p @click="isNavScreenShown = false"><i class="el-icon-plus" /></p>
+        </section>
+      </transition>
+      <section class="top-section" :style="topSectionStyle">
+        <div class="slogan-wrapper">
+          <div class="slogan-title">tinyo {{cursorValue}}</div>
+          <div class="slogan-desc">
+            · 无论何时，开心万岁
+          </div>
+          <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
+        </div>
+      </section>
+      <!-- <div class="home-nav-wrapper">
+        <div class="home-nav-title">
+          <span>S</span><span>o</span><span>m</span><span>e</span><span>t</span><span>h</span><span>i</span><span>n</span><span>g</span><span> Cool</span>
+        </div>
+        <div class="home-nav-list">
+          <div @click="() => onNavClick('/animate')"><span>小动画</span></div>
+          <div @click="() => onNavClick('/viewport')"><span>操作面板</span></div>
+          <div @click="() => onNavClick('/board')"><span>敏捷看板</span></div>
+          <div @click="() => onNavClick('/author')"><span>关于tinyo</span></div>
+          <div @click="() => onNavClick('/threeJs')"><span>threeJS玩具</span></div>
+          <div @click="() => onNavClick('/lottery')"><span>抽奖转盘</span></div>
+          <div @click="() => onNavClick('/fabric')"><span>fabric画布</span></div>
+          <div @click="() => onNavClick('doc')"><span>doc文档</span></div>
+        </div>
+      </div> -->
       <div class="demo-wrapper">
-        <div class="demo-title">Demo Window</div>
-        <div class="demo-desc">2e4ong 的玩具</div>
-        <MacWindow>
+        <div class="demo-title">
+          <span>D</span><span>e</span><span>m</span><span>o</span><span> Win</span><span>dow</span>
+        </div>
+        <MacWindow windowWidth="80%">
           <div class="show-wrapper">
             <div class="show-aside">
               <CoolAside />
@@ -29,26 +82,22 @@
           </div>
         </MacWindow>
       </div>
-      <div class="desc-wrapper"> 
-        <div class="desc-title">认真且怂，从一而终</div>
-        <div class="desc-desc">2e4ong "是这样的"</div>
-        <!-- <div class="desc-main">
-          {
-            this.state.myDesc.map(item => (
-              <div key={item.title}>
-                {
-                  item.title
-                }
-              </div>
-            ))
-          }
-        </div> -->
+      <div class="friend-wrapper">
+        <div class="friend-title">
+          <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
+        </div>
+        <div class="desc">
+          · 无论何时，开心万岁！
+        </div>
       </div>
+      <footer>Design By 2e4ong</footer>
+      <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
     </div>
   </div> 
 </template>
 
 <script>
+import logo from '@/assets/logo.png'
 import CoolNav from '@/components/coolNav.vue'
 import CoolAside from '@/components/coolAside.vue'
 import MacWindow from '@/components/macWindow.vue'
@@ -56,83 +105,287 @@ import MacWindow from '@/components/macWindow.vue'
 export default {
   components: { CoolNav, CoolAside, MacWindow },
   data () {
-    return {}
+    return {
+      logo,
+      // 以下用于控制第一屏文字的显示
+      cursorValue: '',
+      sloganModel: true, // true 显示play; flase显示cool;
+      // 以下变量用于顶部导航栏
+      isShowTopNav: false,
+      isNavScreenShown: false,
+      topSectionStyle: {
+        // transform: 'scale(1)',
+        opacity: 1
+      },
+      ironHeartStyle: {
+        transform: 'scale(1) rotate(0deg)',
+      }
+    }
+  },
+  mounted () {
+    this.sloganFlash()
+    window.addEventListener('scroll', this.watchWindowScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.watchWindowScroll);
+  },
+  methods: {
+    onNavClick (route) {
+      if (route === 'doc') return window.open('http://43.139.113.7:8081/docs/')
+      const curPath = this.$route.fullPath
+      if (curPath === route) return
+      this.$router.push(route)
+    },
+    sloganFlash () {
+      let index = 0
+      if (this.sloganModel) {
+        const simulationArr = ['', '', 'with ', 'Play ', '& ', 'Learn']
+        let cursorValue = ''
+        const timer = setInterval(() => {
+          index++
+          if (index === 5) clearInterval(timer)
+          cursorValue = `${cursorValue}${simulationArr[index]}`
+          this.cursorValue = cursorValue
+        }, 300)
+      } else {
+        const simulationArr = ['with Play & Learn','with Play &', 'with Play', 'with', '', 'is', 'is cool']
+        const timer = setInterval(() => {
+          index++
+          if (index === 6) clearInterval(timer)
+          this.cursorValue = simulationArr[index]
+        }, 300)
+      }
+      this.sloganModel = !this.sloganModel
+    },
+    watchWindowScroll () {
+      const { scrollTop, clientHeight } = document.documentElement
+      this.isShowTopNav = scrollTop >= 300
+      if (scrollTop === 0) {
+        this.topSectionStyle.opacity = 1
+      }
+      // 0 - 500px： top-section , 1 - 0.5 倍数/透明度变换 
+      if (scrollTop > 0 && scrollTop < 900) {
+        this.topSectionStyle.opacity = 1.2 - (scrollTop / 900)
+        // this.ironHeartStyle.transform = `scale(1) rotate(${scrollTop/900 * 270}deg)`
+        // this.topSectionStyle.transform = `scale(${1 - (onePrecent > 0.5 ? 0.5 : onePrecent)})`
+      }
+
+      
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+  // navScreen打开时的渐变效果
+  .navScreen-enter-active,
+  .navScreen-leave-active {
+    opacity: 1;
+    transition: all 0.3s;
+  }
+  .navScreen-enter {
+    opacity: 0;
+  }
+  .navScreen-leave-to {
+    opacity: 0;
+  }
+
   .home-main {
-    padding: 20px;
+    min-width: 1200px;
+    color: #fff;
+    background-color: #000;
 
-    .slogan-wrapper {
-      padding: 64px 0;
+    ::selection {
+      background-color: #a1a1a1;
+    }
+
+    .cool-nav {
+      padding: 10px 0px;
+      background-color: #000;
+      border-bottom: none;
+    }
+
+    .top-animate-nav {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 60px;
       display: flex;
+      justify-content: center;
+      background-color: transparent;
+      z-index: 1;
 
-      .slogan-left {
-        width: 40%;
+      .top-animate-bg {
         height: 100%;
+        transition: all 0.5s;
+        background-color: #111;
         display: flex;
-        flex-direction: column;
+        justify-content: flex-end;
         align-items: center;
-        font-size: 72px;
-        font-weight: bold;
+        overflow: hidden;
 
-        .learn {
-          color: #ff7900;
+        .top-right-svg {
+          fill: #d8d8d8;
+          margin-right: 20px;
+          transition: all 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            fill: #dc5b48;
+          }
+        }
+        // border-bottom: 1px solid #7bf0ff;
+      }
+    }
+
+    .nav-full-screen {
+      padding: 20px 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #080808;
+      z-index: 99;
+      overflow: scroll;
+      scrollbar-width: none; // 清除firefox滚动条
+
+      & > p {
+        margin: 0;
+        // padding: 10px 0;
+        font-size: 74px;
+        font-weight: 600;
+        font-family: 'FuturaStd';
+        color: #1a1c1e;
+        text-transform: uppercase;
+        transition: all 0.2s;
+        cursor: pointer;
+        
+        .el-icon-plus {
+          margin-top: 40px;
+          padding: 10px;
+          border: 1px solid #fff;
+          transform: rotate(45deg);
+          transition: all 0.3s;
+          font-size: 28px;
+          color: #fff;
         }
 
-        .desc {
+        &:hover {
+          color: #7bf0ff;
+          .el-icon-plus {
+            transform: rotate(135deg);
+            border-color: #dc5b48;
+            color: #dc5b48;
+          }
+        }
+      }
+
+    }
+
+    .top-section {
+      position: relative;
+      // height: 1400px;
+
+      .slogan-wrapper {
+        // position: sticky;
+        // left: 0px;
+        // top: 0px;
+        min-height: calc(100vh - 80px);
+        padding: 64px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        background-image: url('~@/assets/ironman.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        // user-select: none;
+
+        .slogan-title {
+          font-size: 82px;
+          position: relative;
+          &::after {
+            content: '';
+            width: 1.5px;
+            height: 100px;
+            position: absolute;
+            right: -4px;
+            background-color: #fff;
+            animation: flash 1.5s linear infinite;
+          }
+            
+          @keyframes flash {
+            0% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        }
+
+        .slogan-desc {
           margin: 44px 0 10px 0;
           font-size: 22px;
           font-weight: normal;
         }
 
-        .more {
-          padding: 5px 10px;
-          font-size: 22px;
-          border-radius: 4px;
-          font-weight: normal;
+        .iron-heart {
+          position: absolute;
+          bottom: -70px;
+          left: calc(50% - 150px);
+          animation: move 15s linear infinite;
           cursor: pointer;
-
-          &:hover {
-            background: #f2f2f2;
+        }
+        
+        @keyframes move{
+          from{
+            transform: rotate(0);
+          }
+          to{
+            transform: rotate(360deg);
           }
         }
-      }
-
-      .slogan-right {
-        width: 60%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
     }
 
     .demo-wrapper {
       width: 100%;
       padding: 0 20px;
-      margin-top: 50px;
+      color: #000;
       display: flex;
       flex-direction: column;
       align-items: center;
+      user-select: none;
 
       .demo-title {
-        font-size: 48px;
+        margin: 150px 0 50px;
+        font-size: 52px;
         font-weight: 600;
-      }
-
-      .demo-desc {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: 350;
+        color: #fff;
+        cursor: default;
+        & > span {
+          &:hover {
+            color: #7bf0ff;
+          }
+        }
       }
 
       .show-wrapper {
         width: 100%;
         height: 100%;
-        min-height: 100vh;
+        min-height: 60vh;
         display: flex;
     
         .show-aside {
@@ -141,36 +394,49 @@ export default {
     
         .show-main {
           width: calc(100% - 180px);
-          height: 100vh;
           overflow: scroll;
+          scrollbar-width: none; // 清除firefox滚动条
         }
       }
     }
 
-    .desc-wrapper {
-      width: 100%;
-      padding: 0 20px;
-      margin-top: 80px;
+    .friend-wrapper {
+      min-height: calc(100vh - 80px);
+      padding: 200px 0 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      color: #fff;
+      font-weight: bold;
+      background-image: url('~@/assets/myfriendsbg.jpg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      user-select: none;
 
-      .desc-title {
-        font-size: 42px;
-        font-weight: 600;
+      .friend-title {
+        font-size: 52px;
+        cursor: default;
+        & > span {
+          &:hover {
+            color: #dc5b48;
+          }
+        }
       }
+      .desc {
+        margin: 44px 0 10px 0;
+        font-size: 22px;
+        font-weight: normal;
+      }
+    }
 
-      .desc-desc {
-        font-size: 20px;
-        margin-bottom: 20px;
-        font-weight: 350;
-      }
-
-      .desc-main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
+    & > footer {
+      padding: 20px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
     }
   }
 </style>

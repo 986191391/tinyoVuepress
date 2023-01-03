@@ -13,7 +13,7 @@ module.exports = {
         {
           title: '文章',
           collapsable: false,
-          children: [ 'base', 'css', 'vue', 'jstype', 'browser' ]
+          children: [ 'base', 'css', 'vue', 'vuebind', 'jstype', 'browser', 'cssFun', 'promisePause', 'webOptimize' ]
         },
         {
           title: '功能性全局方法',
@@ -30,7 +30,7 @@ module.exports = {
         {
           title: '成长经历',
           collapsable: false,
-          children: [ 'reacttovue', 'server' ]
+          children: [ 'reacttovue', 'server', 'fabric' ]
         }
       ],
       '/': [

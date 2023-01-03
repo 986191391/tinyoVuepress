@@ -142,7 +142,7 @@ export default {
             flex-direction: column;
             background-color: #f2f2f2;
             overflow: scroll;
-
+            scrollbar-width: none; // 清除firefox滚动条
 
             .task-card {
               height: 120px;
