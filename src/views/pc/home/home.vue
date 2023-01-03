@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="home-main">
-      <!-- <CoolNav /> -->
       <div class="top-animate-nav">
         <div class="top-animate-bg"
           :style="{
@@ -31,7 +30,7 @@
         </div>
       </div>
       <transition name="navScreen">
-        <section v-if="isNavScreenShown" class="nav-full-screen" >
+        <section v-if="isNavScreenShown" :class="`nav-full-screen ${closeFlag && 'nav-full-screen-closing'}`" >
           <p @click="() => onNavClick('/animate')">Animate Demo</p>
           <p @click="() => onNavClick('/viewport')">Viewport</p>
           <p @click="() => onNavClick('/board')">Job Board</p>
@@ -40,7 +39,7 @@
           <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
           <p @click="() => onNavClick('/fabric')">Fabric</p>
           <p @click="() => onNavClick('doc')">Tinyo Docs</p>
-          <p @click="isNavScreenShown = false"><i class="el-icon-plus" /></p>
+          <p @click="onCloseNavScreen"><i class="el-icon-plus" /></p>
         </section>
       </transition>
       <section class="top-section" :style="topSectionStyle">
@@ -52,21 +51,6 @@
           <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
         </div>
       </section>
-      <!-- <div class="home-nav-wrapper">
-        <div class="home-nav-title">
-          <span>S</span><span>o</span><span>m</span><span>e</span><span>t</span><span>h</span><span>i</span><span>n</span><span>g</span><span> Cool</span>
-        </div>
-        <div class="home-nav-list">
-          <div @click="() => onNavClick('/animate')"><span>小动画</span></div>
-          <div @click="() => onNavClick('/viewport')"><span>操作面板</span></div>
-          <div @click="() => onNavClick('/board')"><span>敏捷看板</span></div>
-          <div @click="() => onNavClick('/author')"><span>关于tinyo</span></div>
-          <div @click="() => onNavClick('/threeJs')"><span>threeJS玩具</span></div>
-          <div @click="() => onNavClick('/lottery')"><span>抽奖转盘</span></div>
-          <div @click="() => onNavClick('/fabric')"><span>fabric画布</span></div>
-          <div @click="() => onNavClick('doc')"><span>doc文档</span></div>
-        </div>
-      </div> -->
       <div class="demo-wrapper">
         <div class="demo-title">
           <span>D</span><span>e</span><span>m</span><span>o</span><span> Win</span><span>dow</span>
@@ -112,6 +96,7 @@ export default {
       sloganModel: true, // true 显示play; flase显示cool;
       // 以下变量用于顶部导航栏
       isShowTopNav: false,
+      closeFlag: false,
       isNavScreenShown: false,
       topSectionStyle: {
         // transform: 'scale(1)',
@@ -169,8 +154,13 @@ export default {
         // this.ironHeartStyle.transform = `scale(1) rotate(${scrollTop/900 * 270}deg)`
         // this.topSectionStyle.transform = `scale(${1 - (onePrecent > 0.5 ? 0.5 : onePrecent)})`
       }
-
-      
+    },
+    onCloseNavScreen () {
+      this.closeFlag = true
+      setTimeout(() => {
+        this.isNavScreenShown = false
+        this.closeFlag = false
+      }, 500)
     }
   }
 }
@@ -181,6 +171,7 @@ export default {
   .navScreen-enter-active,
   .navScreen-leave-active {
     opacity: 1;
+    font-size: 100px;
     transition: all 0.3s;
   }
   .navScreen-enter {
@@ -256,8 +247,7 @@ export default {
 
       & > p {
         margin: 0;
-        // padding: 10px 0;
-        font-size: 74px;
+        font-size: 54px;
         font-weight: 600;
         font-family: 'FuturaStd';
         color: #1a1c1e;
@@ -285,6 +275,36 @@ export default {
         }
       }
 
+      &.nav-full-screen-closing {
+        > p {
+          &:nth-child(1) {
+            animation: scaleFrames 0.5s linear 0.1s infinite;
+          }
+          &:nth-child(2) {
+            animation: scaleFrames 0.5s linear 0.2s infinite;
+          }
+          &:nth-child(3) {
+            animation: scaleFrames 0.5s linear 0.3s infinite;
+          }
+          &:nth-child(4) {
+            animation: scaleFrames 0.5s linear 0.4s infinite;
+          }
+          &:nth-child(5) {
+            animation: scaleFrames 0.5s linear 0.5s infinite;
+          }
+        }
+      }
+
+      @keyframes scaleFrames{
+        from{
+          opacity: 1;
+          transform: scale(1);
+        }
+        to{
+          opacity: 0.2;
+          transform: scale(2);
+        }
+      }
     }
 
     .top-section {
@@ -342,9 +362,11 @@ export default {
         }
 
         .iron-heart {
+          width: 250px;
+          height: 250px;
           position: absolute;
           bottom: -70px;
-          left: calc(50% - 150px);
+          left: calc(50% - 125px);
           animation: move 15s linear infinite;
           cursor: pointer;
         }
