@@ -51,16 +51,16 @@
         </div>
       </section>
       <section class="section">
-        <div class="section-title ">
+        <div class="section-title section-title-yellow">
           <span>Beer </span><span> and </span><span>Skittles</span>
         </div>
         <CoolSwipe
           name="beerandskittles"
-          :data="[logo, zrn, logo1]"
+          :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8]"
         />
       </section>
       <section class="section demo-wrapper">
-        <div class="section-title">
+        <div class="section-title section-title-blue">
           <span>L</span><span>e</span><span>a</span><span>r</span><span>n</span><span> De</span><span>mo</span>
         </div>
         <MacWindow windowWidth="80%">
@@ -81,6 +81,10 @@
         <div class="desc">
           · 无论何时，开心万岁！
         </div>
+        <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
+        <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
+        <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
+        <img src="@/assets/homeperson/yzf.png" width="95" alt class="person person-yzf" /> -->
       </div>
       <footer>Design By 2e4ong</footer>
       <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
@@ -89,9 +93,14 @@
 </template>
 
 <script>
-import logo from '@/assets/navironman.jpg'
-import zrn from '@/assets/zrn.jpeg'
-import logo1 from '@/assets/myfriendsbg.jpg'
+import swipe1 from '@/assets/homeswipe/swipe1.png'
+import swipe2 from '@/assets/homeswipe/swipe2.png'
+import swipe3 from '@/assets/homeswipe/swipe3.jpg'
+import swipe4 from '@/assets/homeswipe/swipe4.jpg'
+import swipe5 from '@/assets/homeswipe/swipe5.jpg'
+import swipe6 from '@/assets/homeswipe/swipe6.jpg'
+import swipe7 from '@/assets/homeswipe/swipe7.jpg'
+import swipe8 from '@/assets/homeswipe/swipe8.jpg'
 
 import CoolNav from '@/components/coolNav.vue'
 import CoolAside from '@/components/coolAside.vue'
@@ -102,9 +111,7 @@ export default {
   components: { CoolNav, CoolAside, MacWindow, CoolSwipe },
   data () {
     return {
-      logo,
-      zrn,
-      logo1,
+      swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8,
       // 以下用于控制第一屏文字的显示
       cursorValue: '',
       sloganModel: true, // true 显示play; flase显示cool;
@@ -346,7 +353,6 @@ export default {
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        // user-select: none;
 
         .slogan-title {
           font-size: 82px;
@@ -408,10 +414,15 @@ export default {
         font-weight: 600;
         color: #fff;
         cursor: default;
-        & > span {
-          &:hover {
-            color: #7bf0ff;
-          }
+
+        &.section-title-yellow > span:hover {
+          color: #ddc485;
+        }
+        &.section-title-blue > span:hover {
+          color: #7bf0ff;
+        }
+        &.section-title-red > span:hover {
+          color: #dc5b48;
         }
       }
     }
@@ -456,8 +467,10 @@ export default {
     }
 
     .friend-wrapper {
-      min-height: calc(100vh - 80px);
-      padding: 200px 0 64px;
+      margin: 0 auto;
+      padding: 160px 0 0;
+      height: 700px;
+      width: 1200px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -467,7 +480,7 @@ export default {
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      user-select: none;
+      position: relative;
 
       .friend-title {
         font-size: 52px;
@@ -479,9 +492,39 @@ export default {
         }
       }
       .desc {
-        margin: 44px 0 10px 0;
+        margin: 24px 0 10px 0;
         font-size: 22px;
         font-weight: normal;
+      }
+
+      .person {
+        position: absolute;
+        transform: scale(1);
+        transition: all 0.5s;
+
+        &.person-ljy {
+          left: 290px;
+          bottom: 139px;
+        }
+
+        &.person-yzf {
+          left: 364px;
+          bottom: 134px;
+        }
+
+        &.person-lsl {
+          left: 424px;
+          bottom: 161px;
+        }
+
+        &.person-pyz {
+          left: 461px;
+          bottom: 160px;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
 
