@@ -21,7 +21,7 @@
 <script>
 import logo from '@/assets/logo.png'
 export default {
-  name: 'YuanNav',
+  name: 'CoolNav',
   props: {
     navTitle: {
       default: '元计划'

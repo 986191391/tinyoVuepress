@@ -30,7 +30,7 @@ module.exports = {
         {
           title: '重点知识',
           collapsable: false,
-          children: [ 'interview/this', 'interview/closure', 'interview/prototype' ]
+          children: [ 'interview/this', 'interview/closure', 'interview/prototype', 'interview/inherit' ]
         },
         {
           title: '成长经历',

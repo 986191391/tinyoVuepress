@@ -10,10 +10,9 @@
 </template>
 
 <script>
-import YuanFooter from '@/components/YuanFooter.vue'
 
 export default {
-  components: { YuanFooter },
+  components: { },
   data () {
     return {
     }

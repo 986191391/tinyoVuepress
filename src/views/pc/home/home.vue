@@ -26,7 +26,6 @@
             <rect y="7" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
             <rect y="14" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
           </svg>
-          <!-- <img class="nav-animate" src="@/assets/moreIcon.png"> -->
         </div>
       </div>
       <transition name="navScreen">
@@ -51,9 +50,18 @@
           <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
         </div>
       </section>
-      <div class="demo-wrapper">
-        <div class="demo-title">
-          <span>D</span><span>e</span><span>m</span><span>o</span><span> Win</span><span>dow</span>
+      <section class="section">
+        <div class="section-title ">
+          <span>Beer </span><span> and </span><span>Skittles</span>
+        </div>
+        <CoolSwipe
+          name="beerandskittles"
+          :data="[logo, zrn, logo1]"
+        />
+      </section>
+      <section class="section demo-wrapper">
+        <div class="section-title">
+          <span>L</span><span>e</span><span>a</span><span>r</span><span>n</span><span> De</span><span>mo</span>
         </div>
         <MacWindow windowWidth="80%">
           <div class="show-wrapper">
@@ -65,7 +73,7 @@
             </div>
           </div>
         </MacWindow>
-      </div>
+      </section>
       <div class="friend-wrapper">
         <div class="friend-title">
           <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
@@ -81,16 +89,22 @@
 </template>
 
 <script>
-import logo from '@/assets/logo.png'
+import logo from '@/assets/navironman.jpg'
+import zrn from '@/assets/zrn.jpeg'
+import logo1 from '@/assets/myfriendsbg.jpg'
+
 import CoolNav from '@/components/coolNav.vue'
 import CoolAside from '@/components/coolAside.vue'
 import MacWindow from '@/components/macWindow.vue'
+import CoolSwipe from '@/components/coolSwipe.vue'
 
 export default {
-  components: { CoolNav, CoolAside, MacWindow },
+  components: { CoolNav, CoolAside, MacWindow, CoolSwipe },
   data () {
     return {
       logo,
+      zrn,
+      logo1,
       // 以下用于控制第一屏文字的显示
       cursorValue: '',
       sloganModel: true, // true 显示play; flase显示cool;
@@ -251,7 +265,7 @@ export default {
         font-weight: 600;
         font-family: 'FuturaStd';
         color: #1a1c1e;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         transition: all 0.2s;
         cursor: pointer;
         
@@ -278,19 +292,28 @@ export default {
       &.nav-full-screen-closing {
         > p {
           &:nth-child(1) {
-            animation: scaleFrames 0.5s linear 0.1s infinite;
+            animation: scaleFrames 0.5s linear 0.05s infinite;
           }
           &:nth-child(2) {
-            animation: scaleFrames 0.5s linear 0.2s infinite;
+            animation: scaleFrames 0.5s linear 0.15s infinite;
           }
           &:nth-child(3) {
-            animation: scaleFrames 0.5s linear 0.3s infinite;
+            animation: scaleFrames 0.5s linear 0.2s infinite;
           }
           &:nth-child(4) {
-            animation: scaleFrames 0.5s linear 0.4s infinite;
+            animation: scaleFrames 0.5s linear 0.25s infinite;
           }
           &:nth-child(5) {
-            animation: scaleFrames 0.5s linear 0.5s infinite;
+            animation: scaleFrames 0.5s linear 0.3s infinite;
+          }
+          &:nth-child(6) {
+            animation: scaleFrames 0.5s linear 0.35s infinite;
+          }
+          &:nth-child(7) {
+            animation: scaleFrames 0.5s linear 0.4s infinite;
+          }
+          &:nth-child(8) {
+            animation: scaleFrames 0.5s linear 0.45s infinite;
           }
         }
       }
@@ -309,12 +332,8 @@ export default {
 
     .top-section {
       position: relative;
-      // height: 1400px;
 
       .slogan-wrapper {
-        // position: sticky;
-        // left: 0px;
-        // top: 0px;
         min-height: calc(100vh - 80px);
         padding: 64px 0;
         display: flex;
@@ -382,6 +401,21 @@ export default {
       }
     }
 
+    .section {
+      .section-title {
+        margin: 150px 0 50px;
+        font-size: 52px;
+        font-weight: 600;
+        color: #fff;
+        cursor: default;
+        & > span {
+          &:hover {
+            color: #7bf0ff;
+          }
+        }
+      }
+    }
+
     .demo-wrapper {
       width: 100%;
       padding: 0 20px;
@@ -389,7 +423,6 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      user-select: none;
 
       .demo-title {
         margin: 150px 0 50px;

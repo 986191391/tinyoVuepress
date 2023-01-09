@@ -39,12 +39,11 @@
 
 <script>
 import CoolNav from '@/components/coolNav.vue'
-import YuanFooter from '@/components/YuanFooter.vue'
 import icon from '@/assets/stamp2.jpg';
 import icon2 from '@/assets/logo.png';
 
 export default {
-  components: { CoolNav, YuanFooter },
+  components: { CoolNav },
   data () {
     return {
       boardDataObj: null,
