@@ -1,93 +1,104 @@
 <template>
-  <div>
-    <div class="home-main">
-      <div class="top-animate-nav">
-        <div class="top-animate-bg"
-          :style="{
-            width: `${isShowTopNav ? '100%' : '0px'}`
-          }"
+  <div class="home-main">
+    <!-- 导航栏 -->
+    <div class="home-animate-nav">
+      <div class="home-animate-nav-wrapper"
+        :style="{
+          width: `${isShowTopNav ? '100%' : '0px'}`
+        }"
+      >
+        <!-- 导航左侧占位 -->
+        <span v-show="isShowTopNav" class="animate-left"/>
+        <!-- 灵动岛 -->
+        <div
+          v-show="isShowTopNav"
+          class="dynamic-island"
+          :style="{ width: `${dynamicIslandWidth}px` }"
         >
-          <svg
-            class="top-right-svg"
-            version="1.1"
-            id="svg9-Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            width="22px"
-            height="20px"
-            viewBox="0 0 18 18"
-            enable-background="new 0 0 18 18"
-            xml:space="preserve"
-            @click="isNavScreenShown = true"
-          >
-            <rect fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
-            <rect y="7" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
-            <rect y="14" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
-          </svg>
+          {{dynamicIslandMessage}}
         </div>
+        <!-- 导航右侧 -->
+        <svg
+          v-show="isShowTopNav"
+          class="animate-right-svg"
+          version="1.1"
+          id="svg9-Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="22px"
+          height="20px"
+          viewBox="0 0 18 18"
+          enable-background="new 0 0 18 18"
+          xml:space="preserve"
+          @click="isNavScreenShown = true"
+        >
+          <rect fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+          <rect y="7" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+          <rect y="14" fill-rule="evenodd" clip-rule="evenodd" width="22" height="4"></rect>
+        </svg>
       </div>
-      <transition name="navScreen">
-        <section v-if="isNavScreenShown" :class="`nav-full-screen ${closeFlag && 'nav-full-screen-closing'}`" >
-          <p @click="() => onNavClick('/animate')">Animate Demo</p>
-          <p @click="() => onNavClick('/viewport')">Viewport</p>
-          <p @click="() => onNavClick('/board')">Job Board</p>
-          <p @click="() => onNavClick('/author')">About Tinyo</p>
-          <p @click="() => onNavClick('/threeJs')">ThreeJs Toys</p>
-          <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
-          <p @click="() => onNavClick('/fabric')">Fabric</p>
-          <p @click="() => onNavClick('doc')">Tinyo Docs</p>
-          <p @click="onCloseNavScreen"><i class="el-icon-plus" /></p>
-        </section>
-      </transition>
-      <section class="top-section" :style="topSectionStyle">
-        <div class="slogan-wrapper">
-          <div class="slogan-title">tinyo {{cursorValue}}</div>
-          <div class="slogan-desc">· 无论何时，开心万岁</div>
-          <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
-        </div>
-      </section>
-      <section class="section">
-        <div class="section-title section-title-yellow">
-          <span>Beer </span><span> and </span><span>Skittles</span>
-        </div>
-        <div class="section-desc">· 不仅吃喝，还有玩乐</div>
-        <CoolSwipe
-          name="beerandskittles"
-          :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8]"
-        />
-      </section>
-      <section class="section demo-wrapper">
-        <div class="section-title section-title-blue">
-          <span>D</span><span>e</span><span>m</span><span>o</span><span> W</span><span>i</span><span>n</span><span>d</span><span>o</span><span>w</span>
-        </div>
-        <div class="section-desc">· 学无止境</div>
-        <MacWindow windowWidth="80%">
-          <div class="show-wrapper">
-            <div class="show-aside">
-              <CoolAside />
-            </div>
-            <div class="show-main">
-              <router-view/>
-            </div>
-          </div>
-        </MacWindow>
-      </section>
-      <div class="section friend-wrapper">
-        <div class="section-title section-title-red">
-          <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
-        </div>
-        <div class="section-desc">· 平安喜乐！</div>
-        <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
-        <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
-        <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
-        <img src="@/assets/homeperson/yzf.png" width="95" alt class="person person-yzf" /> -->
-      </div>
-      <footer>Design By 2e4ong</footer>
-      <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
     </div>
-  </div> 
+    <transition name="navScreen">
+      <section v-if="isNavScreenShown" :class="`nav-full-screen ${closeFlag && 'nav-full-screen-closing'}`" >
+        <p @click="() => onNavClick('/animate')">Animate Demo</p>
+        <p @click="() => onNavClick('/viewport')">Viewport</p>
+        <p @click="() => onNavClick('/board')">Job Board</p>
+        <p @click="() => onNavClick('/author')">About Tinyo</p>
+        <p @click="() => onNavClick('/threeJs')">ThreeJs Toys</p>
+        <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
+        <p @click="() => onNavClick('/fabric')">Fabric</p>
+        <p @click="() => onNavClick('doc')">Tinyo Docs</p>
+        <p @click="onCloseNavScreen"><i class="el-icon-plus" /></p>
+      </section>
+    </transition>
+    <section class="top-section" :style="topSectionStyle">
+      <div class="slogan-wrapper">
+        <div class="slogan-title">tinyo {{cursorValue}}</div>
+        <div class="slogan-desc" @click="() => onDynamicTips('无论何时，开心万岁')">· 无论何时，开心万岁</div>
+        <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-title section-title-yellow">
+        <span>Beer </span><span> and </span><span>Skittles</span>
+      </div>
+      <div class="section-desc" @click="() => onDynamicTips('不仅吃喝，还有玩乐')">· 不仅吃喝，还有玩乐</div>
+      <CoolSwipe
+        name="beerandskittles"
+        :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8]"
+      />
+    </section>
+    <section class="section demo-wrapper">
+      <div class="section-title section-title-blue">
+        <span>D</span><span>e</span><span>m</span><span>o</span><span> W</span><span>i</span><span>n</span><span>d</span><span>o</span><span>w</span>
+      </div>
+      <div class="section-desc" @click="() => onDynamicTips('学无止境')">· 学无止境</div>
+      <MacWindow windowWidth="80%">
+        <div class="show-wrapper">
+          <div class="show-aside">
+            <CoolAside />
+          </div>
+          <div class="show-main">
+            <router-view :onDynamicTips="onDynamicTips"/>
+          </div>
+        </div>
+      </MacWindow>
+    </section>
+    <div class="section friend-wrapper">
+      <div class="section-title section-title-red">
+        <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
+      </div>
+      <div class="section-desc" @click="() => onDynamicTips('平安喜乐')">· 平安喜乐</div>
+      <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
+      <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
+      <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
+      <img src="@/assets/homeperson/yzf.png" width="95" alt class="person person-yzf" /> -->
+    </div>
+    <footer>Design By 2e4ong</footer>
+    <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
+  </div>
 </template>
 
 <script>
@@ -105,11 +116,16 @@ import CoolAside from '@/components/coolAside.vue'
 import MacWindow from '@/components/macWindow.vue'
 import CoolSwipe from '@/components/coolSwipe.vue'
 
+import { getStrLen } from '@/utils/utils'
+
 export default {
   components: { CoolNav, CoolAside, MacWindow, CoolSwipe },
   data () {
     return {
       swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8,
+      // 导航栏相关变量
+      dynamicIslandWidth: 100,
+      dynamicIslandMessage: '',
       // 以下用于控制第一屏文字的显示
       cursorValue: '',
       sloganModel: true, // true 显示learn&play; flase显示is cool;
@@ -123,7 +139,7 @@ export default {
       },
       ironHeartStyle: {
         transform: 'scale(1) rotate(0deg)',
-      }
+      },
     }
   },
   mounted () {
@@ -134,11 +150,16 @@ export default {
     window.removeEventListener('scroll', this.watchWindowScroll);
   },
   methods: {
-    onNavClick (route) {
-      if (route === 'doc') return window.open('http://43.139.113.7:8081/docs/')
-      const curPath = this.$route.fullPath
-      if (curPath === route) return
-      this.$router.push(route)
+    onDynamicTips (tips) {
+      // 导航栏没显示时不触发 正在触发时不触发
+      if (!this.isShowTopNav || this.dynamicIslandMessage) return
+      this.dynamicIslandMessage = tips;
+      let len = getStrLen(tips)
+      this.dynamicIslandWidth = len > 12 ? len * 7.5 : 100;
+      setTimeout(() => { 
+        this.dynamicIslandMessage = ''
+        this.dynamicIslandWidth = 100
+      }, 1500)
     },
     sloganFlash () {
       let index = 0
@@ -173,6 +194,12 @@ export default {
         // this.ironHeartStyle.transform = `scale(1) rotate(${scrollTop/900 * 270}deg)`
         // this.topSectionStyle.transform = `scale(${1 - (onePrecent > 0.5 ? 0.5 : onePrecent)})`
       }
+    },
+    onNavClick (route) {
+      if (route === 'doc') return window.open('http://43.139.113.7:8081/docs/')
+      const curPath = this.$route.fullPath
+      if (curPath === route) return
+      this.$router.push(route)
     },
     onCloseNavScreen () {
       this.closeFlag = true
@@ -215,7 +242,7 @@ export default {
       border-bottom: none;
     }
 
-    .top-animate-nav {
+    .home-animate-nav {
       position: fixed;
       top: 0px;
       left: 0px;
@@ -226,18 +253,39 @@ export default {
       background-color: transparent;
       z-index: 99;
 
-      .top-animate-bg {
+      .home-animate-nav-wrapper {
         height: 100%;
         transition: all 0.5s;
         background-color: #111;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
         overflow: hidden;
 
-        .top-right-svg {
-          fill: #d8d8d8;
+        .animate-left {
+          margin-left: 20px;
+          width: 22px;
+          height: 22px;
+        }
+
+        .dynamic-island {
+          padding: 0 25px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #000;
+          border: 1px solid #222;
+          border-radius: 50px;
+          font-size: 12px;
+          transition: all 0.3s;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+
+        .animate-right-svg {
           margin-right: 20px;
+          fill: #d8d8d8;
           transition: all 0.3s;
           cursor: pointer;
 
@@ -245,7 +293,6 @@ export default {
             fill: #dc5b48;
           }
         }
-        // border-bottom: 1px solid #7bf0ff;
       }
     }
 

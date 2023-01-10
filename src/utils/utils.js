@@ -24,3 +24,18 @@ export function tansParams(params) {
   }
   return result
 }
+
+/*
+* 汉字占两个字符，英文字母占一个字符。
+*/
+export function getStrLen(str){
+  let len = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str.charCodeAt(i) > 255){
+      len += 2;   
+    } else {
+      len++;
+    }  
+  }
+  return len
+}    

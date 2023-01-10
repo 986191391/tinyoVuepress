@@ -35,6 +35,12 @@
 <script>
 
 export default {
+  props: {
+    onDynamicTips: {
+      type: Function,
+      default: () => {}
+    }
+  },
   data () {
     return {
       currentPlayer: true, // true 为黑棋 , false 为白棋
@@ -49,23 +55,19 @@ export default {
   },
   methods: {
     clickBoard (e) {
-      console.log('eee', e)
       const x = Number(e.target.dataset.x);
       const y = Number(e.target.dataset.y);
-      console.log('111')
       // 如果点的是棋子那个div 没有绑定dataset 所以xy都为空
-      if(!x && !y) return console.log('这个位置已经下了,请换一个位置!');
+      if(!x && !y) return this.onDynamicTips('这个位置已经下了,请换一个位置!');
       // 如果点击了棋子所在的格子 则有绑定dateset 需要判断一下是否已经下了
       const curCoordinatesItem = this.coordinates.find((item) => item.x === x && item.y === y);
-      if (curCoordinatesItem.player !== null) return console.log('这个位置已经下了,请换一个位置!');
+      if (curCoordinatesItem.player !== null) return this.onDynamicTips('这个位置已经下了,请换一个位置!');
 
-      console.log('2222')
       // 记录
       const coordinatesItem = this.coordinates.find((coordinatesItem) => coordinatesItem.x === x && coordinatesItem.y === y);
       coordinatesItem.player = this.currentPlayer;
       this.currentPlayer = !this.currentPlayer
 
-      console.log('333')
       // 检查游戏是否结束
       this.checkFinish(x, y);
     },
@@ -110,7 +112,7 @@ export default {
         // 取出第一项 用后面循环的判断
         const firstPlayer = checkPart[0].player;
         const isWin = checkPart.some((item) => item.player !== firstPlayer);
-        if (!isWin) return alert(`${this.currentPlayer ? '白棋' : '黑棋'}获胜!`);
+        if (!isWin) return this.onDynamicTips(`${this.currentPlayer ? '白棋' : '黑棋'}获胜!`);
       }
     },
     reload () {

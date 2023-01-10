@@ -19,6 +19,12 @@
 <script>
 
 export default {
+  props: {
+    onDynamicTips: {
+      type: Function,
+      default: () => {}
+    }
+  },
   data () {
     return {
       navigatorFont: '使用 navigator.clipboard.writeText(text) 来复制',
@@ -44,7 +50,7 @@ export default {
     onExecCommandCopy() {
       document.execCommand('copy')
       const selection = window.getSelection()
-      this.msgSuccess(`缺点是只能够复制选中的文字，现在复制的内容是:${selection.toString()}`)
+      this.onDynamicTips(`当前复制的内容是:${selection.toString()}`)
     }
   }
 }
