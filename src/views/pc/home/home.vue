@@ -91,10 +91,16 @@
         <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
       </div>
       <div class="section-desc" @click="() => onDynamicTips('平安喜乐，万事顺意')">· 平安喜乐</div>
-      <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
-      <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
-      <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
-      <img src="@/assets/homeperson/yzf.png" width="95" alt class="person person-yzf" /> -->
+      <img src="@/assets/homeperson/ljy.png" alt title="1+1" class="person person-ljy" @click="() => onDynamicTips('这位是一加一，tinyo的小可爱！！~')" />
+      <img src="@/assets/homeperson/yzf.png" alt title="tinyo" class="person person-yzf" @click="() => onDynamicTips('hi！ i am tinyo！')" />
+      <img src="@/assets/homeperson/lsl.png" alt title="狼孩lian" class="person person-lsl" @click="() => onDynamicTips('大家好，我是练哥，你猜我说的话是不是真的？')" />
+      <img src="@/assets/homeperson/pyz.png" alt title="珠珠" class="person person-pyz" @click="() => onDynamicTips('这位是练哥的珠珠~')" />
+      <img src="@/assets/homeperson/zhg.png" alt title="花样美男帕尼仔" class="person person-zhg" @click="() => onDynamicTips('花样美男，我永远的男神欧巴概概！')" />
+      <img src="@/assets/homeperson/hry.png" alt title="ria huang" class="person person-hry" @click="() => onDynamicTips('这位是ria huang，一紧张就想拉屎!')" />
+      <img src="@/assets/homeperson/hjz.png" alt title="猴" class="person person-hjz" @click="() => onDynamicTips('早睡早起不熬夜加锻炼猴')" />
+      <img src="@/assets/homeperson/fwx.png" alt title="固执王" class="person person-fwx" @click="() => onDynamicTips('大家好，我是固执王，其他没什么，就是嘴有点硬')" />
+      <img src="@/assets/homeperson/cjx.png" alt title="娴" class="person person-cjx" @click="() => onDynamicTips('这位是爱玩桌游的娴！')" />
+      <img src="@/assets/homeperson/xg.png" alt title="小哥" class="person person-xg" @click="() => onDynamicTips('娴的神秘男孩小哥boy~')" />
     </div>
     <footer>Design By 2e4ong</footer>
     <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
@@ -151,6 +157,7 @@ export default {
   },
   methods: {
     onDynamicTips (tips) {
+      console.log('tips', tips)
       // 导航栏没显示时不触发 正在触发时不触发
       if (!this.isShowTopNav || this.dynamicIslandMessage) return
       this.dynamicIslandMessage = tips;
@@ -512,25 +519,66 @@ export default {
         position: absolute;
         transform: scale(1);
         transition: all 0.5s;
+        cursor: pointer;
 
         &.person-ljy {
-          left: 290px;
-          bottom: 139px;
+          left: 289px;
+          bottom: 60px;
+          z-index: 2;
         }
 
         &.person-yzf {
-          left: 364px;
-          bottom: 134px;
+          left: 365px;
+          bottom: 59px;
+          z-index: 3;
         }
 
         &.person-lsl {
-          left: 424px;
-          bottom: 161px;
+          left: 394px;
+          bottom: 91px;
+          z-index: 1;
         }
 
         &.person-pyz {
           left: 461px;
-          bottom: 160px;
+          bottom: 79px;
+          z-index: 3;
+        }
+
+        &.person-zhg {
+          left: 541px;
+          bottom: 72px;
+          z-index: 2;
+        }
+
+        &.person-hry {
+          left: 598px;
+          bottom: 61px;
+          z-index: 3;
+        }
+
+        &.person-hjz {
+          left: 658px;
+          bottom: 66px;
+          z-index: 2;
+        }
+
+        &.person-fwx {
+          left: 729px;
+          bottom: 54px;
+          z-index: 3;
+        }
+
+        &.person-cjx {
+          left: 826px;
+          bottom: 23px;
+          z-index: 3;
+        }
+
+        &.person-xg {
+          left: 880px;
+          bottom: 41px;
+          z-index: 2;
         }
 
         &:hover {
