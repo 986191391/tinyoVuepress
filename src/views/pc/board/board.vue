@@ -26,7 +26,7 @@
                 >
                   <img class="task-icon" :src="itm.icon" alt="" />
                   <div class="task-code">{{itm.code}}</div>
-                  <div>{{itm.title}}</div>
+                  <div class="task-title">{{itm.title}}</div>
                 </div>
               </template>
             </div>
@@ -62,7 +62,13 @@ export default {
   },
   methods: {
     getBoardListData () {
-      const mockData = [{ id: '001', code: 'EDUC-341', title: '源计划页面优化方案设计', icon, status: 0 }, { id: '003', code: 'EDUC-345', title: 'xxx', icon: icon2, status: 1 }, { id: '002', code: 'EDUC-1432', title: '啊hi的我计划', icon, status: 2 }, { id: '007', code: 'EDUC-245', title: '大王山计划', icon: icon2, status: 2 }, { id: '005', code: 'EDUC-934', title: '明天发财计划', icon, status: 3 }]
+      const mockData = [
+        { id: '001', code: 'EDUC-341', title: '源计划页面优化方案设计', icon, status: 0 },
+        { id: '003', code: 'EDUC-345', title: 'xxx', icon: icon2, status: 1 },
+        { id: '002', code: 'EDUC-1432', title: '啊hi的我计划', icon, status: 2 },
+        { id: '007', code: 'EDUC-245', title: '大王山计划', icon: icon2, status: 2 },
+        { id: '005', code: 'EDUC-934', title: '明天发财计划', icon, status: 3 }
+      ]
       const obj = {}
       mockData.forEach((item) => {
         obj[item.status] = obj[item.status] ? [...obj[item.status], item] : [item]
@@ -145,11 +151,12 @@ export default {
 
             .task-card {
               height: 120px;
-              padding: .5rem;
+              padding: .5rem 50px .5rem .5rem;
               border-radius: 2px;
               box-shadow: 0 0 1px 0 rgba(9, 30, 66, 0.31), 0 2px 4px -1px rgba(9, 30, 66, 0.25);
               margin-bottom: .5rem;
               background-color: #fff;
+              text-align: left;
               transition: all 0.5s;
               position: relative;
               cursor: pointer;
@@ -163,14 +170,24 @@ export default {
                 height: 40px;
                 border-radius: 50%;
                 position: absolute;
-                top: 10px;
-                right: 10px;
+                top: 5px;
+                right: 5px;
               }
 
               .task-code {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
                 margin-bottom: 5px;
                 font-size: 12px;
                 color: #666;
+              }
+
+              .task-title {
+                width: 150px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
               }
             }
           }

@@ -90,7 +90,7 @@
       <div class="section-title section-title-red">
         <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
       </div>
-      <div class="section-desc" @click="() => onDynamicTips('平安喜乐')">· 平安喜乐</div>
+      <div class="section-desc" @click="() => onDynamicTips('平安喜乐，万事顺意')">· 平安喜乐</div>
       <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
       <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
       <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
@@ -344,28 +344,19 @@ export default {
       &.nav-full-screen-closing {
         > p {
           &:nth-child(1) {
-            animation: scaleFrames 0.5s linear 0.05s infinite;
+            animation: scaleFrames 0.5s linear 0.1s infinite;
           }
           &:nth-child(2) {
-            animation: scaleFrames 0.5s linear 0.15s infinite;
-          }
-          &:nth-child(3) {
             animation: scaleFrames 0.5s linear 0.2s infinite;
           }
-          &:nth-child(4) {
-            animation: scaleFrames 0.5s linear 0.25s infinite;
-          }
-          &:nth-child(5) {
+          &:nth-child(3) {
             animation: scaleFrames 0.5s linear 0.3s infinite;
           }
-          &:nth-child(6) {
-            animation: scaleFrames 0.5s linear 0.35s infinite;
-          }
-          &:nth-child(7) {
+          &:nth-child(4) {
             animation: scaleFrames 0.5s linear 0.4s infinite;
           }
-          &:nth-child(8) {
-            animation: scaleFrames 0.5s linear 0.45s infinite;
+          &:nth-child(5) {
+            animation: scaleFrames 0.5s linear 0.5s infinite;
           }
         }
       }
