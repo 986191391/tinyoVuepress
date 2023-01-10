@@ -29,12 +29,17 @@
               <el-button type="primary" size="mini" @click="onTextConfirm">确定</el-button>
             </div>
           </div>
-          <!-- <div class="action-items">
-            <span class="action-items-label">插入图片:</span>
-            <div class="action-items-value action-items-insert-image">
-              <el-button type="ghost" size="mini" @click="onInsertImage">点击插入图片</el-button>
+          <div class="action-items">
+            <span class="action-items-label">已插入文字:</span>
+            <div class="action-items-value action-items-has-input-text">
+              <template v-for="(fontItm, fontIdx) in fontList">
+                <div :key="`font-${fontIdx}`" class="font-item">
+                  <div class="font-value" :title="fontItm.value">{{fontItm.value}}</div>
+                  <i class="el-icon-delete" @click="() => onDelUpload(fontItm, false)"/>
+                </div>
+              </template>
             </div>
-          </div> -->
+          </div>
           <div class="action-items">
             <span class="action-items-label">上传图片:</span>
             <div class="action-items-value action-items-upload-image">
@@ -44,21 +49,13 @@
                   :style="{backgroundImage: `url(${item.url})`}"
                 >
                   <div class="item-mask">
-                    <i class="el-icon-delete" @click="() => onDelUpload(item)"/>
+                    <i class="el-icon-delete" @click="() => onDelUpload(item, true)"/>
                   </div>
                 </div>
               </template>
               <div class="upload-icon-add" @click="onInsertImage">
                 <i class="el-icon-plus"></i>
               </div>
-              <!-- <el-upload
-                action="#"
-                list-type="picture-card"
-                :file-list="defaultFileList"
-                :on-change="onImageUpload"
-                :on-remove="onImageRemove">
-                <i class="el-icon-plus"></i>
-              </el-upload> -->
             </div>
           </div>
           <div class="action-items">
@@ -77,7 +74,6 @@
         </div>
       </aside>
     </main>
-    <!-- <canvas width='800' height='800' /> -->
   </div>
 </template>
 
@@ -95,12 +91,14 @@ export default {
         this.msgInfo('浏览器尺寸改变，请刷新页面！')
       }, 500),
       imgIndex: 3,
+      fontIndex: 3,
       canvasContainer: null,
       backgroundColor: '#f2f2f2',
       canvasWidth: window.innerWidth - 350,
       canvasHeight: window.innerHeight - 80,
       inputText: '',
-      uploadList: [{ name: 'monkey.jpg', url: monkey, uid: 'img1' }, { name: 'cap.jpg', url: cap, uid: 'img2' }]
+      uploadList: [{ name: 'monkey.jpg', url: monkey, uid: 'img1' }, { name: 'cap.jpg', url: cap, uid: 'img2' }],
+      fontList: [{ value: 'coolcool', uid: 'font1' }, { value: 'tinyo', uid: 'font2' }]
     }
   },
   mounted () {
@@ -120,16 +118,22 @@ export default {
     //   height: 30 // 方形的高度
     // })
 
+    // 插入默认的图片
     Promise.all([this.buildImageCanvas(monkey, { left: 150, top: 50 }, 'img1'), this.buildImageCanvas(cap, { left: 250, top: 100 }, 'img2')])
       .then((result) => {
         this.canvasContainer.add(...result)
       })
       .catch((error) => {
       })
+    
+    // 插入默认的文字
+    this.font1 = new fabric.IText('coolcool', { fontSize: 26, evented: true, selectable: true, top: 50, left: 80 })
+    this.font2 = new fabric.IText('tinyo', { fontSize: 26, evented: true, selectable: true, top: 50 })
+    this.canvasContainer.add(this.font1, this.font2)
 
-    // 按下鼠标
+    // 定义鼠标按下时间
     this.canvasContainer.on('mouse:down', (e) => {
-      console.log('111', this.canvasContainer)
+      console.log('鼠标点击', this.canvasContainer)
     })
 
     const canvasDom = document.getElementById('canvas')
@@ -156,32 +160,6 @@ export default {
     //   a.click()
     //   a.remove()
     // })
-
-    // const imgElement = document.getElementById('img') // 声明我们的图片
-    // const imgInstance = new fabric.Image(imgElement, { // 设置图片位置和样子
-    //   left: 0,
-    //   top: 0,
-    //   width: 1000,
-    //   height: 1000
-    // })
-    // canvas.add(rect, imgInstance)
-
-    // // const img = document.getElementById('img')
-    // const imgInstance = new fabric.Image(imgElement, { // 设置图片位置和样子
-    //   left: 210,
-    //   top: 10,
-    //   width: 200,
-    //   height: 100,
-    //   angle: 30 // 设置图形顺时针旋转角度
-    // })
-
-    // const group = new fabric.Group([imgInstance, rect], {
-    //   left: 150,
-    //   top: 100
-    //   // angle: 10
-    // })
-    // canvas.add(imgInstance)
-    // canvas.add(rect, imgInstance) // 加入到canvas中
   },
   methods: {
     canvasOnMouseDown (e) {
@@ -211,13 +189,24 @@ export default {
       if (key === 'height') this.canvasContainer.setHeight(value)
     },
     onTextConfirm () {
-      const text = new fabric.IText(this.inputText, { 
+      // const text = new fabric.IText(this.inputText, { 
+      //   fontSize: 26,
+      //   evented: true,
+      //   selectable: true
+      // })
+      // this.canvasContainer.add(text)
+      this.onInsertFont(this.inputText)
+      this.inputText = ''
+    },
+    onInsertFont (text) {
+      this[`font${this.fontIndex}`] = new fabric.IText(text, { 
         fontSize: 26,
         evented: true,
         selectable: true
       })
-      this.canvasContainer.add(text)
-      this.inputText = ''
+      this.canvasContainer.add(this[`font${this.fontIndex}`])
+      this.fontList = [...this.fontList, { value: text, uid: `font${this.imgIndex}` }]
+      this.fontIndex = this.fontIndex + 1
     },
     onInsertImage () {
       const uploadInput = document.createElement('input')
@@ -244,39 +233,15 @@ export default {
         uploadInput.remove()
       }
     },
-    onDelUpload (file) {
+    onDelUpload (file, isImg) {
       const that = this
       this.canvasContainer.fxRemove(this[file.uid], {
         onComplete() {
-          that.uploadList = that.uploadList.filter(itm => itm.uid !== file.uid)
+          if (isImg) that.uploadList = that.uploadList.filter(itm => itm.uid !== file.uid)
+          else that.fontList = that.fontList.filter(itm => itm.uid !== file.uid)
         }
       })
     },
-    // 用el的upload组件方法
-    // onImageUpload (file, fileList) {
-    //   if (file.status !== 'success') return
-      
-    //   const imgElement = document.createElement('img') // 声明我们的图片
-    //   imgElement.src = file.url
-      
-    //   imgElement.onload = () => {
-    //     this[file.uid] = new fabric.Image(imgElement, { // 设置图片位置和样子
-    //       evented: true,
-    //       selectable: true
-    //     })
-    //     this.canvasContainer.add(this[file.uid])
-    //   }
-    // },
-    // onImageRemove (file) {
-    //   this.canvasContainer.fxRemove(this[file.uid], {
-    //     onChange() {
-    //       console.log('在动画的每一步调用')
-    //     },
-    //     onComplete() {
-    //       console.log('删除成功后调用')
-    //     }
-    //   })
-    // },
     canvasToImage (format) {
       const dataURL = this.canvasContainer.toDataURL({
         width: this.canvasWidth,
@@ -304,7 +269,6 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    // background-color: #f2f2f2;
     
     & > main {
       height: calc(100vh - 80px);
@@ -389,6 +353,39 @@ export default {
                 }
               }
 
+              &.action-items-has-input-text {
+                padding: 10px;
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+
+                .font-item {
+                  display: flex;
+                  font-size: 14px;
+                  margin-bottom: 10px;
+
+                  .font-value {
+                    margin-right: 10px;
+                    width: 150px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    border-bottom: 1px solid #ccc;
+                  }
+
+                  .el-icon-delete {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    &:hover {
+                      font-weight: bold;
+                    }
+                  }
+                }
+
+              }
+
               &.action-items-insert-image {
 
               }
@@ -440,11 +437,7 @@ export default {
                   background-color: #fff;
                   cursor: pointer;
                 }
-                // & > div {
-                //   display: flex;
-                //   flex-wrap: wrap;
-                //   width: 250px;
-                // }
+
                 ::v-deep .el-upload-list {
                   .el-upload-list__item {
                     width: 50px;
@@ -461,12 +454,9 @@ export default {
                 }
               }
             }
-
           }
         }
-
       }
     }
   }
-
 </style>

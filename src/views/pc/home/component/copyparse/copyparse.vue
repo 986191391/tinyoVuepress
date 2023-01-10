@@ -29,7 +29,7 @@ export default {
     return {
       navigatorFont: '使用 navigator.clipboard.writeText(text) 来复制',
       selectionFont: '使用 Selection API/Range API 来复制',
-      documentFont: `使用 document.execCommand('copy') 将选中的项目进行复制`,
+      documentFont: `使用 document.execCommand('copy') 将选中的文字进行复制`,
     }
   },
   methods: {

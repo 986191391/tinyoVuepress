@@ -67,7 +67,7 @@
       <div class="section-desc" @click="() => onDynamicTips('不仅吃喝，还有玩乐')">· 不仅吃喝，还有玩乐</div>
       <CoolSwipe
         name="beerandskittles"
-        :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8]"
+        :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe8]"
       />
     </section>
     <section class="section demo-wrapper">
