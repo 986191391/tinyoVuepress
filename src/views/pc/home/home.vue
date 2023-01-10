@@ -44,9 +44,7 @@
       <section class="top-section" :style="topSectionStyle">
         <div class="slogan-wrapper">
           <div class="slogan-title">tinyo {{cursorValue}}</div>
-          <div class="slogan-desc">
-            · 无论何时，开心万岁
-          </div>
+          <div class="slogan-desc">· 无论何时，开心万岁</div>
           <img src="@/assets/ironheart.png" :style="ironHeartStyle" class="iron-heart" @click="sloganFlash" />
         </div>
       </section>
@@ -54,6 +52,7 @@
         <div class="section-title section-title-yellow">
           <span>Beer </span><span> and </span><span>Skittles</span>
         </div>
+        <div class="section-desc">· 不仅吃喝，还有玩乐</div>
         <CoolSwipe
           name="beerandskittles"
           :data="[swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8]"
@@ -61,8 +60,9 @@
       </section>
       <section class="section demo-wrapper">
         <div class="section-title section-title-blue">
-          <span>L</span><span>e</span><span>a</span><span>r</span><span>n</span><span> De</span><span>mo</span>
+          <span>D</span><span>e</span><span>m</span><span>o</span><span> W</span><span>i</span><span>n</span><span>d</span><span>o</span><span>w</span>
         </div>
+        <div class="section-desc">· 学无止境</div>
         <MacWindow windowWidth="80%">
           <div class="show-wrapper">
             <div class="show-aside">
@@ -74,13 +74,11 @@
           </div>
         </MacWindow>
       </section>
-      <div class="friend-wrapper">
-        <div class="friend-title">
+      <div class="section friend-wrapper">
+        <div class="section-title section-title-red">
           <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
         </div>
-        <div class="desc">
-          · 无论何时，开心万岁！
-        </div>
+        <div class="section-desc">· 开心万岁！</div>
         <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
         <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
         <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
@@ -114,7 +112,7 @@ export default {
       swipe1, swipe2, swipe3, swipe4, swipe5, swipe6, swipe7, swipe8,
       // 以下用于控制第一屏文字的显示
       cursorValue: '',
-      sloganModel: true, // true 显示play; flase显示cool;
+      sloganModel: true, // true 显示learn&play; flase显示is cool;
       // 以下变量用于顶部导航栏
       isShowTopNav: false,
       closeFlag: false,
@@ -409,7 +407,7 @@ export default {
 
     .section {
       .section-title {
-        margin: 150px 0 50px;
+        margin: 150px 0 0;
         font-size: 52px;
         font-weight: 600;
         color: #fff;
@@ -425,6 +423,12 @@ export default {
           color: #dc5b48;
         }
       }
+      .section-desc {
+        margin: 0 0 20px;
+        font-size: 18px;
+        font-weight: normal;
+        color: #fff;
+      }
     }
 
     .demo-wrapper {
@@ -434,19 +438,6 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      .demo-title {
-        margin: 150px 0 50px;
-        font-size: 52px;
-        font-weight: 600;
-        color: #fff;
-        cursor: default;
-        & > span {
-          &:hover {
-            color: #7bf0ff;
-          }
-        }
-      }
 
       .show-wrapper {
         width: 100%;
@@ -468,34 +459,15 @@ export default {
 
     .friend-wrapper {
       margin: 0 auto;
-      padding: 160px 0 0;
+      padding: 50px 0 0;
       height: 700px;
       width: 1200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       color: #fff;
-      font-weight: bold;
       background-image: url('~@/assets/myfriendsbg.jpg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       position: relative;
-
-      .friend-title {
-        font-size: 52px;
-        cursor: default;
-        & > span {
-          &:hover {
-            color: #dc5b48;
-          }
-        }
-      }
-      .desc {
-        margin: 24px 0 10px 0;
-        font-size: 22px;
-        font-weight: normal;
-      }
 
       .person {
         position: absolute;

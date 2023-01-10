@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     btnClick () {
-      this.$router.push('/home/sign')
+      this.$router.push('/home')
     }
   }
 }

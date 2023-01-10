@@ -101,6 +101,7 @@ export default {
     }
 
     .el-menu {
+      border-right: none;
       ::v-deep .el-menu-item {
         background-color: #fbfbfb !important;
 

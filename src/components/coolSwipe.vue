@@ -31,14 +31,17 @@
 export default {
   name: 'CoolSwipe',
   props: {
+    // 传入私有name 避免key重复
     name: {
       type: String,
       default: 'swipe'
     },
+    // 循环的轮播图数据
     data: {
       type: Array,
       default: () => []
     },
+    // 轮播图切换间隔
     delay: {
       type: Number,
       default: 3000
@@ -54,10 +57,8 @@ export default {
     this.initSwipe()
   },
   destroyed() {
-    console.log('destory111')
     if (!this.timer) return
-    clearInterval(this.timer)
-    this.timer = null
+    this.onMouseOver()
   },
   methods: {
     initSwipe () {

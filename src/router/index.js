@@ -9,6 +9,7 @@ import PcBoard from '../views/pc/board/board.vue'
 import PcViewport from '../views/pc/viewport/viewport.vue'
 import PcLottery from '../views/pc/lottery/lottery.vue'
 import PcFabric from '../views/pc/fabric/fabric.vue'
+import PcHomeDesc from '../views/pc/home/component/desc/desc.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
 import PcHomeMarkDown from '../views/pc/home/component/markdown/markdown.vue'
 import PcHomeCssDemo from '../views/pc/home/component/cssDemo/cssDemo.vue'
@@ -46,6 +47,12 @@ const pcRoutes = [
     component: PcHome,
     meta: '首页',
     children: [
+      {
+        path: '/',
+        name: 'desc',
+        component: PcHomeDesc,
+        meta: '首页描述'
+      },
       {
         path: 'sign',
         name: 'sign',
