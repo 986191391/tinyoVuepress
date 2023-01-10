@@ -1,7 +1,7 @@
 <template>
   <div class="home-desc">
-    <div>你好呀! 这里是一些简单有趣的demo</div>
-    <div>可以点击左侧导航看看哦！</div>
+    <div>朋友们! 这里是一些简单有趣的demo集合</div>
+    <div>可以点击左侧导航进行探索！</div>
   </div>
 </template>
 

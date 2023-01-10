@@ -78,7 +78,7 @@
         <div class="section-title section-title-red">
           <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
         </div>
-        <div class="section-desc">· 开心万岁！</div>
+        <div class="section-desc">· 平安喜乐！</div>
         <!-- <img src="@/assets/homeperson/lsl.png" width="85" alt class="person person-lsl" />
         <img src="@/assets/homeperson/pyz.png" width="102" alt class="person person-pyz" />
         <img src="@/assets/homeperson/ljy.png" width="100" alt class="person person-ljy" />
@@ -224,7 +224,7 @@ export default {
       display: flex;
       justify-content: center;
       background-color: transparent;
-      z-index: 1;
+      z-index: 99;
 
       .top-animate-bg {
         height: 100%;
@@ -444,6 +444,7 @@ export default {
         height: 100%;
         min-height: 60vh;
         display: flex;
+        overflow: hidden;
     
         .show-aside {
           width: 180px;

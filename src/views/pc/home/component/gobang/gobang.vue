@@ -1,5 +1,9 @@
 <template>
   <div class="gobang-wrapper">
+    <div class="current-info">
+      <div>轮到: {{currentPlayer ? '黑棋' : '白棋'}}</div>
+      <div class="reload-btn" @click="reload" >重新开始</div>
+    </div>
     <div class="board">
       <div class="gobang-board" @click="(e) => clickBoard(e)">
         <template v-for="(yItem) in y">
@@ -24,10 +28,6 @@
           </div>
         </template>
       </div>
-    </div>
-    <div class="current-info">
-      <div>轮到: {{currentPlayer ? '黑棋' : '白棋'}}</div>
-      <div class="reload-btn" @click="reload" >重新开始</div>
     </div>
   </div>
 </template>
@@ -135,13 +135,16 @@ export default {
   min-width: 900px;
   position: relative;
   display: flex;
+  flex-direction: column;
 
   * {
     box-sizing: border-box;
   }
   
   .board {
+    margin-top: -15px;
     width: 750px;
+    height: 750px;
     position: relative;
 
     .gobang-board {
@@ -226,22 +229,20 @@ export default {
   }
 
   .current-info {
-    min-width: 150px;
-    width: calc(100% - 750px);
-    height: 100vh;
-    padding: 50px 20px;
-    border-left: 1px solid #eee;
-    background-color: #fff;
+    // height: 100vh;
+    padding: 15px 30px 0;
+    display: flex;
+    align-items: center;
 
     .reload-btn {
-      margin-top: 10px;
+      margin-left: 20px;
+      padding: 0 10px;
       max-width: 100px;
       height: 30px;
       line-height: 28px;
       text-align: center;
       border: 1px solid  rgb(98, 131, 239);
       background-color: #fff;
-      border-radius: 15px;
       transition: all 0.5s;
       cursor: pointer;
 
