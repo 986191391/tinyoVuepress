@@ -82,6 +82,8 @@ export default {
     }
   },
   mounted () {
+    const { scrollTop } = document.documentElement;
+    if (scrollTop > 0) document.body.scrollTop = document.documentElement.scrollTop = 0
     window.addEventListener('scroll', this.watchWindowScroll);
   },
   destroyed () {
