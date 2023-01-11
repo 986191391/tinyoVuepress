@@ -14,10 +14,18 @@
     </main>
     <main class="main-third">
       <section class="section-third-bg" />
-      <section class="section section-third" :style="sectionSecondFontStyle">
+      <section class="section section-third">
         <h2 class="ilike" :style="ilikeStyle">我喜欢</h2>
-        <div class="asd" >唱跳rap</div>
+        <!-- <div class="asd" >唱跳rap</div> -->
+        <img src="@/assets/animate/whiteman.png" class="whiteman" :style="whitemanStyle" />
+        <span :style="singStyle" class="singStyle">唱</span>
+        <span :style="jumpStyle" class="jumpStyle">跳?</span>
+        <span :style="rapStyle" class="rapStyle">rap?</span>
+        <span :style="basketballStyle" class="basketballStyle">篮球</span>
       </section>
+    </main>
+    <main class="main-fourth">
+      4444
     </main>
   </div> 
 </template>
@@ -49,7 +57,27 @@ export default {
       },
       // 第三部分变量
       ilikeStyle: {
-        transform: `rotateX(-90deg) scale(1, 4)`
+        transform: `rotateX(-101.48deg) scale(1.5, 1.9)`
+      },
+      whitemanStyle: {
+        transform: `translateY(50px)`,
+        opacity: 0
+      },
+      singStyle: {
+        transform: `skewX(25deg) scale(3.5) translate(-65px, -65px)`,
+        opacity: 0
+      },
+      jumpStyle: {
+        transform: `skewX(20deg) scale(3.5) translate(-15px, -110px)`,
+        opacity: 0
+      },
+      rapStyle: {
+        transform: `skewX(-20deg) scale(3.5) translate(10px, -120px)`,
+        opacity: 0
+      },
+      basketballStyle: {
+        transform: `skewX(-25deg) scale(3.5) translate(50px, -75px)`,
+        opacity: 0
       }
     }
   },
@@ -112,15 +140,46 @@ export default {
       //   this.iamtinyoFontStyle.transform = `translateX(${translatex}px)`
       // }
       if (scrollTop > 3800 && scrollTop < 3900) {
-        this.ilikeStyle.transform = `rotateX(-90deg) scale(0, 4)`
+        // this.ilikeStyle.transform = `rotateX(-90deg) scale(0, 4)`
       }
-      // 3900 - 4100
-      // 第三部分: 我喜欢文字X轴旋转-90->-40 放大倍数 1->1.2 
-      if (scrollTop > 3900 && scrollTop < 4100) {
-        // (scrollTop - 3900) / 200): 屏幕滚动的比例
-        const rotateX = (((scrollTop - 3900) / 200) * 50) - 90
-        const scaleX = ((scrollTop - 3900) / 200) * 2
-        this.ilikeStyle.transform = `rotateX(${rotateX}deg)`
+      // 4200 - 4400
+      // 第三部分: 我喜欢文字X轴旋转-101.48->-65 放大倍数 1->1.2 
+      if (scrollTop > 4100 && scrollTop < 4600) {
+        // (scrollTop - 4200) / 400): 屏幕滚动的比例
+        if (scrollTop <= 4200) {
+          this.ilikeStyle.transform = `rotateX(-101.48deg) scale(1.5, 1.9)`
+        } else {
+          const rotateX = (((scrollTop - 4200) / 400) * 38) - 101.48 // 38由101.48-65得到 取差数
+          this.ilikeStyle.transform = `rotateX(${rotateX}deg) scale(1.5, 1.9)`
+        }
+      }
+      // 4450 - 4750
+      // 前100px后50px是预留 处理opacity问题
+      // 第三部分: 卡通人物出现y轴位移50px->0px, 透明度0->1
+      if (scrollTop > 4450 && scrollTop < 4750) {
+        // (scrollTop - 4550) / 150): 屏幕滚动的比例
+        const translateY = 50 - ((scrollTop - 4550) / 150) * 50
+        const opacity = ((scrollTop - 4550) / 150)
+        this.whitemanStyle.transform = `translateY(${translateY}px)`
+        this.whitemanStyle.opacity = opacity
+      }
+      // 4500 - 4800 
+      // 前150后50px是预留
+      if (scrollTop > 4500 && scrollTop < 4800) {
+        const opacity = ((scrollTop - 4650) / 150)
+        this.singStyle.opacity = opacity
+      }
+      if (scrollTop > 4600 && scrollTop < 4900) {
+        const opacity = ((scrollTop - 4750) / 150)
+        this.jumpStyle.opacity = opacity
+      }
+      if (scrollTop > 4700 && scrollTop < 5000) {
+        const opacity = ((scrollTop - 4850) / 150)
+        this.rapStyle.opacity = opacity
+      }
+      if (scrollTop > 4800 && scrollTop < 5100) {
+        const opacity = ((scrollTop - 4950) / 150)
+        this.basketballStyle.opacity = opacity
       }
     }
   }
@@ -145,7 +204,7 @@ export default {
       }
 
       &.main-first {
-        height: 2000px;
+        height: 2100px;
 
         .section-first {
           display: flex;
@@ -183,11 +242,8 @@ export default {
       }
 
       &.main-third {
-        height: 1500px;
+        height: 3600px;
         background-color: #000;
-        perspective: 1000; /* 定义透视 */
-        -webkit-perspective: 1000;
-        perspective-origin: 50% 55.97%;
 
         .section-third-bg {
           width: 100%;
@@ -198,17 +254,30 @@ export default {
         }
 
         .section-third {
-          padding: 50px 0;
+          padding-top: 150px;
           display: flex;
           flex-direction: column;
           // justify-content: center;
           align-items: center;
+          perspective: 1000; /* 定义透视 */
+          -webkit-perspective: 1000;
+          perspective-origin: 50% 55.97%;
           transform-style: preserve-3d;
 
           .ilike {
             margin: 0;
             font-size: 100px;
             // transform-origin: center bottom;
+          }
+
+          .whiteman {
+            margin-top: 60px;
+          }
+          .singStyle, .jumpStyle, .rapStyle, .basketballStyle {
+            user-select: none;
+            &:hover {
+              color: #ddc485;
+            }
           }
         }
       }
