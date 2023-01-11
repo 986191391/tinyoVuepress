@@ -24,6 +24,10 @@ export default {
 body, html {
   width: 100%;
   min-height: 100vh;
+
+  ::selection {
+    background-color: #a1a1a1;
+  }
 }
 
 #app {

@@ -157,7 +157,6 @@ export default {
   },
   methods: {
     onDynamicTips (tips) {
-      console.log('tips', tips)
       // 导航栏没显示时不触发 正在触发时不触发
       if (!this.isShowTopNav || this.dynamicIslandMessage) return
       this.dynamicIslandMessage = tips;
@@ -209,6 +208,7 @@ export default {
       this.$router.push(route)
     },
     onCloseNavScreen () {
+      if (this.closeFlag) return
       this.closeFlag = true
       setTimeout(() => {
         this.isNavScreenShown = false
@@ -505,14 +505,15 @@ export default {
 
     .friend-wrapper {
       margin: 0 auto;
-      padding: 50px 0 0;
+      padding: 20px 0 0;
       height: 700px;
       width: 1200px;
       color: #fff;
-      background-image: url('~@/assets/myfriendsbg.jpg');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: #000;
+      // background-image: url('~@/assets/myfriendsbg.jpg');
+      // background-size: contain;
+      // background-position: center;
+      // background-repeat: no-repeat;
       position: relative;
 
       .person {

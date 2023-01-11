@@ -25,7 +25,8 @@ export default {
 
 <style scoped lang="scss">
   .music-box-wrapper {
-    perspective: 100%;/* 定义透视 */
+    perspective: 1000;/* 定义透视 */
+    -webkit-perspective: 1000;
     width: 100%;
     height: 100%;
     display: flex;
