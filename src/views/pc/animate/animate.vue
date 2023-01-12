@@ -7,24 +7,32 @@
     </main>
     <main class="main-second">
       <section class="section section-second" :style="sectionSecondFontStyle">
-        <div :style="greetStyle">大家好！</div>
-        <div :style="iamtinyoFontStyle">我是tinyo!</div>
+        <div :style="greetStyle"> Hello！我是</div>
+        <div class="iam" :style="iamtinyoFontStyle"><span>tinyo</span> / <span>2e4ong</span> / <span>小黑</span></div>
       </section>
       <section class="section-second-bg" />
     </main>
     <main class="main-third">
       <section class="section-third-bg" />
-      <section class="section section-third">
-        <h2 class="ilike" :style="ilikeStyle">我喜欢</h2>
+      <section class="section section-third" :style="sectionThirdStyle">
+        <h2 class="ilike" :style="ilikeStyle">技能爆满</h2>
         <img src="@/assets/animate/whiteman.png" class="whiteman" :style="whitemanStyle" />
         <span :style="singStyle" class="singStyle">唱</span>
         <span :style="jumpStyle" class="jumpStyle">跳?</span>
         <span :style="rapStyle" class="rapStyle">rap?</span>
         <span :style="basketballStyle" class="basketballStyle">篮球</span>
+        <div :style="mindStyle" class="mind"></div>
       </section>
     </main>
     <main class="main-fourth">
-      4444
+      <section class="section-fourth">
+        <img src="@/assets/animate/rotate.jpeg" width="30" height="30" class="fourth-rotate" />
+        <div class="fourth-font fourth-font-front">满脑子</div>
+        <div class="fourth-font fourth-font-reverse">花里胡哨</div>
+      </section>
+      <section class="section section-fourth-second">
+        gggg
+      </section>
     </main>
   </div> 
 </template>
@@ -55,6 +63,10 @@ export default {
         opacity: 0
       },
       // 第三部分变量
+      sectionThirdStyle: {
+        transform: 'scale(1)',
+        opacity: 1
+      },
       ilikeStyle: {
         transform: `rotateX(-101.48deg) scale(1.5, 1.9)`,
         visibility: 'hidden'
@@ -78,6 +90,10 @@ export default {
       basketballStyle: {
         transform: `skewX(-25deg) scale(3.5) translate(50px, -75px)`,
         opacity: 0
+      },
+      mindStyle: {
+        transform: `translate(-20px, -500px)`,
+        visibility: 'hidden'
       }
     }
   },
@@ -91,6 +107,11 @@ export default {
   },
   methods: {
     watchWindowScroll(e) {
+      // 优化点记录，避免回流
+      // 宽度长度/放大缩小改变用scale(x, y)来控制
+      // 位移用translate(x, y)来控制
+      // 显示隐藏用visibility/opacity来控制
+
       const { scrollTop, clientHeight } = document.documentElement;
       console.log('scrollTop', scrollTop);
       // console.log('clientHeight', clientHeight);
@@ -115,10 +136,6 @@ export default {
         this.sectionFirstFontStyle.transform = `scale(${scale}) rotate(${deg}deg)`
         this.sectionFirstFontStyle.opacity = opacity
       }
-      // 1500 - 2500
-      if (scrollTop > 1500 && scrollTop < 2000) {
-        const secondOpacity = ((scrollTop - 1500) / 500) * 1 // (scrollTop - 1500) / 500): 屏幕滚动的比例
-      }
       // 1850 - 2650
       // 第二部分: 大家好的文字位置x方向从 -100 -> 0, 透明度由0->1
       if (scrollTop > 1850 && scrollTop < 2650) { // scrollTop > 1850: 预留了100px,避免滚动太快透明度不变为0的问题,下面的逻辑代码不预留
@@ -137,15 +154,18 @@ export default {
       }
       // 空白空间区域有图片过渡
       // 4200 - 4400
-      // 第三部分: 我喜欢文字X轴旋转-101.48->-65 放大倍数 1->1.2 
-      if (scrollTop > 4100 && scrollTop < 4600) {
+      // 第三部分: 我喜欢文字X轴旋转-100->-65 放大倍数 1->1.2 
+      if (scrollTop > 4100 && scrollTop < 4700) {
         // (scrollTop - 4200) / 400): 屏幕滚动的比例
         this.ilikeStyle.visibility = 'unset'
         if (scrollTop <= 4200) {
           this.ilikeStyle.visibility = 'hidden'
         } else {
-          const deg = (((scrollTop - 4200) / 400) * 38) - 101.48 // 38由101.48-65得到 取差数
-          this.ilikeStyle.transform = `rotateX(${deg}deg) scale(1.5, 1.9)`
+          // 后预留了100 判断超过是则直接取35差值
+          const num = ((scrollTop - 4200) / 400) * 35 > 35 ? 35 : ((scrollTop - 4200) / 400) * 35
+          const deg = num - 100 // 35由100-65得到 取差数
+          const scaleX = 1.5 + (((scrollTop - 4200) / 400) * 0.5 > 0.5 ? 0.5 : ((scrollTop - 4200) / 400) * 0.5)
+          this.ilikeStyle.transform = `rotateX(${deg}deg) scale(${scaleX}, 1.9)`
         }
       }
       // 4450 - 4750
@@ -153,8 +173,9 @@ export default {
       // 第三部分: 卡通人物出现y轴位移50px->0px, 透明度0->1
       if (scrollTop > 4450 && scrollTop < 4750) {
         // (scrollTop - 4550) / 150): 屏幕滚动的比例
-        const translateY = 50 - ((scrollTop - 4550) / 150) * 50
-        const opacity = ((scrollTop - 4550) / 150)
+        const yNum = ((scrollTop - 4550) / 150) * 50 > 50 ? 50 : ((scrollTop - 4550) / 150) * 50
+        const translateY = 50 - yNum
+        const opacity = scrollTop > 4700 ? 1 : ((scrollTop - 4550) / 150)
         this.whitemanStyle.transform = `translateY(${translateY}px)`
         this.whitemanStyle.opacity = opacity
       }
@@ -180,8 +201,20 @@ export default {
       }
 
       // 5200 - 5800
-      if (scrollTop > 5200 && scrollTop < 5800) {
-        
+      // 我喜欢文字由倾斜变为正常, 且小幅度缩小
+      // 小白人往上移动一些 0->50
+      if (scrollTop > 5200 && scrollTop < 5850) {
+        // 当前变量: rotateX(-65deg) scale(2, 1.9)
+        // 目标变量: rotateX(0deg) scale(1.1, 1) translate(0, -80px)
+        // ((scrollTop - 5200) / 200): 屏幕滚动的比例
+        const rotateX = 65 - ((scrollTop - 5200) / 600) * 65      // 65: 差值
+        const scaleX = 2 - ((scrollTop - 5200) / 600) * 0.9       // 2: 目标值  0.9: 差值
+        const scaleY = 1.9 - ((scrollTop - 5200) / 600) * 0.9     // 1.9: 目标值 0.9: 差值
+        const translateY = ((scrollTop - 5200) / 600) * 80        // 80: 目标值
+        this.ilikeStyle.transform = `rotateX(-${rotateX}deg) scale(${scaleX}, ${scaleY}) translateY(-${translateY}px)`
+      
+        const whitemanTranslateY = ((scrollTop - 5200) / 600) * 50 > 50 ? 50 : ((scrollTop - 5200) / 600) * 50
+        this.whitemanStyle.transform = `translateY(-${whitemanTranslateY}px)`
       }
       // 前预留文字最开始会跳位
       // 后100预留
@@ -237,7 +270,25 @@ export default {
         this.basketballStyle.opacity = opacity
         this.basketballStyle.transform = `skewX(-${deg}deg) scale(${scale}) translate(${x}px, ${y}px)`
       }
-    
+
+      // 5700 - 6600
+      // 人物头像放大至全屏幕
+      if (scrollTop > 5700 && scrollTop < 6500) {
+        // ((scrollTop - 5800) / 200): 屏幕滚动的比例
+        this.mindStyle.visibility = 'unset'
+        if (scrollTop < 5800) this.mindStyle.visibility = 'hidden'
+        // scale: 1 -> 200
+        const proportion = ((scrollTop - 5800) / 700)
+        const scale = proportion * 25 < 1 ? 1 : proportion * 25
+
+        this.sectionThirdStyle.transform = `scale(${scale})`
+      }
+
+      // 6600 - 6800
+      // 头部放大后开始隐藏第三部分
+      if (scrollTop > 6600 & scrollTop < 6800) {
+        // ((scrollTop - 6600) / 200): 屏幕滚动的比例
+      }
     }
   }
 }
@@ -276,9 +327,10 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         background-color: #000;
+        cursor: default;
 
         .section-second {
-          padding: 150px 300px 0;
+          padding: 150px 0 0 200px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -288,6 +340,10 @@ export default {
           // background-image: url('~@/assets/animate/14bg.png');
           // background-size: 100% 100%;
           // background-repeat: no-repeat;
+
+          .iam > span:hover {
+            text-decoration: underline;
+          }
         }
         .section-second-bg {
           width: 100%;
@@ -299,7 +355,7 @@ export default {
       }
 
       &.main-third {
-        height: 3600px;
+        height: 3300px;
         background-color: #000;
 
         .section-third-bg {
@@ -320,6 +376,7 @@ export default {
           -webkit-perspective: 1000;
           perspective-origin: 50% 55.97%;
           transform-style: preserve-3d;
+          transform-origin: 48% 42%;
 
           .ilike {
             margin: 0;
@@ -327,14 +384,75 @@ export default {
           }
 
           .whiteman {
-            margin-top: 50px;
+            margin-top: 30px;
+            transform-origin: 95px 55px;
           }
+          
           .singStyle, .jumpStyle, .rapStyle, .basketballStyle {
             user-select: none;
             &:hover {
               color: #ddc485;
             }
           }
+
+          // .mind {
+          //   width: 30px;
+          //   height: 15px;
+          //   border-radius: 50%;
+          //   background-color: #fff;
+          // }
+        }
+      }
+
+      &.main-fourth {
+        padding: 0 50px;
+        height: 3000px;
+        background-color: #fff;
+
+        .section-fourth {
+          margin: 0 auto;
+          // padding: 30px 0;
+          width: 600px;
+          height: 500px;
+          // height: auto;
+          font-size: 100px;
+          color: #000;
+          // display: flex;
+          // flex-direction: column;
+          // align-items: center;
+          transform-style: preserve-3d;
+          transform: rotateY(0deg);
+          transform-origin: center center;
+          position: sticky;
+          top: 0;
+
+          .fourth-rotate {
+            margin: 0 auto;
+            transform: rotateX(50deg);
+            cursor: pointer;
+          }
+
+          .fourth-font {
+            width: 600px;
+            position: absolute;
+            backface-visibility: hidden; // 隐藏背面
+
+            &.fourth-font-front {
+              border: 1px solid #fff;
+              background-color: #000;
+              color: #fff;
+              transform: rotateY(0deg);
+            }
+            &.fourth-font-reverse {
+              border: 1px solid #000;
+              background-color: #fff;
+              color: #000;
+              transform: rotateY(180deg);
+            }
+          }
+        }
+        .section-fourth-second {
+          color: blue;
         }
       }
     }
