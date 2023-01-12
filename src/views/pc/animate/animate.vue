@@ -16,7 +16,6 @@
       <section class="section-third-bg" />
       <section class="section section-third">
         <h2 class="ilike" :style="ilikeStyle">我喜欢</h2>
-        <!-- <div class="asd" >唱跳rap</div> -->
         <img src="@/assets/animate/whiteman.png" class="whiteman" :style="whitemanStyle" />
         <span :style="singStyle" class="singStyle">唱</span>
         <span :style="jumpStyle" class="jumpStyle">跳?</span>
@@ -57,7 +56,8 @@ export default {
       },
       // 第三部分变量
       ilikeStyle: {
-        transform: `rotateX(-101.48deg) scale(1.5, 1.9)`
+        transform: `rotateX(-101.48deg) scale(1.5, 1.9)`,
+        visibility: 'hidden'
       },
       whitemanStyle: {
         transform: `translateY(50px)`,
@@ -106,7 +106,8 @@ export default {
       }
       // 500 - 1500
       // 第一部分: 旋转两圈, 透明度由1->0
-      if (scrollTop > 500 && scrollTop < 1500) {
+      // 后面预留100px
+      if (scrollTop > 500 && scrollTop < 1600) {
         // (scrollTop - 500) / 1000): 屏幕滚动的比例
         const deg = ((scrollTop - 500) / 1000) * 720
         const scale = ((scrollTop - 500) / 1000) * 1 + 1
@@ -134,25 +135,17 @@ export default {
         this.iamtinyoFontStyle.transform = `translateX(-${tinyoTranslatex}px)`
         this.iamtinyoFontStyle.opacity = tinyoOpacity
       }
-      // // 2900 - 3200
-      // // 第二部分: 两个文字同时从位置x方向 0 -> 1000
-      // if (scrollTop > 2900 && scrollTop < 3500) { // scrollTop > 1600: 预留了100px,避免滚动太快透明度不变为0的问题,下面的逻辑代码不预留
-      //   const translatex = ((scrollTop - 2900) / 600) * 1000  // (scrollTop - 2900) / 600): 屏幕滚动的比例, 1000: x方向从0到1000目标距离的长度
-      //   this.greetStyle.transform = `translateX(${translatex}px)`
-      //   this.iamtinyoFontStyle.transform = `translateX(${translatex}px)`
-      // }
-      if (scrollTop > 3800 && scrollTop < 3900) {
-        // this.ilikeStyle.transform = `rotateX(-90deg) scale(0, 4)`
-      }
+      // 空白空间区域有图片过渡
       // 4200 - 4400
       // 第三部分: 我喜欢文字X轴旋转-101.48->-65 放大倍数 1->1.2 
       if (scrollTop > 4100 && scrollTop < 4600) {
         // (scrollTop - 4200) / 400): 屏幕滚动的比例
+        this.ilikeStyle.visibility = 'unset'
         if (scrollTop <= 4200) {
-          this.ilikeStyle.transform = `rotateX(-101.48deg) scale(1.5, 1.9)`
+          this.ilikeStyle.visibility = 'hidden'
         } else {
-          const rotateX = (((scrollTop - 4200) / 400) * 38) - 101.48 // 38由101.48-65得到 取差数
-          this.ilikeStyle.transform = `rotateX(${rotateX}deg) scale(1.5, 1.9)`
+          const deg = (((scrollTop - 4200) / 400) * 38) - 101.48 // 38由101.48-65得到 取差数
+          this.ilikeStyle.transform = `rotateX(${deg}deg) scale(1.5, 1.9)`
         }
       }
       // 4450 - 4750
@@ -165,7 +158,9 @@ export default {
         this.whitemanStyle.transform = `translateY(${translateY}px)`
         this.whitemanStyle.opacity = opacity
       }
-      // 4500 - 4800 
+
+      // 4500 - 5100 
+      // 唱跳rap篮球文字按顺序显示 
       // 前150后50px是预留
       if (scrollTop > 4500 && scrollTop < 4800) {
         const opacity = ((scrollTop - 4650) / 150)
@@ -183,6 +178,66 @@ export default {
         const opacity = ((scrollTop - 4950) / 150)
         this.basketballStyle.opacity = opacity
       }
+
+      // 5200 - 5800
+      if (scrollTop > 5200 && scrollTop < 5800) {
+        
+      }
+      // 前预留文字最开始会跳位
+      // 后100预留
+      // 唱跳rap篮球位移到人中心
+      if (scrollTop > 5200 && scrollTop < 5500) {
+        // ((scrollTop - 5200) / 200): 屏幕滚动的比例
+        // 原始位置: skewX(25deg) scale(3.5) translate(-65px, -65px)
+        // 目标位置: skewX(0deg) scale(1) translate(-10px, -270px)
+        const opacity = 1 - ((scrollTop - 5200) / 200)
+        const deg = 25 - ((scrollTop - 5200) / 200) * 25          // 25: deg差值
+        const scale = 3.5 - ((scrollTop - 5200) / 200) * 2.5      // 2.5 scale差值
+        const x = ((scrollTop - 5200) / 200) * 50 - 65            // 50: x的差值  65: 原始x位置
+        const y = -65 - ((scrollTop - 5200) / 200) * 170          // 65: 原始x位置 170: y值差值
+        this.singStyle.opacity = opacity
+        this.singStyle.transform = `skewX(${deg}deg) scale(${scale}) translate(${x}px, ${y}px)`
+      }
+
+      if (scrollTop > 5300 && scrollTop < 5600) {
+        // ((scrollTop - 5300) / 200): 屏幕滚动的比例
+        // 原始位置: skewX(20deg) scale(3.5) translate(-15px, -110px)
+        // 目标位置: skewX(0deg) scale(1) translate(-10px, -270px)
+        const opacity = 1 - ((scrollTop - 5300) / 200)
+        const deg = 20 - ((scrollTop - 5300) / 200) * 20
+        const scale = 3.5 - ((scrollTop - 5300) / 200) * 2.5
+        const x = ((scrollTop - 5300) / 200) * 5 - 10
+        const y = -110 - ((scrollTop - 5300) / 200) * 160
+        this.jumpStyle.opacity = opacity
+        this.jumpStyle.transform = `skewX(${deg}deg) scale(${scale}) translate(${x}px, ${y}px)`
+      }
+    
+      if (scrollTop > 5400 && scrollTop < 5700) {
+        // ((scrollTop - 5400) / 200): 屏幕滚动的比例
+        // 原始位置: skewX(-20deg) scale(3.5) translate(10px, -120px)
+        // 目标位置: skewX(0deg) scale(1) translate(-10px, -280px)
+        const opacity = 1 - ((scrollTop - 5400) / 200)
+        const deg = 20 - ((scrollTop - 5400) / 200) * 20
+        const scale = 3.5 - ((scrollTop - 5400) / 200) * 2.5
+        const x = 10 - ((scrollTop - 5400) / 200) * 20
+        const y = -120 - ((scrollTop - 5400) / 200) * 160
+        this.rapStyle.opacity = opacity
+        this.rapStyle.transform = `skewX(-${deg}deg) scale(${scale}) translate(${x}px, ${y}px)`
+      }
+
+      if (scrollTop > 5500 && scrollTop < 5800) {
+        // ((scrollTop - 5500) / 200): 屏幕滚动的比例
+        // 原始位置: skewX(-25deg) scale(3.5) translate(50px, -75px)
+        // 目标位置: skewX(0deg) scale(1) translate(-15px, -305px)
+        const opacity = 1 - ((scrollTop - 5500) / 200)
+        const deg = 25 - ((scrollTop - 5500) / 200) * 25
+        const scale = 3.5 - ((scrollTop - 5500) / 200) * 2.5
+        const x = 50 - ((scrollTop - 5500) / 200) * 65
+        const y = -75 - ((scrollTop - 5500) / 200) * 230
+        this.basketballStyle.opacity = opacity
+        this.basketballStyle.transform = `skewX(-${deg}deg) scale(${scale}) translate(${x}px, ${y}px)`
+      }
+    
     }
   }
 }
@@ -269,11 +324,10 @@ export default {
           .ilike {
             margin: 0;
             font-size: 100px;
-            // transform-origin: center bottom;
           }
 
           .whiteman {
-            margin-top: 60px;
+            margin-top: 50px;
           }
           .singStyle, .jumpStyle, .rapStyle, .basketballStyle {
             user-select: none;
