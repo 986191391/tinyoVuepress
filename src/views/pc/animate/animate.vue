@@ -5,10 +5,10 @@
         · tinyo
       </section>
       <section class="section main-first-section-second" :style="sectionSecondStyle">
-        <div :style="isMeStyle">是的，这就是我</div>
-        <img src="@/assets/animate/baby.jpeg" class="baby" :style="babyImgStyle" />
+        <div :style="sloganFirstStyle">出淤泥而不染</div>
+        <img src="@/assets/animate/baby.jpeg" class="baby" :style="{ transform: `translateX(${descImgMove ? 150 : 0}px)` }" />
         <div class="desc-wrapper">
-          <div class="desc-item desc-item-left" :style="descLeftStyle">
+          <div class="desc-item desc-item-left" :style="{ transform: `translateX(${descImgMove ? -100 : 0}px)` }">
             <div><img src="@/assets/animate/1997.png" width="175" height="50" /></div>
             <div><img class="icon" src="@/assets/animate/boy.png" width="35" height="35" /> 男孩</div>
             <div><img class="icon" src="@/assets/animate/location.png" width="35" height="35" /> 深圳</div>
@@ -50,10 +50,11 @@ export default {
         transform: `translateY(0px)`,
         opacity: 1
       },
-      isMeStyle: {
+      sloganFirstStyle: {
         fontSize: '48px',
         transform: `translateY(50px) scale(0.4)`
       },
+      descImgMove: false,
       babyImgStyle: {
         transform: `translateX(0px)`
       },
@@ -79,19 +80,19 @@ export default {
         transform: `translateY(110px)`
       },
       cardFourthStyle: {
-        opacity: 0.6,
-        transform: `translateY(110px)`
+        opacity: 0.3,
+        transform: `translateY(140px)`
       },
       cardFifthStyle: {
-        opacity: 0.6,
+        opacity: 0.3,
         transform: `translateY(110px)`
       },
       cardSixthStyle: {
-        opacity: 0.6,
+        opacity: 0.3,
         transform: `translateY(80px)`
       },
       cardSeventhStyle: {
-        opacity: 0.6,
+        opacity: 0.3,
         transform: `translateY(100px)`
       }
     }
@@ -131,23 +132,28 @@ export default {
       if (t > 100 && t < 550) {
         const prop = this.getPercentage(150, 350)
         const bornTranslateY = 50 - prop * 60
-        this.isMeStyle.transform = `translateY(${bornTranslateY}px) scale(${prop * 1.3})`
+        this.sloganFirstStyle.transform = `translateY(${bornTranslateY}px) scale(${prop * 1.3})`
       }
-      // 文字往左, baby照片往右出现
-      if (t > 700 && t < 1100) {
-        const prop = this.getPercentage(750, 300)
-        const translateX = prop * 150 
-        this.babyImgStyle.transform = `translateX(${translateX}px)`
-        const leftTranslateX = prop * 100
-        this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
+      
+      if (t > 500 && t < 1100) {
+        this.descImgMove = true
+        if (t < 750) this.descImgMove = false
       }
+      // // 文字往左, baby照片往右出现
+      // if (t > 700 && t < 1100) {
+      //   const prop = this.getPercentage(750, 300)
+      //   const translateX = prop * 150 
+      //   this.babyImgStyle.transform = `translateX(${translateX}px)`
+      //   const leftTranslateX = prop * 100
+      //   this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
+      // }
       // 是的，这就是我文字往上离开。文字往左离开。baby照片往右离开。
       // if (t > 1100 && t < 1500) {
         // const prop = this.getPercentage(1150, 300)
         // const topTranslateY = prop * 50 + 10
         // const leftTranslateX = prop * 100 + 100
         // const rightTranslateX = prop * 200 + 150
-        // this.isMeStyle.transform =  `translateY(-${topTranslateY}px) scale(1.3)`
+        // this.sloganFirstStyle.transform =  `translateY(-${topTranslateY}px) scale(1.3)`
         // this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
         // this.babyImgStyle.transform = `translateX(${rightTranslateX}px)`
         // this.sectionSecondStyle.opacity = 1 - prop
@@ -176,25 +182,25 @@ export default {
       if (t > 1900 && t < 2100) {
         const prop = this.getPercentage(1950, 80)
         const translateY = 110 - prop * 110
-        this.cardFourthStyle.opacity = 0.6 + prop * 0.4
+        this.cardFourthStyle.opacity = 0.3 + prop * 0.7
         this.cardFourthStyle.transform = `translateY(${translateY}px)`
       }
       if (t > 1950 && t < 2150) {
         const prop = this.getPercentage(2000, 80)
-        const translateY = 110 - prop * 110
-        this.cardFifthStyle.opacity = 0.6 + prop * 0.4
+        const translateY = 140 - prop * 140
+        this.cardFifthStyle.opacity = 0.3 + prop * 0.7
         this.cardFifthStyle.transform = `translateY(${translateY}px)`
       }
       if (t > 2000 && t < 2200) {
         const prop = this.getPercentage(2050, 80)
         const translateY = 80 - prop * 80
-        this.cardSixthStyle.opacity = 0.6 + prop * 0.4
+        this.cardSixthStyle.opacity = 0.3 + prop * 0.7
         this.cardSixthStyle.transform = `translateY(${translateY}px)`
       }
       if (t > 2050 && t < 2250) {
         const prop = this.getPercentage(2100, 80)
         const translateY = 100 - prop * 100
-        this.cardSeventhStyle.opacity = 0.6 + prop * 0.4
+        this.cardSeventhStyle.opacity = 0.3 + prop * 0.7
         this.cardSeventhStyle.transform = `translateY(${translateY}px)`
       }
       
@@ -247,6 +253,7 @@ export default {
             margin-bottom: -30px;
             width: 608px;
             height: 460.8px;
+            transition: all 0.5s;
             z-index: 1;
           }
           .desc-wrapper {
@@ -277,6 +284,7 @@ export default {
               &.desc-item-left {
                 margin-left: 150px;
                 align-items: flex-start;
+                transition: all 0.5s;
               }
             }
           }
