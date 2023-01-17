@@ -66,8 +66,9 @@
           <span class="worry-title" :style="worrySocializeTitleStyle">社交</span>
         </div>
       </section>
-      <section class="main-second-section-fourth">
+      <section class="section main-second-section-fourth">
         <div class="interest-title">不变的是向往快乐的心</div>
+        <img src="@/assets/animate/camera.png" class="camera-img" />
       </section>
     </main>
   </div> 
