@@ -6,12 +6,12 @@
       </section>
       <section class="section main-first-section-second" :style="sectionSecondStyle">
         <div :style="sloganFirstStyle">出淤泥而不染</div>
-        <img src="@/assets/animate/baby.jpeg" class="baby" :style="babyImgStyle" />
+        <img src="@/assets/animate/baby.jpeg" class="baby-img" />
         <div class="desc-wrapper">
-          <div class="desc-item desc-item-left" :style="descLeftStyle">
+          <div class="desc-item desc-item-left" :style="descStyle">
             <div><img src="@/assets/animate/1997.png" width="175" height="50" /></div>
-            <div><img class="icon" src="@/assets/animate/boy.png" width="35" height="35" /> 男孩</div>
-            <div><img class="icon" src="@/assets/animate/location.png" width="35" height="35" /> 深圳</div>
+            <div><img class="icon" src="@/assets/animate/boy.png" /> 男孩</div>
+            <div><img class="icon" src="@/assets/animate/location.png" /> 深圳</div>
           </div>
           <div class="desc-item desc-item-right"></div>
         </div>
@@ -92,11 +92,9 @@ export default {
         fontSize: '48px',
         transform: `translateY(50px) scale(0.4)`
       },
-      babyImgStyle: {
-        transform: `translateX(0px)`
-      },
-      descLeftStyle: {
-        transform: `translateX(0px)`
+      descStyle: {
+        opacity: 0,
+        transform: `translateX(30px)`
       },
       // 第二部分
       cardFirstStyle: {
@@ -189,19 +187,18 @@ export default {
         this.sectionFirstStyle.opacity = opacity
         this.sectionFirstStyle.transform = `translateY(-${translateY}px)`
       }
-      // 是的，这就是我文字出现
+      // 出淤泥而不染文字出现
       if (t > 100 && t < 550) {
         const prop = this.getPercentage(150, 350)
         const bornTranslateY = 50 - prop * 60
         this.sloganFirstStyle.transform = `translateY(${bornTranslateY}px) scale(${prop * 1.3})`
       }
-      // 文字往左, baby照片往右出现
+      // 文字在baby照片中渐变往左出现
       if (t > 700 && t < 1100) {
         const prop = this.getPercentage(750, 300)
-        const translateX = prop * 150 
-        this.babyImgStyle.transform = `translateX(${translateX}px)`
-        const leftTranslateX = prop * 100
-        this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
+        const translateX = 30 - prop * 30 
+        this.descStyle.opacity = prop
+        this.descStyle.transform = `translateX(${translateX}px)`
       }
       // 卡片渐变从下往上出现
       if (t > 1750 && t < 1950) {
@@ -346,13 +343,12 @@ export default {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          .baby {
-            margin-top: 30px;
+          .baby-img {
+            margin-top: 50px;
             margin-bottom: -30px;
             width: 608px;
             height: 460.8px;
             border-radius: 8px;
-            z-index: 1;
           }
           .desc-wrapper {
             width: 100%;
