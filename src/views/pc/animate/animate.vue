@@ -31,7 +31,7 @@
         </div>
       </section>
       <section class="main-second-section-second">
-        <div class="interest-title">人生, 很简单</div>
+        <div class="interest-title">人生, 其实很简单</div>
         <div class="pursue eat-wrapper">吃</div>
         <div class="pursue drink-wrapper">喝</div>
         <div class="pursue play-wrapper">
@@ -57,13 +57,13 @@
       <section class="main-second-section-third" :style="sectionThridStyle" >
         <!-- <div class="pursue drink-wrapper">喝</div> -->
         <div class="worry worry-job" :style="worryJobStyle">
-          <span class="worry-title" :style="worryJobTitleStyle">工作压力</span>
+          <span class="worry-title" :style="worryJobTitleStyle">工作</span>
         </div>
         <div class="worry worry-life" :style="worryLifeStyle">
-          <span class="worry-title" :style="worryLifeTitleStyle">生活压力</span>
+          <span class="worry-title" :style="worryLifeTitleStyle">生活</span>
         </div>
         <div class="worry worry-socialize" :style="worrySocializeStyle">
-          <span class="worry-title" :style="worrySocializeTitleStyle">社交压力</span>
+          <span class="worry-title" :style="worrySocializeTitleStyle">社交</span>
         </div>
       </section>
       <section class="main-second-section-fourth">
@@ -245,49 +245,49 @@ export default {
       }
       
       // 烦恼部分显示
-      if (t > 5850 && t < 6700) {
+      if (t > 5800 && t < 6600) {
         const prop = this.getPercentage(5900, 600)
         const translateY = 300 - prop * 300
         this.sectionThridStyle.opacity = prop
         this.sectionThridStyle.transform = `translateY(${translateY}px)`
       }
-      if (t > 6650 && t < 6950) {
+      if (t > 6600 && t < 7000) {
         const prop = this.getPercentage(6700, 200)
         const translateY = 30 - prop * 30
         this.worryJobTitleStyle.opacity = prop
         this.worryJobTitleStyle.transform = `translateX(-${translateY}px)`
       }
-      if (t > 6850 && t < 7250) {
+      if (t > 6800 && t < 7300) {
         const prop = this.getPercentage(6900, 300)
         const translateY = prop * 30
         this.worryJobStyle.opacity = 1 - prop
         this.worryJobStyle.transform = `translateY(-${translateY}px)`
       }
-      if (t > 7200 && t < 7500) {
+      if (t > 7150 && t < 7550) {
         const prop = this.getPercentage(7250, 200)
         const translateY = 30 - prop * 30
         this.worryLifeStyle.opacity = prop
         this.worryLifeStyle.transform = `translateY(-${translateY}px)`
       }
-      if (t > 7450 && t < 7750) {
+      if (t > 7400 && t < 7800) {
         const prop = this.getPercentage(7500, 200)
         const translateY = 30 - prop * 30
         this.worryLifeTitleStyle.opacity = prop
         this.worryLifeTitleStyle.transform = `translateX(-${translateY}px)`
       }
-      if (t > 7650 && t < 8050) {
+      if (t > 7600 && t < 8100) {
         const prop = this.getPercentage(7700, 300)
         const translateY = prop * 30
         this.worryLifeStyle.opacity = 1 - prop
         this.worryLifeStyle.transform = `translateY(-${translateY}px)`
       }
-      if (t > 8000 && t < 8300) {
+      if (t > 7950 && t < 8350) {
         const prop = this.getPercentage(8050, 200)
         const translateY = 30 - prop * 30
         this.worrySocializeStyle.opacity = prop
         this.worrySocializeStyle.transform = `translateY(-${translateY}px)`
       }
-      if (t > 8250 && t < 8550) {
+      if (t > 8200 && t < 8600) {
         const prop = this.getPercentage(8300, 200)
         const translateY = 30 - prop * 30
         this.worrySocializeTitleStyle.opacity = prop
