@@ -515,7 +515,7 @@ export default {
 
             &.eat-wrapper {
               width: 100vw;
-              height: 61.78vw;
+              height: 889.63px;
               background-image: url('~@/assets/animate/fun/barbecue.jpg');
               background-size: 100%;
               background-position: center;
@@ -523,7 +523,7 @@ export default {
             }
             &.drink-wrapper {
               width: 100vw;
-              height: 58.79vw;
+              height: 846.57px;
               background-image: url('~@/assets/animate/fun/beer.jpg');
               background-size: 100%;
               background-position: center;
@@ -531,7 +531,7 @@ export default {
             }
             &.play-wrapper {
               width: 100vw;
-              height: 56vw;
+              height: 806.4px;
               position: relative;
               .play-vedio {
                 width: 100%;
