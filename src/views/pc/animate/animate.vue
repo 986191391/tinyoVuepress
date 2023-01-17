@@ -6,9 +6,9 @@
       </section>
       <section class="section main-first-section-second" :style="sectionSecondStyle">
         <div :style="sloganFirstStyle">出淤泥而不染</div>
-        <img src="@/assets/animate/baby.jpeg" class="baby" :style="{ transform: `translateX(${descImgMove ? 150 : 0}px)` }" />
+        <img src="@/assets/animate/baby.jpeg" class="baby" :style="babyImgStyle" />
         <div class="desc-wrapper">
-          <div class="desc-item desc-item-left" :style="{ transform: `translateX(${descImgMove ? -100 : 0}px)` }">
+          <div class="desc-item desc-item-left" :style="descLeftStyle">
             <div><img src="@/assets/animate/1997.png" width="175" height="50" /></div>
             <div><img class="icon" src="@/assets/animate/boy.png" width="35" height="35" /> 男孩</div>
             <div><img class="icon" src="@/assets/animate/location.png" width="35" height="35" /> 深圳</div>
@@ -18,8 +18,8 @@
       </section>
     </main>
     <main class="main-second">
-      <div class="interest-title">集喜爱于一身</div>
-      <section class="main-second-section-first" :style="sectionThirdStyle">
+      <section class="main-second-section-first">
+        <div class="interest-title">集喜爱于一身</div>
         <div class="card-wrapper">
           <div class="card-item card-item1" :style="cardFirstStyle">旅行</div>
           <div class="card-item card-item2" :style="cardSecondStyle">艺术</div>
@@ -30,7 +30,45 @@
           <div class="card-item card-item7" :style="cardSeventhStyle">电影</div>
         </div>
       </section>
-      <div class="interest-title">未完待续</div>
+      <section class="main-second-section-second">
+        <div class="interest-title">人生, 很简单</div>
+        <div class="pursue eat-wrapper">吃</div>
+        <div class="pursue drink-wrapper">喝</div>
+        <div class="pursue play-wrapper">
+          <video
+            class="play-vedio"
+            ref="playVedio"
+            src="@/assets/animate/fun/play.mp4"
+            id="video-home"
+            data-object-fit=""
+            playsinline
+            muted
+            autoplay
+            loop
+            x5-playsinline
+            webkit-playsinline="true"
+            x5-video-player-type="h5"
+            preload="auto"
+          />
+          <span class="play-title">玩乐</span>
+        </div>
+      </section>
+      <div class="interest-title">参杂些烦恼</div>
+      <section class="main-second-section-third" :style="sectionThridStyle" >
+        <!-- <div class="pursue drink-wrapper">喝</div> -->
+        <div class="worry worry-job" :style="worryJobStyle">
+          <span class="worry-title" :style="worryJobTitleStyle">工作压力</span>
+        </div>
+        <div class="worry worry-life" :style="worryLifeStyle">
+          <span class="worry-title" :style="worryLifeTitleStyle">生活压力</span>
+        </div>
+        <div class="worry worry-socialize" :style="worrySocializeStyle">
+          <span class="worry-title" :style="worrySocializeTitleStyle">社交压力</span>
+        </div>
+      </section>
+      <section class="main-second-section-fourth">
+        <div class="interest-title">不变的是向往快乐的心</div>
+      </section>
     </main>
   </div> 
 </template>
@@ -54,19 +92,13 @@ export default {
         fontSize: '48px',
         transform: `translateY(50px) scale(0.4)`
       },
-      descImgMove: false,
       babyImgStyle: {
         transform: `translateX(0px)`
       },
       descLeftStyle: {
         transform: `translateX(0px)`
       },
-      sectionThirdStyle: {
-        // opacity: 0,
-        // visibility: 'hidden',
-        // transform: `scale(0)`
-      },
-      // 第二部分变了
+      // 第二部分
       cardFirstStyle: {
         opacity: 0.6,
         transform: `translateY(50px)`
@@ -94,6 +126,35 @@ export default {
       cardSeventhStyle: {
         opacity: 0.3,
         transform: `translateY(100px)`
+      },
+      // 第三部分
+      sectionThridStyle: {
+        opacity: 0,
+        transform: `translateY(300px)`
+      },
+      worryJobStyle: {
+        opacity: 1,
+        transform: `translateY(0px)`
+      },
+      worryJobTitleStyle: {
+        opacity: 0,
+        transform: `translateX(-30px)`
+      },
+      worryLifeStyle: {
+        opacity: 0,
+        transform: `translateX(-30px)`
+      },
+      worryLifeTitleStyle: {
+        opacity: 0,
+        transform: `translateX(-30px)`
+      },
+      worrySocializeStyle: {
+        opacity: 0,
+        transform: `translateX(-30px)`
+      },
+      worrySocializeTitleStyle: {
+        opacity: 0,
+        transform: `translateX(-30px)`
       }
     }
   },
@@ -134,33 +195,15 @@ export default {
         const bornTranslateY = 50 - prop * 60
         this.sloganFirstStyle.transform = `translateY(${bornTranslateY}px) scale(${prop * 1.3})`
       }
-      
-      if (t > 500 && t < 1100) {
-        this.descImgMove = true
-        if (t < 750) this.descImgMove = false
+      // 文字往左, baby照片往右出现
+      if (t > 700 && t < 1100) {
+        const prop = this.getPercentage(750, 300)
+        const translateX = prop * 150 
+        this.babyImgStyle.transform = `translateX(${translateX}px)`
+        const leftTranslateX = prop * 100
+        this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
       }
-      // // 文字往左, baby照片往右出现
-      // if (t > 700 && t < 1100) {
-      //   const prop = this.getPercentage(750, 300)
-      //   const translateX = prop * 150 
-      //   this.babyImgStyle.transform = `translateX(${translateX}px)`
-      //   const leftTranslateX = prop * 100
-      //   this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
-      // }
-      // 是的，这就是我文字往上离开。文字往左离开。baby照片往右离开。
-      // if (t > 1100 && t < 1500) {
-        // const prop = this.getPercentage(1150, 300)
-        // const topTranslateY = prop * 50 + 10
-        // const leftTranslateX = prop * 100 + 100
-        // const rightTranslateX = prop * 200 + 150
-        // this.sloganFirstStyle.transform =  `translateY(-${topTranslateY}px) scale(1.3)`
-        // this.descLeftStyle.transform = `translateX(-${leftTranslateX}px)`
-        // this.babyImgStyle.transform = `translateX(${rightTranslateX}px)`
-        // this.sectionSecondStyle.opacity = 1 - prop
-        // this.sectionThirdStyle.opacity = prop
-        // this.sectionThirdStyle.visibility = 'unset'
-        // this.sectionThirdStyle.transform = `scale(${prop})`
-      // }
+      // 卡片渐变从下往上出现
       if (t > 1750 && t < 1950) {
         const prop = this.getPercentage(1800, 50)
         const translateY = 50 - prop * 50
@@ -204,6 +247,61 @@ export default {
         this.cardSeventhStyle.transform = `translateY(${translateY}px)`
       }
       
+      // 烦恼部分显示
+      if (t > 5850 && t < 6700) {
+        const prop = this.getPercentage(5900, 600)
+        const translateY = 300 - prop * 300
+        this.sectionThridStyle.opacity = prop
+        this.sectionThridStyle.transform = `translateY(${translateY}px)`
+      }
+      if (t > 6650 && t < 6950) {
+        const prop = this.getPercentage(6700, 200)
+        const translateY = 30 - prop * 30
+        this.worryJobTitleStyle.opacity = prop
+        this.worryJobTitleStyle.transform = `translateX(-${translateY}px)`
+      }
+      if (t > 6850 && t < 7250) {
+        const prop = this.getPercentage(6900, 300)
+        const translateY = prop * 30
+        this.worryJobStyle.opacity = 1 - prop
+        this.worryJobStyle.transform = `translateY(-${translateY}px)`
+      }
+      if (t > 7200 && t < 7500) {
+        const prop = this.getPercentage(7250, 200)
+        const translateY = 30 - prop * 30
+        this.worryLifeStyle.opacity = prop
+        this.worryLifeStyle.transform = `translateY(-${translateY}px)`
+      }
+      if (t > 7450 && t < 7750) {
+        const prop = this.getPercentage(7500, 200)
+        const translateY = 30 - prop * 30
+        this.worryLifeTitleStyle.opacity = prop
+        this.worryLifeTitleStyle.transform = `translateX(-${translateY}px)`
+      }
+      if (t > 7650 && t < 8050) {
+        const prop = this.getPercentage(7700, 300)
+        const translateY = prop * 30
+        this.worryLifeStyle.opacity = 1 - prop
+        this.worryLifeStyle.transform = `translateY(-${translateY}px)`
+      }
+      if (t > 8000 && t < 8300) {
+        const prop = this.getPercentage(8050, 200)
+        const translateY = 30 - prop * 30
+        this.worrySocializeStyle.opacity = prop
+        this.worrySocializeStyle.transform = `translateY(-${translateY}px)`
+      }
+      if (t > 8250 && t < 8550) {
+        const prop = this.getPercentage(8300, 200)
+        const translateY = 30 - prop * 30
+        this.worrySocializeTitleStyle.opacity = prop
+        this.worrySocializeTitleStyle.transform = `translateX(-${translateY}px)`
+      }
+      // if (t > 8450 && t < 8850) {
+      //   const prop = this.getPercentage(8500, 300)
+      //   const translateY = prop * 30
+      //   this.worrySocializeStyle.opacity = 1 - prop
+      //   this.worrySocializeStyle.transform = `translateY(-${translateY}px)`
+      // }
     }
   }
 }
@@ -212,8 +310,8 @@ export default {
 <style scoped lang="scss">
   .animate-container {
     position: relative;
-    color: #000;
-    background-color: #fff;
+    color: #fff;
+    background-color: #000;
 
     & > main {
       width: 100%;
@@ -253,7 +351,7 @@ export default {
             margin-bottom: -30px;
             width: 608px;
             height: 460.8px;
-            transition: all 0.5s;
+            border-radius: 8px;
             z-index: 1;
           }
           .desc-wrapper {
@@ -284,7 +382,6 @@ export default {
               &.desc-item-left {
                 margin-left: 150px;
                 align-items: flex-start;
-                transition: all 0.5s;
               }
             }
           }
@@ -311,12 +408,12 @@ export default {
       }
 
       &.main-second {
-        height: 2000px;
+        height: 12000px;
         font-size: 38px;
         background-color: #000;
 
         .interest-title {
-          padding: 200px 0 150px 0;
+          padding: 200px 0 120px 0;
           display: flex;
           justify-content: center;
           font-size: 60px;
@@ -325,13 +422,14 @@ export default {
 
         .main-second-section-first {
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
 
           .card-wrapper {
             display: grid;
-            grid-template-columns: repeat(3, 180px);
-            grid-template-rows: repeat(3, 180px);
+            grid-template-columns: repeat(3, 220px);
+            grid-template-rows: repeat(3, 220px);
             gap: 10px;
             color: #000;
 
@@ -349,42 +447,42 @@ export default {
               &.card-item1 {
                 grid-row-start: 1;
                 grid-row-end: 3;
-                background-image: url('~@/assets/animate/travel.webp');
+                background-image: url('~@/assets/animate/card/travel.webp');
                 background-size: 110% 100%;
                 background-position: center;
                 background-repeat: no-repeat;
                 &:hover { background-size: 120% 110%; }
               }
               &.card-item2 {
-                background-image: url('~@/assets/animate/star.webp');
+                background-image: url('~@/assets/animate/card/star.webp');
                 background-size: 140%;
                 background-position: center;
                 background-repeat: no-repeat;
                 &:hover { background-size: 150%; }
               }
               &.card-item3 {
-                background-image: url('~@/assets/animate/kobe.webp');
+                background-image: url('~@/assets/animate/card/kobe.webp');
                 background-size: 150%;
                 background-position: center;
                 background-repeat: no-repeat;
                 &:hover { background-size: 170%; }
               }
               &.card-item4 {
-                background-image: url('~@/assets/animate/blackhole.jpg');
+                background-image: url('~@/assets/animate/card/blackhole.jpg');
                 background-size: 180%;
                 background-position: center;
                 background-repeat: no-repeat;
                 &:hover { background-size: 200%; }
               }
               &.card-item5 {
-                background-image: url('~@/assets/animate/guitar.webp');
+                background-image: url('~@/assets/animate/card/guitar.webp');
                 background-size: 180%;
                 background-position: center;
                 background-repeat: no-repeat;
                 &:hover { background-size: 200%; }
               }
               &.card-item6 {
-                background-image: url('~@/assets/animate/akl.jpg');
+                background-image: url('~@/assets/animate/card/akl.jpg');
                 background-size: 180%;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -393,11 +491,101 @@ export default {
               &.card-item7 {
                 grid-column-start: 2;
                 grid-column-end: 4;
-                background-image: url('~@/assets/animate/ironman.gif');
+                background-image: url('~@/assets/animate/card/ironman.gif');
                 background-size: 111%;
                 background-position: center;
                 background-repeat: no-repeat;
               }
+            }
+          }
+        }
+
+        .main-second-section-second {
+          margin-top: 100px;
+          color: #fff;
+
+          .bg-img {
+            width: 100%;
+          }
+
+          .pursue {
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 200px;
+            user-select: none;
+
+            &.eat-wrapper {
+              width: 100vw;
+              height: 61.78vw;
+              background-image: url('~@/assets/animate/fun/barbecue.jpg');
+              background-size: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+            &.drink-wrapper {
+              width: 100vw;
+              height: 58.79vw;
+              background-image: url('~@/assets/animate/fun/beer.jpg');
+              background-size: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+            &.play-wrapper {
+              width: 100vw;
+              height: 56vw;
+              position: relative;
+              .play-vedio {
+                width: 100%;
+                height: 100%;
+              }
+              .play-title {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+          }
+        }
+
+        .main-second-section-third {
+          height: 2800px;
+          display: flex;
+          flex-direction: column;
+          color: #fff;
+          position: relative;
+
+          .worry {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            left: 0;
+            user-select: none;
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            .worry-title {
+              font-size: 120px;
+            }
+            &.worry-job {
+              background-image: url('~@/assets/animate/worry/job.jpeg');
+            }
+            &.worry-life {
+              background-image: url('~@/assets/animate/worry/life.jpeg');
+            }
+            &.worry-socialize {
+              background-image: url('~@/assets/animate/worry/socialize.jpeg');
             }
           }
         }
