@@ -34,7 +34,8 @@
         <div class="interest-title">人生, 其实很简单</div>
         <div class="pursue eat-wrapper">吃</div>
         <div class="pursue drink-wrapper">喝</div>
-        <div class="pursue play-wrapper">
+        <div class="pursue play-wrapper">玩乐</div>
+        <!-- <div class="pursue play-wrapper">
           <video
             class="play-vedio"
             ref="playVedio"
@@ -51,7 +52,7 @@
             preload="auto"
           />
           <span class="play-title">玩乐</span>
-        </div>
+        </div> -->
       </section>
       <div class="interest-title">参杂些烦恼</div>
       <section class="main-second-section-third" :style="sectionThridStyle" >
@@ -66,9 +67,42 @@
           <span class="worry-title" :style="worrySocializeTitleStyle">社交</span>
         </div>
       </section>
-      <section class="section main-second-section-fourth">
+      <section class="main-second-section-fourth">
         <div class="interest-title">不变的是向往快乐的心</div>
-        <img src="@/assets/animate/camera.png" class="camera-img" />
+        <div class="happy-wrapper">
+          <img class="iphone14pro" height="500" src="@/assets/animate/iphonevedio/iphone14pro.png" />
+          <div class="iphone-vedio-wrapper">
+            <video
+              v-show="!iphoneVedioEnd"
+              class="iphone-vedio"
+              ref="iphone14proVedio"
+              src="@/assets/animate/iphonevedio/happy.mp4"
+              id="video-home"
+              data-object-fit=""
+              playsinline
+              muted
+              x5-playsinline
+              webkit-playsinline="true"
+              x5-video-player-type="h5"
+              preload="auto"
+              @ended="iphoneVedioEnded"
+            />
+            <img v-show="iphoneVedioEnd" class="iphone-vedio-endimg" src="@/assets/animate/iphonevedio/vediobg.jpeg" />
+          </div>
+        </div>
+        <div class="start-pause" @click="onIphoneVedioPlayPause">
+          <i :class="iphoneVedioEnd ? 'el-icon-refresh' : (iphoneVedioPlay ? 'el-icon-video-pause' : 'el-icon-video-play')" />
+          <span>{{ iphoneVedioEnd ? '重播' : (iphoneVedioPlay ? '暂停' : '播放') }}</span>
+        </div>
+        <div class="happy-desc">
+          <p class="desc-left">追寻快乐的方式有很多种，或是旅行，或是学习。但追求快乐的过程本身，就很快乐。</p>
+          <p class="desc-right">
+            <span>功成名就不是目的，</span>
+            <span>让自己快乐才叫做意义。</span>
+            <span>一生仅此一次，</span>
+            <span>边走边学，边唱边跳，使劲的叫。</span>
+          </p>
+        </div>
       </section>
     </main>
   </div> 
@@ -154,12 +188,19 @@ export default {
       worrySocializeTitleStyle: {
         opacity: 0,
         transform: `translateX(-30px)`
-      }
+      },
+      // 第四部分
+      iphoneVedioPlay: false,
+      iphoneVedioEnd: true,
     }
   },
   mounted () {
     const { scrollTop } = document.documentElement;
-    if (scrollTop > 0) document.body.scrollTop = document.documentElement.scrollTop = 0
+    console.log('scrollTopscrollTop', scrollTop)
+    if (scrollTop > 0) {
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
     window.addEventListener('scroll', this.watchWindowScroll);
   },
   destroyed () {
@@ -196,7 +237,7 @@ export default {
       }
       // 文字在baby照片中渐变往左出现
       if (t > 700 && t < 1100) {
-        const prop = this.getPercentage(750, 300)
+        const prop = this.getPercentage(750, 400)
         const translateX = 30 - prop * 30 
         this.descStyle.opacity = prop
         this.descStyle.transform = `translateX(${translateX}px)`
@@ -294,12 +335,25 @@ export default {
         this.worrySocializeTitleStyle.opacity = prop
         this.worrySocializeTitleStyle.transform = `translateX(-${translateY}px)`
       }
-      // if (t > 8450 && t < 8850) {
-      //   const prop = this.getPercentage(8500, 300)
-      //   const translateY = prop * 30
-      //   this.worrySocializeStyle.opacity = 1 - prop
-      //   this.worrySocializeStyle.transform = `translateY(-${translateY}px)`
-      // }
+      // 播放视频, 视频不会autoplay
+      if (t > 9200 && t < 9400) {
+        if (!this.iphoneVedioPlay && this.iphoneVedioEnd) {
+          this.$refs['iphone14proVedio'].play()
+          this.iphoneVedioPlay = true
+          this.iphoneVedioEnd = false
+        }
+      }
+    },
+    onIphoneVedioPlayPause () {
+      this.iphoneVedioEnd = false
+      if (this.iphoneVedioPlay) this.$refs['iphone14proVedio'].pause()
+      if (!this.iphoneVedioPlay) this.$refs['iphone14proVedio'].play()
+      this.iphoneVedioPlay = !this.iphoneVedioPlay
+    },
+    iphoneVedioEnded (e) {
+      console.log('eeee ended',e)
+      this.iphoneVedioPlay = false
+      this.iphoneVedioEnd = true
     }
   }
 }
@@ -533,21 +587,10 @@ export default {
             &.play-wrapper {
               width: 100vw;
               height: 806.4px;
-              position: relative;
-              .play-vedio {
-                width: 100%;
-                height: 100%;
-              }
-              .play-title {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
+              background-image: url('~@/assets/animate/fun/happy.png');
+              background-size: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
             }
           }
         }
@@ -583,6 +626,81 @@ export default {
             }
             &.worry-socialize {
               background-image: url('~@/assets/animate/worry/socialize.jpeg');
+            }
+          }
+        }
+
+        .main-second-section-fourth {
+          .interest-title {
+            padding-bottom: 80px;
+          }
+          .happy-wrapper {
+            height: 500px;
+            position: relative;
+            font-size: 50px;
+            .iphone14pro {
+              z-index: 2;
+              position: relative;
+              top: 0;
+              left: 0;
+            }
+            .iphone-vedio-wrapper {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              position: absolute;
+              top: 3px;
+              left: 0;
+              z-index: 1;
+              .iphone-vedio {
+                height: 490px;
+                border-radius: 100px;
+                overflow: hidden;
+              }
+              .iphone-vedio-endimg {
+                height: 490px;
+                // height: 485px;
+                // position: absolute;
+                // top: 4px;
+                // left: 0;
+                // z-index: 1;
+              }
+            }
+          }
+          .start-pause {
+            width: 150px;
+            margin: 15px auto 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #2997ff;
+            user-select: none;
+            cursor: pointer;
+            & > i {
+              font-size: 16px;
+              margin-right: 5px;
+            }
+            &:hover {
+              > span { text-decoration: underline; }
+            }
+          }
+          .happy-desc {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            .desc-left {
+              margin-right: 50px;
+              width: 300px;
+              font-size: 20px;
+              text-align: left;
+            }
+            .desc-right {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              font-size: 20px;
             }
           }
         }
