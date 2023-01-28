@@ -58,12 +58,25 @@
       <section class="main-second-section-third" :style="sectionThridStyle" >
         <!-- <div class="pursue drink-wrapper">喝</div> -->
         <div class="worry worry-job" :style="worryJobStyle">
+          <div class="worry-desc">
+            <div>· 岗位： 前端工程师</div>
+            <div>· 学历： 大学本科</div>
+            <div>· 工作年限： 3年半</div>
+          </div>
           <span class="worry-title" :style="worryJobTitleStyle">工作</span>
         </div>
         <div class="worry worry-life" :style="worryLifeStyle">
+          <div class="worry-desc" style="color: #000">
+            <div>· 生日： 1997年1月2日</div>
+            <div>· 地区： 深圳市龙岗区</div>
+          </div>
           <span class="worry-title" :style="worryLifeTitleStyle">生活</span>
         </div>
         <div class="worry worry-socialize" :style="worrySocializeStyle">
+          <div class="worry-desc">
+            <div>wechat： yzfcoo1</div>
+            <div>email： yzfcool.tinyo@qq.com</div>
+          </div>
           <span class="worry-title" :style="worrySocializeTitleStyle">社交</span>
         </div>
       </section>
@@ -99,7 +112,7 @@
           <p class="desc-right">
             <span>功成名就不是目的，</span>
             <span>让自己快乐才叫做意义。</span>
-            <span>一生仅此一次，</span>
+            <span>快乐是自己给的！</span>
             <span>边走边学，边唱边跳，使劲的叫。</span>
           </p>
         </div>
@@ -617,6 +630,15 @@ export default {
             background-repeat: no-repeat;
             .worry-title {
               font-size: 120px;
+            }
+            .worry-desc {
+              position: absolute;
+              top: 35px;
+              left: 35px;
+              text-align: left;
+              font-size: 20px;
+              font-weight: bold;
+              line-height: 40px;
             }
             &.worry-job {
               background-image: url('~@/assets/animate/worry/job.jpeg');
