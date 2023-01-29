@@ -1,8 +1,8 @@
 <template>
   <div class="animate-container">
     <main class="main-first">
-      <section class="main-first-section-first" :style="sectionFirstStyle">
-        · tinyo
+      <section class="main-first-section-first" :style="sectionFirstStyle" desc="文字图片背景">
+        · Design By tinyo
       </section>
       <section class="section main-first-section-second" :style="sectionSecondStyle">
         <div :style="sloganFirstStyle">出淤泥而不染</div>
@@ -56,7 +56,6 @@
       </section>
       <div class="interest-title">参杂些烦恼</div>
       <section class="main-second-section-third" :style="sectionThridStyle" >
-        <!-- <div class="pursue drink-wrapper">喝</div> -->
         <div class="worry worry-job" :style="worryJobStyle">
           <span class="worry-title" :style="worryJobTitleStyle">工作</span>
         </div>
@@ -105,6 +104,9 @@
         </div>
       </section>
     </main>
+    <!-- <main class="main-third">
+      钢铁侠反应堆变身区域
+    </main> -->
   </div> 
 </template>
 
@@ -118,7 +120,7 @@ export default {
       // 第一部分变量
       sectionFirstStyle: {
         opacity: 1,
-        transform: `translateY(-50px)`
+        transform: `translateY(-40px)`
       },
       sectionSecondStyle: {
         transform: `translateY(0px)`,
@@ -210,6 +212,9 @@ export default {
     setScreenParamsDefault () {
       const spStr = sessionStorage.getItem('sp')
       const sp = JSON.parse(spStr)
+      delete sp.lock
+      delete sp.iphoneVedioPlay
+      delete sp.iphoneVedioEnd
       if (sp) for(let key in sp) this[key] = sp[key]
     },
     // 获取开始的像素值距离完成的像素值的百分比 0—>1
@@ -232,7 +237,7 @@ export default {
       if (t > 100 && t < 400) {
         const prop = this.getPercentage(130, 200)
         const opacity = 1 - prop
-        const translateY = 50 + (prop * 100 > 100 ? 100 : prop * 100)
+        const translateY = 40 + (prop * 100 > 100 ? 100 : prop * 100)
         this.sectionFirstStyle.opacity = opacity
         this.sectionFirstStyle.transform = `translateY(-${translateY}px)`
       }
@@ -376,6 +381,7 @@ export default {
 
 <style scoped lang="scss">
   .animate-container {
+    width: 100%;
     position: relative;
     color: #fff;
     background-color: #000;
@@ -403,6 +409,8 @@ export default {
           align-items: center;
           background-image: url('~@/assets/animate/rainbow.jpeg');
           background-clip: text;
+          background-size: 100%;
+          background-repeat: no-repeat;
           -webkit-background-clip: text;
           color: transparent;
           user-select: none;
@@ -474,7 +482,7 @@ export default {
       }
 
       &.main-second {
-        height: 12000px;
+        height: 8500px;
         font-size: 38px;
         background-color: #000;
 
@@ -719,6 +727,10 @@ export default {
             }
           }
         }
+      }
+
+      &.main-third {
+        color: #fff;
       }
     }
   }
