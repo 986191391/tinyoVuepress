@@ -38,21 +38,24 @@
         </div>
         <div class="author-info">
           <p class="author-name">杨泽锋</p>
-          <p class="work-times">男 | 97年 | 三年工作经验</p>
+          <p class="work-times">男 | 97年 | 三年半工作经验</p>
           <template v-for="(itm, idx) in info.authorBaseInfo">
-            <div :key="`author-base-info-item${idx}`" class="info-item">{{itm.label}} - {{itm.value}}</div>
+            <div :key="`author-base-info-item${idx}`" class="info-item">{{itm.label}}: {{itm.value}}</div>
           </template>
         </div>
       </section>
       <template v-for="(itm, idx) in info.resumeInfo" >
+        <!-- 分割线 -->
         <Divider :key="`divider${idx}`"/>
         <ResumeCard :key="`resumecard${idx}`" :title="itm.title">
+          <!-- type = normal 正常显示 -->
           <div v-if="itm.main.type === 'normal'">{{itm.main.content}}</div>
+          <!-- type = list 列表显示 -->
           <div v-else-if="itm.main.type === 'list'">
             <div
               v-for="(listItm, listIdx) in (itm.main.content || [])"
               :key="`card-itm-${listIdx}`"
-              :style="{ lineHeight: '28px' }"
+              :style="{ lineHeight: '24px' }"
             >
               <template v-if="itm.main.id === 'assessment'">
                 <span :style="{ color: '#64bef1', marginRight: '0.5rem' }">{{listItm.split(':')[0]}}:</span>
@@ -61,6 +64,7 @@
               <template v-else>{{listItm}}</template>
             </div>
           </div>
+          <!-- type = nestlist 嵌套列表显示 -->
           <div v-else-if="itm.main.type === 'nestList'">
             <div
               v-for="(nestListItm, nestListIdx) in (itm.main.content || [])"
@@ -85,8 +89,8 @@
                   {{innerItm}}
                 </template>
                 <template v-else-if="itm.main.id === 'project'">
-                  <span :style="{ color: '#64bef1', marginRight: '0.5rem' }">{{innerItm.split(':')[0]}}:</span>
-                  <span>{{innerItm.split(':')[1]}}</span>
+                  <span :style="{ color: '#64bef1', marginRight: '0.5rem' }">{{getListItemLabelValue(innerItm, 'label')}}:</span>
+                  <span>{{getListItemLabelValue(innerItm, 'value')}}</span>
                 </template>
               </div>
             </div>
@@ -113,7 +117,7 @@ export default {
       imgUrl,
       editStatus: false,
       scaleValue: 1,
-      bestView: false
+      bestView: true
     }
   },
   mounted () {
@@ -166,6 +170,12 @@ export default {
         reader.onload = e => this.imgUrl = e.target.result
         uploadInput.remove()
       }
+    },
+    getListItemLabelValue (str, key) {
+      const splitIndex = str.indexOf(':')
+      if (splitIndex === -1) return
+      if (key === 'label') return str.slice(0, splitIndex)
+      return str.slice(splitIndex + 1)
     }
   }
 }
@@ -292,9 +302,9 @@ export default {
         }
 
         .info-item {
-          padding: 0.15rem 0;
-          font-size: 0.6rem;
-          line-height: 16px;
+          // padding: 0.15rem 0;
+          font-size: 12px;
+          line-height: 20px;
         }
       }
     }
