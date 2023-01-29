@@ -58,25 +58,12 @@
       <section class="main-second-section-third" :style="sectionThridStyle" >
         <!-- <div class="pursue drink-wrapper">喝</div> -->
         <div class="worry worry-job" :style="worryJobStyle">
-          <div class="worry-desc">
-            <div>· 岗位： 前端工程师</div>
-            <div>· 学历： 大学本科</div>
-            <div>· 工作年限： 3年半</div>
-          </div>
           <span class="worry-title" :style="worryJobTitleStyle">工作</span>
         </div>
         <div class="worry worry-life" :style="worryLifeStyle">
-          <div class="worry-desc" style="color: #000">
-            <div>· 生日： 1997年1月2日</div>
-            <div>· 地区： 深圳市龙岗区</div>
-          </div>
           <span class="worry-title" :style="worryLifeTitleStyle">生活</span>
         </div>
         <div class="worry worry-socialize" :style="worrySocializeStyle">
-          <div class="worry-desc">
-            <div>wechat： yzfcoo1</div>
-            <div>email： yzfcool.tinyo@qq.com</div>
-          </div>
           <span class="worry-title" :style="worrySocializeTitleStyle">社交</span>
         </div>
       </section>
@@ -127,6 +114,7 @@ export default {
   components: { CoolNav },
   data () {
     return {
+      lock: false,
       // 第一部分变量
       sectionFirstStyle: {
         opacity: 1,
@@ -207,21 +195,27 @@ export default {
       iphoneVedioEnd: true,
     }
   },
+  created () {
+    this.setScreenParamsDefault()
+  },
   mounted () {
-    const { scrollTop } = document.documentElement;
-    console.log('scrollTopscrollTop', scrollTop)
-    if (scrollTop > 0) {
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-    }
     window.addEventListener('scroll', this.watchWindowScroll);
   },
   destroyed () {
+    sessionStorage.removeItem('sp')
     window.removeEventListener('scroll', this.watchWindowScroll);
   },
   methods: {
+    // 初始化数据
+    setScreenParamsDefault () {
+      const spStr = sessionStorage.getItem('sp')
+      const sp = JSON.parse(spStr)
+      if (sp) for(let key in sp) this[key] = sp[key]
+    },
     // 获取开始的像素值距离完成的像素值的百分比 0—>1
     getPercentage(beginPx, totalPx) {
+      // beginPx 开始的像素值
+      // totalPx 整个过程所需的像素值
       const t = document.documentElement.scrollTop;
       const p = ((t - beginPx) / totalPx) < 0 ? 0 : ((t - beginPx) / totalPx)
       return p > 1 ? 1 : p
@@ -356,6 +350,15 @@ export default {
           this.iphoneVedioEnd = false
         }
       }
+
+      // 实时保存滚动后位置的相关数据, 以免页面刷新后错乱
+      if (!this.lock) {
+        this.lock = true
+        setTimeout(() => {
+          this.lock = false
+          sessionStorage.setItem('sp', JSON.stringify(this.$data))
+        }, 500)
+      }
     },
     onIphoneVedioPlayPause () {
       this.iphoneVedioEnd = false
@@ -364,7 +367,6 @@ export default {
       this.iphoneVedioPlay = !this.iphoneVedioPlay
     },
     iphoneVedioEnded (e) {
-      console.log('eeee ended',e)
       this.iphoneVedioPlay = false
       this.iphoneVedioEnd = true
     }
@@ -630,15 +632,6 @@ export default {
             background-repeat: no-repeat;
             .worry-title {
               font-size: 120px;
-            }
-            .worry-desc {
-              position: absolute;
-              top: 35px;
-              left: 35px;
-              text-align: left;
-              font-size: 20px;
-              font-weight: bold;
-              line-height: 40px;
             }
             &.worry-job {
               background-image: url('~@/assets/animate/worry/job.jpeg');
