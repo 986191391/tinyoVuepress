@@ -13,7 +13,7 @@
             <div><img class="icon" src="@/assets/animate/boy.png" /> 男孩</div>
             <div><img class="icon" src="@/assets/animate/location.png" /> 深圳</div>
           </div>
-          <div class="desc-item desc-item-right"></div>
+          <div class="desc-item desc-item-right" />
         </div>
       </section>
     </main>
@@ -104,16 +104,27 @@
         </div>
       </section>
     </main>
-    <!-- <main class="main-third">
+    <main class="main-third">
+      <div class="interest-title">随心老虎机</div>
+      <div class="emo-wrapper">
+        <template v-for="(item, index) in 36">
+          <img :key="`emoticonKey${index}`" :src="getRandomEmoticon(index)" :style="{opacity: moodIndex === index ? 1 : 0.6}" alt="" />
+        </template>
+      </div>
+      <i class="el-icon-thumb" title="点出好心情!" @click="onMoodClick"/>
+    </main>
+    <main class="main-fourth">
       钢铁侠反应堆变身区域
-    </main> -->
+    </main>
   </div> 
 </template>
 
 <script>
 import CoolNav from '@/components/coolNav.vue'
+import base from './animateBase'
 export default {
   components: { CoolNav },
+  mixins: [base],
   data () {
     return {
       lock: false,
@@ -195,12 +206,18 @@ export default {
       // 第四部分
       iphoneVedioPlay: false,
       iphoneVedioEnd: true,
+      // 随心老虎机变量
+      moodLock: false,
+      moodIndex: 0,
     }
   },
   created () {
     this.setScreenParamsDefault()
   },
   mounted () {
+    console.log('111111', this.emoticonList)
+    // 首次进入页面时 移动到顶部
+    if (!sessionStorage.getItem('sp')) window.scrollTo(0 ,0)
     window.addEventListener('scroll', this.watchWindowScroll);
   },
   destroyed () {
@@ -212,10 +229,12 @@ export default {
     setScreenParamsDefault () {
       const spStr = sessionStorage.getItem('sp')
       const sp = JSON.parse(spStr)
-      delete sp.lock
-      delete sp.iphoneVedioPlay
-      delete sp.iphoneVedioEnd
-      if (sp) for(let key in sp) this[key] = sp[key]
+      if (sp) {
+        delete sp.lock
+        delete sp.iphoneVedioPlay
+        delete sp.iphoneVedioEnd
+        for(let key in sp) this[key] = sp[key]
+      }
     },
     // 获取开始的像素值距离完成的像素值的百分比 0—>1
     getPercentage(beginPx, totalPx) {
@@ -374,6 +393,24 @@ export default {
     iphoneVedioEnded (e) {
       this.iphoneVedioPlay = false
       this.iphoneVedioEnd = true
+    },
+    onMoodClick () {
+      if (this.moodLock) return
+      this.moodLock = true
+      let delay = 100
+      let delayFlag = 0
+      const timer = setInterval(() => {
+        // if (delayFlag > 40 && delayFlag <= 60) delay = 300
+        // else if (delayFlag > 60 && delayFlag <= 80) delay = 500
+        // else if (delayFlag > 80 && delayFlag <= 100) delay = 1000
+        // else 
+        if (delayFlag > 50) {
+          this.moodLock = false
+          return clearInterval(timer)
+        }
+        delayFlag = delayFlag + 1
+        this.moodIndex = Math.ceil(Math.random() * 36) - 1
+      }, delay)
     }
   }
 }
@@ -682,11 +719,6 @@ export default {
               }
               .iphone-vedio-endimg {
                 height: 490px;
-                // height: 485px;
-                // position: absolute;
-                // top: 4px;
-                // left: 0;
-                // z-index: 1;
               }
             }
           }
@@ -730,7 +762,44 @@ export default {
       }
 
       &.main-third {
-        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .interest-title {
+          padding: 20px 0;
+          display: flex;
+          justify-content: center;
+          font-size: 60px;
+          color: #fff;
+        }
+
+        .emo-wrapper {
+          margin: 30px auto;
+          width: 1050px;
+          display: flex;
+          justify-content: space-evenly;
+          gap: 15px;
+          flex-wrap: wrap;
+          & > img { opacity: 0.6; width: 100px; }
+        }
+
+        .el-icon-thumb {
+          padding: 10px 15px 15px 10px;
+          color: #fff;
+          border: 5px solid #fff;
+          border-radius: 60px;
+          font-size: 60px;
+          transition: all 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            color: #2997ff;
+            border-color: #2997ff;
+          }
+        }
+
       }
     }
   }
