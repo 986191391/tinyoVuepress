@@ -24,7 +24,7 @@ import PcHomeGoBang from '../views/pc/home/component/gobang/gobang.vue'
 // import PcScore from '../views/pc/mine/score.vue'
 // import PcDemo from '../views/pc/demo/demo.vue'
 
-// import MobileHomeIndex from '../views/mobile/homeIndex/homeIndex.vue'
+import MobileHomeIndex from '../views/mobile/home/home.vue'
 // import MobileAbout from '../views/mobile/about/about.vue'
 // import MobilePlan from '../views/mobile/plan/plan.vue'
 // import MobileLegends from '../views/mobile/legends/legends.vue'
@@ -33,6 +33,8 @@ import PcHomeGoBang from '../views/pc/home/component/gobang/gobang.vue'
 // import MobileScore from '../views/mobile/mine/score.vue'
 // import MobileScoreRule from '../views/mobile/mine/scorerule.vue'
 Vue.use(VueRouter)
+
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|ios|IEMobile/i.test(navigator.userAgent);
 
 const pcRoutes = [
   {
@@ -139,41 +141,19 @@ const pcRoutes = [
     component: PcFabric,
     meta: 'fabric'
   }
-  // {
-  //   path: '/legends',
-  //   name: 'legends',
-  //   component: PcLegends,
-  //   meta: '藏品展示'
-  // },
-  // {
-  //   path: '/demo',
-  //   name: 'demo',
-  //   component: PcDemo,
-  //   meta: 'Demo区域'
-  // },
-  // {
-  //   path: '/mine',
-  //   name: 'mine',
-  //   component: PcMine,
-  //   children: [
-  //     {
-  //       path: 'collect',
-  //       name: 'collect',
-  //       component: PcCollect,
-  //       meta: '个人中心'
-  //     },
-  //     {
-  //       path: 'score',
-  //       name: 'score',
-  //       component: PcScore,
-  //       meta: '我的积分'
-  //     }
-  //   ]
-  // }
 ]
 
+const mobileRoutes = [
+  {
+    path: "/",
+    name: "homeIndex",
+    component: MobileHomeIndex,
+    meta: "首页",
+  },
+];
+
 const router = new VueRouter({
-  routes: pcRoutes
+  routes: isMobile ? mobileRoutes : pcRoutes,
 })
 
 export default router
