@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+</style>
+<body>
+  <div id="app" class="container">
+    {{a}}
+    <span>{{b.b2}},</span>
+    {{b.b1}}牛逼
+  </div>
+<script>
+  function Vue(options) {
+    this.$vm = this
+    this.$options = options
+    this.$data = options.data
+
+    observe(this.$data)
+    proxyData(this.$data, this)
+    compile(options.el, this)
+  }
+
+  // function 
+
+  function observe(data) {
+    for (let key in data) {
+      let val = data[key]
+      if (!!val && typeof val === 'object') observe(val)
+
+      Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get() {
+          return val
+        },
+        set(newVal) {
+          if (newVal === val) return
+          val = newVal
+          if (!!val && typeof val === 'object') observe(val)
+        }
+      })
+    }
+  }
+
+  function proxyData(data, vm) {
+    for(let key in data) {
+      Object.defineProperty(vm, key, {
+        enumerable: true,
+        configurable: true,
+        get() {
+          return data[key]
+        },
+        set(newVal) {
+          data[key] = newVal 
+        }
+      })
+    }
+  }
+
+  function compile(el, vm) {
+    vm.$el = document.querySelector(el)
+    let fragment = document.createDocumentFragment()
+    while(child = vm.$el.childNodes[0]) {
+      fragment.appendChild(child)
+    }
+    elReplace(fragment.childNodes, vm)
+    Array.from(fragment.childNodes).forEach((node) => {
+      vm.$el.appendChild(node)
+    })
+  }
+
+  function elReplace(fragmentNodes, vm) {
+    Array.from(fragmentNodes).forEach((node, nodeIndex, arr) => {
+      if (node.nodeType === 1) {
+        elReplace(node.childNodes, vm)
+        // 元素节点
+      } else if (node.nodeType === 3) {
+        // 文本节点
+        let text = node.textContent
+        let reg = /\{\{(.*)\}\}/
+        const regExp = reg.test(text)
+        if (!regExp) return
+        // RegExp.$1 第一个匹配的xxx
+        const dotArr = RegExp.$1.split('.')
+        let newVal = vm
+        dotArr.forEach((itm, idx) => {
+          newVal = newVal[itm]
+        })
+        node.textContent = text.replace(reg, newVal)
+      }
+
+      console.log('nodetype', node.nodeType)
+    })
+  }
+
+  let vue = new Vue({
+    el: '#app',
+    data: {
+      a: '我是a。',
+      b: {
+        b1: '====bbbbb11111====',
+        b2: 'b2'
+      }
+    }
+  })
+
+  console.log('vue', vue)
+</script>
+</body>
+</html>
