@@ -23,7 +23,7 @@ module.exports = {
         {
           title: 'Vue',
           collapsable: false,
-          children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize' ]
+          children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize', 'vue/router' ]
         },
         {
           title: '功能性全局方法',
