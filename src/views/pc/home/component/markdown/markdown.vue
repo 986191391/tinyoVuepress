@@ -11,12 +11,7 @@
 </template>
 
 <script>
-import CoolNav from '@/components/coolNav.vue'
-import CoolAside from '@/components/coolAside.vue'
-import MacWindow from '@/components/macWindow.vue'
-
 export default {
-  components: { CoolNav, CoolAside, MacWindow },
   data () {
     return {}
   },
@@ -36,7 +31,7 @@ export default {
       } else {
         const strBefore = value.slice(0, selectionStart)
         const curLineStart = strBefore.includes('\n') ? strBefore.lastIndexOf('\n') + 1 : 0
-        const strBetween = this.value.slice(curLineStart, selectionEnd + 1)
+        const strBetween = value.slice(curLineStart, selectionEnd + 1)
         const newStr = `  ${strBetween.replace(/\n/g, '\n  ')}`
         const lineBreakCount = strBetween.split('\n').length
         const newStart = selectionStart + 2
