@@ -1,6 +1,6 @@
 import { getClassifyMenu, getLegendList } from '@/api/legends'
 
-const user = {
+const legends = {
   state: {
     // legendList: [],
   },
@@ -41,4 +41,4 @@ const user = {
   }
 }
 
-export default user
+export default legends

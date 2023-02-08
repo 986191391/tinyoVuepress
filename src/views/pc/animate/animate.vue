@@ -1,8 +1,8 @@
 <template>
   <div class="animate-container">
     <main class="main-first">
-      <section class="main-first-section-first" :style="sectionFirstStyle">
-        · tinyo
+      <section class="main-first-section-first" :style="sectionFirstStyle" desc="文字图片背景">
+        · Design By tinyo
       </section>
       <section class="section main-first-section-second" :style="sectionSecondStyle">
         <div :style="sloganFirstStyle">出淤泥而不染</div>
@@ -13,7 +13,7 @@
             <div><img class="icon" src="@/assets/animate/boy.png" /> 男孩</div>
             <div><img class="icon" src="@/assets/animate/location.png" /> 深圳</div>
           </div>
-          <div class="desc-item desc-item-right"></div>
+          <div class="desc-item desc-item-right" />
         </div>
       </section>
     </main>
@@ -56,7 +56,6 @@
       </section>
       <div class="interest-title">参杂些烦恼</div>
       <section class="main-second-section-third" :style="sectionThridStyle" >
-        <!-- <div class="pursue drink-wrapper">喝</div> -->
         <div class="worry worry-job" :style="worryJobStyle">
           <span class="worry-title" :style="worryJobTitleStyle">工作</span>
         </div>
@@ -99,25 +98,40 @@
           <p class="desc-right">
             <span>功成名就不是目的，</span>
             <span>让自己快乐才叫做意义。</span>
-            <span>一生仅此一次，</span>
+            <span>快乐是自己给的！</span>
             <span>边走边学，边唱边跳，使劲的叫。</span>
           </p>
         </div>
       </section>
+    </main>
+    <main class="main-third">
+      <div class="interest-title">随心老虎机</div>
+      <div class="emo-wrapper">
+        <template v-for="(item, index) in 36">
+          <img :key="`emoticonKey${index}`" :src="getRandomEmoticon(index)" :style="{opacity: moodIndex === index ? 1 : 0.6}" alt="" />
+        </template>
+      </div>
+      <i class="el-icon-thumb" title="点出好心情!" @click="onMoodClick"/>
+    </main>
+    <main class="main-fourth">
+      钢铁侠反应堆变身区域
     </main>
   </div> 
 </template>
 
 <script>
 import CoolNav from '@/components/coolNav.vue'
+import base from './animateBase'
 export default {
   components: { CoolNav },
+  mixins: [base],
   data () {
     return {
+      lock: false,
       // 第一部分变量
       sectionFirstStyle: {
         opacity: 1,
-        transform: `translateY(-50px)`
+        transform: `translateY(-40px)`
       },
       sectionSecondStyle: {
         transform: `translateY(0px)`,
@@ -192,23 +206,40 @@ export default {
       // 第四部分
       iphoneVedioPlay: false,
       iphoneVedioEnd: true,
+      // 随心老虎机变量
+      moodLock: false,
+      moodIndex: 0,
     }
   },
+  created () {
+    this.setScreenParamsDefault()
+  },
   mounted () {
-    const { scrollTop } = document.documentElement;
-    console.log('scrollTopscrollTop', scrollTop)
-    if (scrollTop > 0) {
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-    }
+    console.log('111111', this.emoticonList)
+    // 首次进入页面时 移动到顶部
+    if (!sessionStorage.getItem('sp')) window.scrollTo(0 ,0)
     window.addEventListener('scroll', this.watchWindowScroll);
   },
   destroyed () {
+    sessionStorage.removeItem('sp')
     window.removeEventListener('scroll', this.watchWindowScroll);
   },
   methods: {
+    // 初始化数据
+    setScreenParamsDefault () {
+      const spStr = sessionStorage.getItem('sp')
+      const sp = JSON.parse(spStr)
+      if (sp) {
+        delete sp.lock
+        delete sp.iphoneVedioPlay
+        delete sp.iphoneVedioEnd
+        for(let key in sp) this[key] = sp[key]
+      }
+    },
     // 获取开始的像素值距离完成的像素值的百分比 0—>1
     getPercentage(beginPx, totalPx) {
+      // beginPx 开始的像素值
+      // totalPx 整个过程所需的像素值
       const t = document.documentElement.scrollTop;
       const p = ((t - beginPx) / totalPx) < 0 ? 0 : ((t - beginPx) / totalPx)
       return p > 1 ? 1 : p
@@ -225,7 +256,7 @@ export default {
       if (t > 100 && t < 400) {
         const prop = this.getPercentage(130, 200)
         const opacity = 1 - prop
-        const translateY = 50 + (prop * 100 > 100 ? 100 : prop * 100)
+        const translateY = 40 + (prop * 100 > 100 ? 100 : prop * 100)
         this.sectionFirstStyle.opacity = opacity
         this.sectionFirstStyle.transform = `translateY(-${translateY}px)`
       }
@@ -343,6 +374,15 @@ export default {
           this.iphoneVedioEnd = false
         }
       }
+
+      // 实时保存滚动后位置的相关数据, 以免页面刷新后错乱
+      if (!this.lock) {
+        this.lock = true
+        setTimeout(() => {
+          this.lock = false
+          sessionStorage.setItem('sp', JSON.stringify(this.$data))
+        }, 500)
+      }
     },
     onIphoneVedioPlayPause () {
       this.iphoneVedioEnd = false
@@ -351,9 +391,26 @@ export default {
       this.iphoneVedioPlay = !this.iphoneVedioPlay
     },
     iphoneVedioEnded (e) {
-      console.log('eeee ended',e)
       this.iphoneVedioPlay = false
       this.iphoneVedioEnd = true
+    },
+    onMoodClick () {
+      if (this.moodLock) return
+      this.moodLock = true
+      let delay = 100
+      let delayFlag = 0
+      const timer = setInterval(() => {
+        // if (delayFlag > 40 && delayFlag <= 60) delay = 300
+        // else if (delayFlag > 60 && delayFlag <= 80) delay = 500
+        // else if (delayFlag > 80 && delayFlag <= 100) delay = 1000
+        // else 
+        if (delayFlag > 50) {
+          this.moodLock = false
+          return clearInterval(timer)
+        }
+        delayFlag = delayFlag + 1
+        this.moodIndex = Math.ceil(Math.random() * 36) - 1
+      }, delay)
     }
   }
 }
@@ -361,6 +418,7 @@ export default {
 
 <style scoped lang="scss">
   .animate-container {
+    width: 100%;
     position: relative;
     color: #fff;
     background-color: #000;
@@ -388,6 +446,8 @@ export default {
           align-items: center;
           background-image: url('~@/assets/animate/rainbow.jpeg');
           background-clip: text;
+          background-size: 100%;
+          background-repeat: no-repeat;
           -webkit-background-clip: text;
           color: transparent;
           user-select: none;
@@ -459,7 +519,7 @@ export default {
       }
 
       &.main-second {
-        height: 12000px;
+        height: 8500px;
         font-size: 38px;
         background-color: #000;
 
@@ -659,11 +719,6 @@ export default {
               }
               .iphone-vedio-endimg {
                 height: 490px;
-                // height: 485px;
-                // position: absolute;
-                // top: 4px;
-                // left: 0;
-                // z-index: 1;
               }
             }
           }
@@ -704,6 +759,47 @@ export default {
             }
           }
         }
+      }
+
+      &.main-third {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .interest-title {
+          padding: 20px 0;
+          display: flex;
+          justify-content: center;
+          font-size: 60px;
+          color: #fff;
+        }
+
+        .emo-wrapper {
+          margin: 30px auto;
+          width: 1050px;
+          display: flex;
+          justify-content: space-evenly;
+          gap: 15px;
+          flex-wrap: wrap;
+          & > img { opacity: 0.6; width: 100px; }
+        }
+
+        .el-icon-thumb {
+          padding: 10px 15px 15px 10px;
+          color: #fff;
+          border: 5px solid #fff;
+          border-radius: 60px;
+          font-size: 60px;
+          transition: all 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            color: #2997ff;
+            border-color: #2997ff;
+          }
+        }
+
       }
     }
   }

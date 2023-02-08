@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+  a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+<body>
+  <div class="container">
+    <h1>模拟路由</h1>
+    <div>路由地址：<input id="routelink" style="width: 300px;height: 40px;" onblur="onRouteLinkBlur()" /></div>
+    <!-- <span id="routelink">http://example.com/home</span> -->
+    <div>
+      nav: 
+      <a onclick="router.go('/')" >home</a>
+      <a onclick="router.go('/cool')" >cool</a>
+      <a onclick="router.go('/yzf')" >yzf</a>
+    </div>
+    <div id="router-view" style="width: 500px; height: 300px; border: 1px solid #ddd"></div>
+    <div>输入框内的地址模拟浏览器中的url</div>
+    input输入框的blur事件，模拟的是hashchange 或者 popstate事件的触发
+  </div>
+<script>
+  // function initRoute() {
+  //   const routeLink = document.querySelector('#routelink')
+  // }
+  // initRoute()
+  function onRouteLinkBlur() {
+    const val = document.querySelector('#routelink').value
+    console.log('onRouteLinkBlur', val)
+    const path = val.slice(val.lastIndexOf('/'))
+    router.buildView(router.routeMap[path])
+  }
+
+  class VueRouter {
+    constructor(options) {
+      this.options = options
+      this.routeMap = {}
+      this.defaultBuild = false
+      this.init()
+    }
+    init() {
+      this.initDefault()
+      this.initRouteMap()
+      this.initEvent()
+    }
+    initDefault() {
+      if (this.defaultBuild) return
+      this.defaultBuild = true
+
+      const { base, path, component } = this.options.default
+      this.buildLink(base, path)
+      this.buildView(component)
+    }
+    initRouteMap() {
+      if (this.options.routes) {
+        this.options.routes.forEach(route => {
+          this.routeMap[route.path] = route.component
+        })
+      }
+    }
+    initEvent() {
+      window.addEventListener("popstate", () => {
+        this.data.current = location.pathname
+      })
+    }
+    buildLink(base, path) {
+      const link = document.querySelector('#routelink')
+      link.value = base + path
+    }
+    buildView(component) {
+      const view = document.querySelector('#router-view')
+      view.innerHTML = component ? component : "<div>404 没有这个页面哦！</div>"
+    }
+    go(path) {
+      console.log('go path', path)
+      const { base } = this.options.default
+      this.buildLink(base, path)
+      this.buildView(this.routeMap[path] ? this.routeMap[path] : null)
+    }
+  }
+
+  const routes = [
+    {
+      path: "/",
+      name: "home",
+      component: "<div>i am home page</div>",
+      meta: "首页",
+    },
+    {
+      path: "/cool",
+      name: "cool",
+      component: "<div>cool cool</div>",
+      meta: "cool页面",
+    },
+    {
+      path: "/yzf",
+      name: "yzf",
+      component: "<div>yzf yzfyzfyzf</div>",
+      meta: "yzf页面",
+    },
+  ]
+
+  const router = new VueRouter({
+    default: {
+      base: 'http://example.com',
+      path: '/',
+      name: 'home',
+      component: "<div>i am home page</div>"
+    },
+    routes,
+  })
+</script>
+</body>
+</html>

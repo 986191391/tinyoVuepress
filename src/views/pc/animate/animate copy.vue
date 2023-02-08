@@ -135,6 +135,7 @@ export default {
       // 宽度长度/放大缩小改变用scale(x, y)来控制
       // 位移用translate(x, y)来控制
       // 显示隐藏用visibility/opacity来控制
+      // 页面刷新时保存当前位置状态
 
       const { scrollTop, clientHeight } = document.documentElement;
       console.log('scrollTop', scrollTop);

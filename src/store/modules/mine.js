@@ -1,6 +1,6 @@
 import { getCollectList, getScoreInfo } from '@/api/mine'
 
-const user = {
+const mine = {
   state: {
   },
 
@@ -29,4 +29,4 @@ const user = {
   }
 }
 
-export default user
+export default mine

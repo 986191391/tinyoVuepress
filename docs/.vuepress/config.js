@@ -11,9 +11,19 @@ module.exports = {
 		sidebar: {
       '/csdn/': [
         {
-          title: '文章',
+          title: 'CSDN文章',
           collapsable: false,
-          children: [ 'base', 'css', 'vue', 'vuebind', 'jstype', 'browser', 'cssFun', 'promisePause', 'webOptimize' ]
+          children: [ 'base', 'css', 'vue', 'jstype', 'browser', 'cssFun', 'promisePause', 'webOptimize' ]
+        },
+        {
+          title: 'CSS',
+          collapsable: false,
+          children: [ 'css/css' ]
+        },
+        {
+          title: 'Vue',
+          collapsable: false,
+          children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize', 'vue/router' ]
         },
         {
           title: '功能性全局方法',
