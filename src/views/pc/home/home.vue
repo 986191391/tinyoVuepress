@@ -45,7 +45,7 @@
         <p @click="() => onNavClick('/animate')">Animate Demo</p>
         <p @click="() => onNavClick('/viewport')">Viewport</p>
         <p @click="() => onNavClick('/board')">Job Board</p>
-        <p @click="() => onNavClick('/author')">About Tinyo</p>
+        <!-- <p @click="() => onNavClick('/author')">About Tinyo</p> -->
         <p @click="() => onNavClick('/threeJs')">ThreeJs Toys</p>
         <p @click="() => onNavClick('/lottery')">Prize Wheel</p>
         <p @click="() => onNavClick('/fabric')">Fabric</p>
@@ -86,7 +86,7 @@
         </div>
       </MacWindow>
     </section>
-    <div class="section friend-wrapper">
+    <!-- <div class="section friend-wrapper">
       <div class="section-title section-title-red">
         <span>My </span><span>F</span><span>r</span><span>i</span><span>e</span><span>n</span><span>d</span><span>s</span>
       </div>
@@ -101,7 +101,7 @@
       <img src="@/assets/homeperson/fwx.png" alt title="固执王" class="person person-fwx" @click="() => onDynamicTips('大家好，我是固执王，其他没什么，就是嘴有点硬')" />
       <img src="@/assets/homeperson/cjx.png" alt title="娴" class="person person-cjx" @click="() => onDynamicTips('这位是爱玩桌游的娴！')" />
       <img src="@/assets/homeperson/xg.png" alt title="小哥" class="person person-xg" @click="() => onDynamicTips('娴的神秘男孩小哥boy~')" />
-    </div>
+    </div> -->
     <footer>Design By 2e4ong</footer>
     <!-- 2022 -> 跨年(河源/烟花/烧烤/UNo/倒数/万绿湖/红烧芋头) -> -->
   </div>

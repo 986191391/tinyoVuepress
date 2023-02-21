@@ -1,7 +1,7 @@
 module.exports = {
   title: 'tinyo docs',
   description: 'Just playing around',
-  base: '/docs/',
+  base: '/',
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
