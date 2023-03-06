@@ -8,7 +8,6 @@ import PcAuthor from '../views/pc/author/author.vue'
 import PcThreeJs from '../views/pc/threeJs/threeJs.vue'
 import PcBoard from '../views/pc/board/board.vue'
 import PcViewport from '../views/pc/viewport/viewport.vue'
-import PcLottery from '../views/pc/lottery/lottery.vue'
 import PcFabric from '../views/pc/fabric/fabric.vue'
 import PcHomeDesc from '../views/pc/home/component/desc/desc.vue'
 import PcHomeSign from '../views/pc/home/component/sign/sign.vue'
@@ -18,6 +17,7 @@ import PcHomeCopyparse from '../views/pc/home/component/copyparse/copyparse.vue'
 import PcHomeMusicbox from '../views/pc/home/component/musicbox/musicbox.vue'
 import PcHomeNav from '../views/pc/home/component/nav/nav.vue'
 import PcHomeGoBang from '../views/pc/home/component/gobang/gobang.vue'
+import PcHomeLottery from '../views/pc/home/component/lottery/lottery.vue'
 // import PcPlan from '../views/pc/plan/plan.vue'
 // import PcLegends from '../views/pc/legends/legends.vue'
 // import PcMine from '../views/pc/mine/mine.vue'
@@ -97,6 +97,12 @@ const pcRoutes = [
         name: 'gobang',
         component: PcHomeGoBang,
         meta: 'gobang'
+      },
+      {
+        path: 'lottery',
+        name: 'lottery',
+        component: PcHomeLottery,
+        meta: 'lottery'
       }
     ]
   },
@@ -136,12 +142,12 @@ const pcRoutes = [
     component: PcViewport,
     meta: 'viewport'
   },
-  {
-    path: '/lottery',
-    name: 'lottery',
-    component: PcLottery,
-    meta: 'lottery'
-  },
+  // {
+  //   path: '/lottery',
+  //   name: 'lottery',
+  //   component: PcLottery,
+  //   meta: 'lottery'
+  // },
   {
     path: '/fabric',
     name: 'fabric',

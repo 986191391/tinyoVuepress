@@ -52,6 +52,10 @@ export default {
         title: '语义话标签目录',
         nav: '/home/directory',
         index: '7'
+      }, {
+        title: '转盘',
+        nav: '/home/lottery',
+        index: '8'
       }]
     }
   },

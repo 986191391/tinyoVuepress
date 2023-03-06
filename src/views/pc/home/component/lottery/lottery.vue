@@ -1,6 +1,5 @@
 <template>
   <div class="lottery-container">
-    <CoolNav />
     <main>
       <div class="lottery-main">
         <span class="go-font" @click="goLottery">{{ timer ? '确定确定' : '开始抽奖'}}</span>
@@ -84,7 +83,6 @@ export default {
 <style scoped lang="scss">
   .lottery-container {
     height: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 
