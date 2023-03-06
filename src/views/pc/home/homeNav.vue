@@ -105,12 +105,6 @@ export default {
       this.$emit('update:isShowTopNav', scrollTop >= 100)
       // this.isShowTopNav = scrollTop >= 100
     },
-    onNavClick (route) {
-      if (route === 'doc') return window.open('http://43.139.113.7:8081/docs/')
-      const curPath = this.$route.fullPath
-      if (curPath === route) return
-      this.$router.push(route)
-    },
     onCloseNavScreen () {
       if (this.closeFlag) return
       this.closeFlag = true
