@@ -5,20 +5,20 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '文章', link: '/csdn/' },
+      { text: '文章', link: '/article/' },
       { text: '心得', link: '/growth/' }
     ],
 		sidebar: {
-      '/csdn/': [
+      '/article/': [
         {
           title: 'CSDN文章',
           collapsable: false,
           children: [ 'base', 'css', 'vue', 'jstype', 'browser', 'cssFun', 'promisePause', 'webOptimize' ]
         },
         {
-          title: 'CSS',
+          title: 'CSS / JS',
           collapsable: false,
-          children: [ 'css/css' ]
+          children: [ 'cssjs/css', 'cssjs/js' ]
         },
         {
           title: 'Vue',

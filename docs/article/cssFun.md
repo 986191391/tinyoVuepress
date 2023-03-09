@@ -142,3 +142,7 @@ transform的scale属性可以将dom元素放大显示，而该放大只是视觉
 ## dispaly: inline-block的margintop/bottom无效
 
 其实inline-block就是行内元素的一种表现，所以也存在行内元素该有的特征。
+
+## img 图片中间为什么会有 4-6px 的间距
+
+img图片默认排版为 inline-block;而所有的inline-block元素之间都会有空白。

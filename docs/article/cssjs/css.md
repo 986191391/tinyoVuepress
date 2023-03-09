@@ -1,4 +1,4 @@
-# CSS
+# CSS 基本知识
 
 
 ## 水平居中的方法
@@ -9,12 +9,21 @@
 4. transform: translateX()
 
 ## dom元素消失的方法
-1. opacity: 0
-2. position: absolute; top: -10000px
-3. width: 0px; height: 0px; overflow: hidden;
-4. transform: scale(0) // 或者位移到看不见的地方或者3d旋转到其他面
+1. 透明度 opacity: 0
+2. 定位 position: absolute; top: -10000px
+3. 宽高 width: 0px; height: 0px; overflow: hidden;
+4. 缩放 transform: scale(0) // 或者位移到看不见的地方或者3d旋转到其他面
 5. display: none
 6. visibility: hidden
+
+#### **opacity:0 / visibility: hidden / display: none 的区别是什么**
+- opacity: 0
+透明度设置为0, 该元素只是视觉上的消失了, 但实际还占用着区域, 区域中定义的方法仍然可以被触发, 例如click方法。不会触发重绘。
+- visibility: hidden
+与前者很相似, 同样也占用着区域，不一样的是该区域定义的方法是不能被触发的。浏览器会渲染visibility属性为hidden的元素。改变此属性时会引起重绘。
+- display: none
+与前面两项的差距比较大, 不但从视觉上消失了, 而且还不占用的区域。该样式实际是通过dom的方式来处理元素的显隐。直接将设置了该属性的dom元素从文档流中移出了。浏览器不会渲染display属性为none的元素。改变此属性时会引起回流(重排)。
+
 
 ## BFC
 <!-- [BFC 参考文章](https://blog.csdn.net/sinat_36422236/article/details/88763187) -->
@@ -59,9 +68,9 @@ flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 au
 
 
 ## 盒模型
-- 1. 标准盒模型 content-box
+-  标准盒模型 content-box
 width 只等于内容区域，不包括border和padding
-- 2. 怪异(IE)盒模型 border-box
+-  怪异(IE)盒模型 border-box
 width = 内容区宽度 + border + padding
 
 
@@ -75,10 +84,17 @@ class: class = “class-selector”<br>
 属性: a[href=“https://example.org”]<br>
 元素: .class-selector > div
 
+## em、rem、vw、vh、vmin、vmax 分别是做什么的?
+em：相对长度单位，基准点为父节点字体的大小，如果自身定义了font-size按自身来计算（浏览器默认字体是16px），整个页面内1em不是一个固定的值<br>
+rem：是相对长度单位。相对于HTML根元素的字体大小。<br>
+vw：视窗宽度的百分比（1vw 代表视窗的宽度为 1%）<br>
+vh：视窗高度的百分比<br>
+vmin：当前 vw 和 vh 中较小的一个值<br>
+vmax：当前 vw 和 vh 中较大的一个值
 
 ## 伪类和伪元素
 这个东西是真的特别容易搞混来，区别伪类和伪元素的关键就是<br>
-*`如果没有伪元素(或伪类)，是否需要添加元素才能达到目的，如果是则是伪元素，反之则是伪类。`*
+**如果没有伪元素(或伪类)，是否需要添加元素才能达到目的，如果是则是伪元素，反之则是伪类。**
 
 举两个例子：
 - 1. hover一个div的时候，我想给它添加一个背景颜色。我们不用伪类的时候，添加元素可以达成这个效果吗？不借助js的话显然是不行的，所以 `:hover 就是伪类`
