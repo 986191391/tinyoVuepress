@@ -13,12 +13,17 @@ module.exports = {
         {
           title: 'CSDN文章',
           collapsable: false,
-          children: [ 'base', 'css', 'vue', 'jstype', 'browser', 'cssFun', 'promisePause', 'webOptimize' ]
+          children: [ 'csdn/base', 'csdn/css', 'csdn/vue', 'csdn/jstype', 'csdn/browser', 'csdn/cssFun', 'csdn/promisePause', 'csdn/webOptimize' ]
         },
         {
           title: 'CSS / JS',
           collapsable: false,
           children: [ 'cssjs/css', 'cssjs/js' ]
+        },
+        {
+          title: 'Browser',
+          collapsable: false,
+          children: [ 'browser/browser' ]
         },
         {
           title: 'Vue',

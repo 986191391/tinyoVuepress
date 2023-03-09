@@ -1,14 +1,14 @@
 # JS 基本知识
 
 ## this
-[tinyo docs - this](http://http://43.139.113.7:89/growth/interview/this.html)
+[tinyo docs - this](http://43.139.113.7:89/growth/interview/this.html)
 
 ## 闭包
-[tinyo docs - 闭包](http://http://43.139.113.7:89/growth/interview/closure.html)
+[tinyo docs - 闭包](http://43.139.113.7:89/growth/interview/closure.html)
 
 ## 原型 & 原型链
 
-[tinyo docs - 原型 & 原型链](http://http://43.139.113.7:89/growth/interview/prototype.html)
+[tinyo docs - 原型 & 原型链](http://43.139.113.7:89/growth/interview/prototype.html)
 
 
 ## let 和 var 的区别
@@ -21,7 +21,7 @@
 
 ## undefined 和 null 的区别
 
-[tinyo docs - JS类型比较](http://http://43.139.113.7:89/article/jstype.html)
+[tinyo docs - JS类型比较](http://43.139.113.7:89/article/jstype.html)
 
 可以将两者分别这样理解：<br>
 undefined: 没有定义<br>
@@ -74,7 +74,7 @@ JavaScript 事件触发有三个阶段。
 > **currentTarget和target的区别是什么** < 参考文章：[currentTarget和target的区别](https://www.jianshu.com/p/1dd668ccc97a)>
 
 
-## EventLoop  JS的事件循环机制 (常问)
+## EventLoop  JS的事件循环机制
 参考文章： [阮一峰 - EventLoop](https://www.ruanyifeng.com/blog/2014/10/event-loop.html)
 
 - 所有同步任务都在主线程上执行，形成一个[执行栈](http://www.ruanyifeng.com/blog/2013/11/stack.html) (execution context stack)。

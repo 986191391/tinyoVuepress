@@ -22,10 +22,10 @@
 - visibility: hidden
 与前者很相似, 同样也占用着区域，不一样的是该区域定义的方法是不能被触发的。浏览器会渲染visibility属性为hidden的元素。改变此属性时会引起重绘。
 - display: none
-与前面两项的差距比较大, 不但从视觉上消失了, 而且还不占用的区域。该样式实际是通过dom的方式来处理元素的显隐。直接将设置了该属性的dom元素从文档流中移出了。浏览器不会渲染display属性为none的元素。改变此属性时会引起回流(重排)。
+与前面两项的差距比较大, 不但从视觉上消失了, 而且还不占用的区域。浏览器不会渲染display属性为none的元素。改变此属性时会引起回流(重排)。
 
 
-## BFC
+## 什么是BFC
 <!-- [BFC 参考文章](https://blog.csdn.net/sinat_36422236/article/details/88763187) -->
 
 **BFC(Block formatting context): 称为块级格式化上下文**，是CSS中的一种渲染机制。是一个拥有独立渲染区域的盒子(也可以理解为结界)，规定了内部元素如何布局，并且盒子内部元素与外部元素互不影响。
@@ -41,7 +41,7 @@
 
 **IFC (Inline Formatting Contexts)行内格式化上下文**
 
-## Flex
+## Flex布局
 参考：[Flex 布局教程：语法篇 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
 Flex作为当前最流行的布局, 是否了解它的所有属性了？
@@ -67,14 +67,14 @@ flex-basis属性定义了在分配多余空间之前，项目占据的主轴空�
 flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
 
 
-## 盒模型
+## CSS 盒模型
 -  标准盒模型 content-box
 width 只等于内容区域，不包括border和padding
 -  怪异(IE)盒模型 border-box
 width = 内容区宽度 + border + padding
 
 
-## 权重
+## CSS 权重
 !important > 内联样式(1000) > id选择器(100) > class选择器(10) = 伪类选择器(10) = 属性选择器(10) > 元素选择器(1)
 
 内联样式: 写在标签里的style<br>

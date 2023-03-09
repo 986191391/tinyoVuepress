@@ -5,7 +5,7 @@
 
 值得注意的是：<br>
 v-if操作的是dom，通过对dom的插入和删除来控制元素的显示。<br>
-v-if则通过操作元素的css的display属性来控制元素的显示。
+v-show则通过操作元素的css的display属性来控制元素的显示。
 
 
 所以，v-if和v-show都会触发页面的`回流`。
