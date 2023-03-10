@@ -120,10 +120,8 @@
 </template>
 
 <script>
-import CoolNav from '@/components/coolNav.vue'
 import base from './animateBase'
 export default {
-  components: { CoolNav },
   mixins: [base],
   data () {
     return {
@@ -215,7 +213,6 @@ export default {
     this.setScreenParamsDefault()
   },
   mounted () {
-    console.log('111111', this.emoticonList)
     // 首次进入页面时 移动到顶部
     if (!sessionStorage.getItem('sp')) window.scrollTo(0 ,0)
     window.addEventListener('scroll', this.watchWindowScroll);
