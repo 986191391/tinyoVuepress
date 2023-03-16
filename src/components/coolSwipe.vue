@@ -1,28 +1,26 @@
 <template>
-  <div
-    class="cool-swipe"
-  >
-    <template v-for="(item, index) in data" >
-      <div :key="`swipe-${name}-${index}`" :class="`swipe-img-wrapper ${swipeActive === index && 'swipe-img-active'}`">
-        <img
-          :src="item"
-          alt=""
-          @click="onSwipeClick"
-          @mouseover="onMouseOver"
-          @mouseleave="onMouseLeave"
-        />
-      </div>
-    </template>
+  <div class="cool-swipe" >
+    <div
+      v-for="(item, index) in data" :key="`swipe-${name}-${index}`"
+      :class="`swipe-img-wrapper ${swipeActive === index && 'swipe-img-active'}`"
+    >
+      <img
+        :src="item"
+        alt=""
+        @click="onSwipeClick"
+        @mouseover="onMouseOver"
+        @mouseleave="onMouseLeave"
+      />
+    </div>
     <div class="swipe-doc">
-      <template v-for="(itm, idx) in data.length">
-        <span
-          :key="`swipe-doc-${name}-${idx}`"
-          :class="`swipe-doc-itm ${swipeActive === idx && 'swipe-doc-itm-active'}`"
-          @mouseover="onMouseOver"
-          @mouseleave="onMouseLeave"
-          @click="() => onSwipeDocClick(idx)"
-        />
-      </template>
+      <span
+        v-for="(itm, idx) in data.length"
+        :key="`swipe-doc-${name}-${idx}`"
+        :class="`swipe-doc-itm ${swipeActive === idx && 'swipe-doc-itm-active'}`"
+        @mouseover="onMouseOver"
+        @mouseleave="onMouseLeave"
+        @click="() => onSwipeDocClick(idx)"
+      />
     </div>
   </div>
 </template>
