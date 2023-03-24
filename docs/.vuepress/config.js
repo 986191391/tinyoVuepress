@@ -31,6 +31,11 @@ module.exports = {
           children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize', 'vue/router', 'vue/vuedataFunction' ]
         },
         {
+          title: 'React',
+          collapsable: false,
+          children: [ 'react/lifeCycle' ]
+        },
+        {
           title: '功能性全局方法',
           collapsable: false,
           children: [ 'utils/debounceThrottle', 'utils/isInViewPort' ]
