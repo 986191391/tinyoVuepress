@@ -218,5 +218,30 @@ proxy.someMethod(); // logs "Proxy operation" and "Expensive operation"
 
 代理模式的核心思想是通过创建一个代理对象来控制对另一个对象的访问。代理对象可以拦截对原始对象的访问，并在访问前后执行一些操作。这种方法可以使代码更加灵活和可维护，因为它允许我们在不修改原始对象的情况下扩展其功能。
 
+## 策略模式
 
-策略模式、模板方法模式、命令模式、职责链模式、享元模式、状态模式、访问者模式和组合模式等。
+策略模式是一种行为设计模式，它允许我们定义一系列算法，并将它们封装在独立的类中，以使它们可以相互替换。在JavaScript中，策略模式可以通过使用对象字面量和函数来实现。
+
+以下是JavaScript中策略模式的示例实现：
+```javascript
+const strategies = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b
+};
+
+function calculate(strategy, a, b) {
+  return strategies[strategy](a, b);
+}
+
+console.log(calculate('add', 2, 3)); // logs 5
+console.log(calculate('subtract', 5, 3)); // logs 2
+console.log(calculate('multiply', 2, 3)); // logs 6
+console.log(calculate('divide', 6, 3)); // logs 2
+```
+在这个示例中，我们定义了一个名为strategies的对象，它包含了一系列算法，每个算法都是一个函数。我们还定义了一个名为calculate的函数，它接受一个策略名称、两个数字作为参数，并返回策略函数的结果。最后，我们使用calculate函数来执行不同的算法，并打印结果。
+
+策略模式的核心思想是将算法封装在独立的类中，以使它们可以相互替换。这种方法可以使代码更加灵活和可维护，因为它允许我们在运行时动态地选择算法，并且不需要修改调用算法的代码。
+
+、模板方法模式、命令模式、职责链模式、享元模式、状态模式、访问者模式和组合模式等。
