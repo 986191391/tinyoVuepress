@@ -18,7 +18,7 @@ module.exports = {
         {
           title: 'CSS / JS',
           collapsable: false,
-          children: [ 'cssjs/css', 'cssjs/js' ]
+          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode' ]
         },
         {
           title: 'Browser',
@@ -33,7 +33,7 @@ module.exports = {
         {
           title: 'React',
           collapsable: false,
-          children: [ 'react/lifeCycle' ]
+          children: [ 'react/lifeCycle', 'react/interview' ]
         },
         {
           title: '功能性全局方法',
