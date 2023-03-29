@@ -21,11 +21,6 @@ module.exports = {
           children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode' ]
         },
         {
-          title: 'Browser',
-          collapsable: false,
-          children: [ 'browser/browser' ]
-        },
-        {
           title: 'Vue',
           collapsable: false,
           children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize', 'vue/router', 'vue/vuedataFunction' ]
@@ -34,6 +29,16 @@ module.exports = {
           title: 'React',
           collapsable: false,
           children: [ 'react/lifeCycle', 'react/interview' ]
+        },
+        {
+          title: 'Browser',
+          collapsable: false,
+          children: [ 'browser/browser' ]
+        },
+        {
+          title: '网络通信',
+          collapsable: false,
+          children: [ 'net/tcpip', 'net/http' ]
         },
         {
           title: '功能性全局方法',
