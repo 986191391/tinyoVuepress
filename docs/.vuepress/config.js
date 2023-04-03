@@ -60,7 +60,7 @@ module.exports = {
         {
           title: '成长经历',
           collapsable: false,
-          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver' ]
+          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver', 'job' ]
         }
       ],
       '/': [
