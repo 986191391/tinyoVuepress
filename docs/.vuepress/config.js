@@ -16,6 +16,11 @@ module.exports = {
           children: [ 'csdn/base', 'csdn/css', 'csdn/vue', 'csdn/jstype', 'csdn/browser', 'csdn/cssFun', 'csdn/promisePause', 'csdn/webOptimize' ]
         },
         {
+          title: '前端',
+          collapsable: false,
+          children: [ 'front/webOptimize' ]
+        },
+        {
           title: 'CSS / JS',
           collapsable: false,
           children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode' ]

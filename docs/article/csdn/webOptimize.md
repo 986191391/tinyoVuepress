@@ -1,6 +1,6 @@
 # 前端 性能优化
 
-一个小问题：为什么script标签一般都放在body标签的前面呢？
+一个小问题：为什么script标签一般都放在body标签的后面呢？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/img_convert/fa64c09fc563b8a799255609bb0f91bb.png#pic_center)
 ## 从浏览器的渲染过程来看
