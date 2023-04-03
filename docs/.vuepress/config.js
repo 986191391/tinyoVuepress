@@ -33,7 +33,7 @@ module.exports = {
         {
           title: 'Browser',
           collapsable: false,
-          children: [ 'browser/browser' ]
+          children: [ 'browser/browser', 'browser/inputurl', 'browser/cache', 'browser/engine' ]
         },
         {
           title: '网络通信',
