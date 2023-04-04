@@ -2,6 +2,8 @@
 
 参考: [详解React生命周期](https://www.jianshu.com/p/514fe21b9914)
 
+# v16以前流行版本
+
 ![reactcyclt](http://43.139.113.7:81/img/reactcycle.png)
 
 ## 一、初始化阶段(initialization)
@@ -147,3 +149,24 @@ ps：这边也可以看出，就算componentWillReceiveProps()中执行了this.s
 
 
 
+# v16以后流行版本
+
+React组件的生命周期可以分为三个阶段：挂载阶段、更新阶段和卸载阶段。每个阶段都有对应的生命周期方法，可以在这些方法中执行一些操作。
+
+- **挂载阶段**
+
+constructor：组件被创建时调用，用于初始化组件的状态和绑定事件处理函数等操作。<br>
+getDerivedStateFromProps：组件被创建或更新时调用，用于根据props计算state的值。<br>
+render：组件被创建或更新时调用，用于渲染组件的UI。<br>
+componentDidMount：组件被挂载到DOM后调用，用于执行一些需要DOM的操作，如获取元素的宽高等。
+
+- **更新阶段**
+
+getDerivedStateFromProps：组件被更新时调用，用于根据props计算state的值。<br>
+shouldComponentUpdate：组件被更新时调用，用于判断是否需要重新渲染组件。<br>
+render：组件被更新时调用，用于渲染组件的UI。<br>
+componentDidUpdate：组件被更新后调用，用于执行一些需要DOM的操作，如获取元素的宽高等。
+
+- **卸载阶段**
+
+componentWillUnmount：组件被卸载前调用，用于执行一些清理操作，如取消定时器、取消事件监听等。
