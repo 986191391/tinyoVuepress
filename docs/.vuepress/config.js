@@ -18,17 +18,31 @@ module.exports = {
         {
           title: '前端',
           collapsable: false,
-          children: [ 'front/webOptimize' ]
+          children: [ 'front/webOptimize', 'front/webpack' ]
         },
         {
           title: 'CSS / JS',
           collapsable: false,
-          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode' ]
+          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule' ]
         },
         {
           title: 'Vue',
           collapsable: false,
-          children: [ 'vue/lifeCycle', 'vue/dataBinding', 'vue/communication', 'vue/vifvshowdiff', 'vue/computedwatchdiff', 'vue/vforkey', 'vue/routeGurad', 'vue/optimize', 'vue/router', 'vue/vuedataFunction', 'vue/directive', 'vue/keepalive' ]
+          children: [
+            'vue/lifeCycle',
+            'vue/dataBinding',
+            'vue/communication',
+            'vue/vifvshowdiff',
+            'vue/computedwatchdiff',
+            'vue/vforkey',
+            'vue/routeGurad',
+            'vue/optimize',
+            'vue/router',
+            'vue/vuedataFunction',
+            'vue/directive',
+            'vue/keepalive',
+            'vue/set'
+          ]
         },
         {
           title: 'React',
