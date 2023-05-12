@@ -86,3 +86,28 @@ Vue.directive('tooltip', {
 });
 
 ```
+
+
+## Vue3
+
+在 Vue.js 3.x 中，自定义指令的生命周期钩子分为以下几类：
+
+beforeMount：在指令挂载到元素之前被调用。
+
+mounted：在指令第一次绑定到元素并插入父节点后调用。
+
+beforeUpdate：在包含组件的 VNode 更新之前调用，但是可能在其子 VNode 更新之后调用。
+
+updated：在包含组件的 VNode 及其子 VNode 均已更新后调用。
+
+beforeUnmount：在卸载绑定元素之前调用。
+
+unmounted：在卸载绑定元素之后调用。
+
+beforeBind：此函数接收了一个参数 binding: DirectiveBinding，在指令第一次绑定到元素时调用。
+
+created：此函数在指令实例被创建时调用，可通过 binding.instance 访问组件实例，该函数在服务端渲染期间不可用。
+
+注意：beforeBind 钩子是在指令绑定到元素之前执行的，而 beforeMount 是在指令绑定到元素后，准备挂载之前执行的。而 created 钩子是在指令实例被创建时调用的，与 beforeMount 和 mounted 钩子的调用时机略有不同。
+
+需要注意的是，在 Vue.js 3.x 中，除了 mounted、beforeUnmount 和 unmounted 之外，其他的钩子函数不再接受 el 参数（对应指令绑定的元素），而是通过 binding.value、binding.oldValue 或 binding.arg 等参数来访问当前指令的状态和值。
