@@ -41,7 +41,8 @@ module.exports = {
             'vue/vuedataFunction',
             'vue/directive',
             'vue/keepalive',
-            'vue/set'
+            'vue/set',
+            'vue/vuex'
           ]
         },
         {

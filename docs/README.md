@@ -1,23 +1,23 @@
-# 关于我
+<!-- # 关于我
 
 ## tinyo
 
 - tiny - 小
 - o - 黑
 
-大家好，我是tinyo。
+大家好，我是tinyo。 -->
 
 <!-- 诞生于1997, 喜欢唱, 不喜欢跳和rap的潮汕男孩。 -->
 
-## slogan
-进步是没有尽头的，但是它却留有痕迹！
+<!-- ## slogan -->
+**进步是没有尽头的，但是它却留有痕迹！**
 
 <!-- **运动不止，生生不息。昂首向前，学无止境。**<br>
 记录学习，记录问题，进步是没有尽头的，但是它却留有痕迹！
 
 在这里，我会以板块划分，同时留下我生活的痕迹，项目的痕迹，遇到困难的窘境。<br>
 等我回过头来看时，会发现其内涵是如此饱满，填满我的生活。 -->
-
+[跳转至文章](http://43.139.113.7:89/article/)
 
 ## 相关作品
 
@@ -28,6 +28,7 @@ tinyo个人网站:  [-**点击跳转**](http://43.139.113.7:81/)<br>
 个人公众号: **不要只会想和说**
 
 ## 常用网站
+Bing [点击跳转](https://cn.bing.com/?FORM=BEHPTB)<br>
 Github [点击跳转](https://github.com/)<br>
 PNG/JPG图片高效压缩 [TinyPNG](https://tinypng.com/)<br>
 Ant Design Vue组件库 [Ant Design Vue](https://www.antdv.com/components/icon-cn)<br>
@@ -35,7 +36,8 @@ Ant Design React组件库 [Ant Design React](https://4x.ant.design/components/ov
 Ant Design Mobile组件库 [Ant Design Mobile](https://mobile.ant.design/zh/guide/quick-start/)<br>
 Vant UI组件库 [Vant UI](https://vant-contrib.gitee.io/vant/#/zh-CN)<br>
 有道词典翻译 [点击跳转](https://fanyi.youdao.com/index.html#/)<br>
-微信公众平台 [点击跳转](https://mp.weixin.qq.com/)
+微信公众平台 [点击跳转](https://mp.weixin.qq.com/)<br>
+GTP3.5免费试用 [点击跳转](https://chat.wuguokai.cn/)
 
 <!-- ## 一段很喜欢的歌词
 
