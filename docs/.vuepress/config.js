@@ -23,7 +23,7 @@ module.exports = {
         {
           title: 'CSS / JS',
           collapsable: false,
-          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule' ]
+          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule', 'cssjs/this', 'cssjs/closure', 'cssjs/prototype', 'cssjs/inherit' ]
         },
         {
           title: 'Vue',
@@ -51,7 +51,7 @@ module.exports = {
           children: [ 'react/lifeCycle', 'react/interview', 'react/communication' ]
         },
         {
-          title: 'Browser',
+          title: '浏览器',
           collapsable: false,
           children: [ 'browser/browser', 'browser/inputurl', 'browser/cache', 'browser/engine' ]
         },
@@ -72,15 +72,15 @@ module.exports = {
         }
       ],
       '/growth/': [
-        {
-          title: '重点知识',
-          collapsable: false,
-          children: [ 'interview/this', 'interview/closure', 'interview/prototype', 'interview/inherit' ]
-        },
+        // {
+        //   title: '重点知识',
+        //   collapsable: false,
+        //   children: [ 'interview/this', 'interview/closure', 'interview/prototype', 'interview/inherit' ]
+        // },
         {
           title: '成长经历',
           collapsable: false,
-          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver', 'nodejsmysql', 'job' ]
+          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver', 'nodejsmysql', 'job', 'projectIntroduct' ]
         }
       ],
       '/': [
