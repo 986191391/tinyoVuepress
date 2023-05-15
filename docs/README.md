@@ -1,3 +1,4 @@
+# Tinyo Docs
 <!-- # 关于我
 
 ## tinyo
@@ -10,20 +11,20 @@
 <!-- 诞生于1997, 喜欢唱, 不喜欢跳和rap的潮汕男孩。 -->
 
 <!-- ## slogan -->
-**进步是没有尽头的，但是它却留有痕迹！**
+进步是没有尽头的，但是它却留有痕迹！
 
 <!-- **运动不止，生生不息。昂首向前，学无止境。**<br>
 记录学习，记录问题，进步是没有尽头的，但是它却留有痕迹！
 
 在这里，我会以板块划分，同时留下我生活的痕迹，项目的痕迹，遇到困难的窘境。<br>
 等我回过头来看时，会发现其内涵是如此饱满，填满我的生活。 -->
-[跳转至文章](http://43.139.113.7:89/article/)
 
-## 相关作品
+## 我的作品
 
 元计划官方网站: [-**点击跳转**](http://www.yuanjihua.art)<br>
 codefun官方网站:  [-**点击跳转**](https://www.code.fun)<br>
 tinyo个人网站:  [-**点击跳转**](http://43.139.113.7:81/)<br>
+tinyo个人文档: [跳转至文章](http://43.139.113.7:89/article/)<br>
 小程序搜索: **yzfcool**<br>
 个人公众号: **不要只会想和说**
 
@@ -38,6 +39,15 @@ Vant UI组件库 [Vant UI](https://vant-contrib.gitee.io/vant/#/zh-CN)<br>
 有道词典翻译 [点击跳转](https://fanyi.youdao.com/index.html#/)<br>
 微信公众平台 [点击跳转](https://mp.weixin.qq.com/)<br>
 GTP3.5免费试用 [点击跳转](https://chat.wuguokai.cn/)
+
+
+## 联系我
+
+WeChat: yzfcoo1<br>
+QQ: 986191391<br>
+
+<img width="200" src="http://43.139.113.7:81/img/tinyo.JPG" alt="" />
+
 
 <!-- ## 一段很喜欢的歌词
 

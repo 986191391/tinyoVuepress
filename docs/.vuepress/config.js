@@ -85,8 +85,9 @@ module.exports = {
       ],
       '/': [
         {
-          title: '关于我',
-          path: '/'
+          title: '首页',
+          collapsable: false,
+          children: [ '/', '/home/life' ]
         }
       ]
     }
