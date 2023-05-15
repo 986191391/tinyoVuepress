@@ -46,7 +46,7 @@ GTP3.5免费试用 [点击跳转](https://chat.wuguokai.cn/)
 WeChat: yzfcoo1<br>
 QQ: 986191391<br>
 
-<img width="200" src="http://43.139.113.7:81/img/tinyo.JPG" alt="" />
+<img src="./assets/tinyo.jpg" alt="" />
 
 
 <!-- ## 一段很喜欢的歌词
