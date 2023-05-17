@@ -72,15 +72,15 @@ module.exports = {
         }
       ],
       '/growth/': [
-        // {
-        //   title: '重点知识',
-        //   collapsable: false,
-        //   children: [ 'interview/this', 'interview/closure', 'interview/prototype', 'interview/inherit' ]
-        // },
+        {
+          title: '项目经历',
+          collapsable: false,
+          children: [ 'myproject/myPrivate' ]
+        },
         {
           title: '成长经历',
           collapsable: false,
-          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver', 'nodejsmysql', 'job', 'projectIntroduct' ]
+          children: [ 'reacttovue', 'server', 'fabric', 'buildnodejsserver', 'nodejsmysql', 'job' ]
         }
       ],
       '/': [
