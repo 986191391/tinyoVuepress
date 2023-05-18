@@ -48,7 +48,7 @@ module.exports = {
         {
           title: 'React',
           collapsable: false,
-          children: [ 'react/lifeCycle', 'react/interview', 'react/communication' ]
+          children: [ 'react/lifeCycle', 'react/interview', 'react/communication', 'react/hooks' ]
         },
         {
           title: '浏览器',

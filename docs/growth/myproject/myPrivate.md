@@ -63,7 +63,7 @@ const selection = window.getSelection()
 - 顶部栏右侧icon点击后会出现导航栏，利用css的动画实现了导航栏的动态显示和消失的效果，费劲心思只求帅气！(动画灵感来自于win10系统的chrome打开打印弹窗的显示效果。), 点击关闭时使用定时器延时0.5s触发，然后每一个文字单独设置触发的动画延迟, 从0.1-0.5逐个设置。
 
 
-## ScrollAnimate页面
+## ScrollAnimate动画
 
 灵感来源是苹果官网的产品宣传页，页面会随着页面的滚动而执行对应的动画效果，看起来就酷炫无比。要让浏览器能够滚动起来，首先需要有足够的高度，然后再将需要执行动画的区域粘在顶部，让这一块区域的大小刚好为满屏。
 
@@ -74,7 +74,7 @@ const selection = window.getSelection()
 实现的思路根据自己想的来做的，可能有点稚嫩，但我觉得该页面最难的不是如何实现效果，而是动画效果怎么展示更优雅好看高端大气...
 
 
-## Viewport页面
+## Viewport操作区域
 
 <img style="border: 1px solid #ddd" src="../../assets/projectIntroduct/viewport.png" alt="" />
 
@@ -88,7 +88,7 @@ const selection = window.getSelection()
 - 顶部操作栏的放大缩小恢复默认操作，通过变量来控制viewport的scale缩放大小。
 
 
-## AboutTinyo页面
+## AboutTinyo简历
 
 <img style="border: 1px solid #ddd" src="../../assets/projectIntroduct/author.png" alt="" />
 
@@ -115,7 +115,7 @@ uploadInput.onchange = () => {
 }
 ```
 
-## JobBoard页面
+## JobBoard工作看板
 
 <img style="border: 1px solid #ddd" src="../../assets/projectIntroduct/board.png" alt="" />
 
@@ -126,8 +126,17 @@ uploadInput.onchange = () => {
 - 拖拽的实现通过dragstart，dragover，drop方法来实现。在卡片上绑定dragstart方法，捕获用户的拖拽开始动作，在每一列中分别绑定dragover和drop方法，捕获用户在对应列上移动和松开鼠标动作，松开鼠标后将对应卡片信息中的状态修改为当前列对应的状态，即可实现该功能。
 - dragover方法上主要代码为`e.preventDefault()`，用于取消“拖拽卡片在浏览器中松开鼠标后会弹回”的默认事件(不同的操作系统问题可能不同)。
 
+## Cockpit驾驶舱
 
-## DynamicTable页面
+灵感来源于一个视频，看到了类似的驾驶舱页面。因此做了个小礼物送给了某人。
+
+在显示区域定义css动画3d效果属性`transform-style: preserve-3d;`才能表现出一个3d的效果，接着在最外层的元素需要定义css透视效果属性`perspective: 650;`，这里的数值需要调整到合适的位置，就能将动画的视角移动到旋转区域的内部。因为做了一个旋转的效果，所以还需要格外设置一个动画中心点`transform-origin: 50% 50% 180px;`通过数值的调整后将动画执行时的中心点固定，这样进行旋转操作时看起来就会丝滑很多。
+
+- 每次点击向左或向右时旋转的角度是根据`360/每一行图片的张数`来确定的
+- 需要给每一张图片绑定dragstart事件，同时取消默认事件，浏览器图片拖拽会有默认的事件。
+- 因为图片比较多，使用较大的图片越多时，卡顿的情况越明显。这里就得考虑优化的问题了，例如图片的懒加载。
+
+## DynamicTable动态表单
 
 <img style="border: 1px solid #ddd" src="../../assets/projectIntroduct/dynamicTable.png" alt="" />
 
@@ -154,6 +163,44 @@ uploadInput.onchange = () => {
 遍历了以后就可以得到一个cellConfig的对象数据，在antDesignVue组件库的Table组件中，根据配置columns的customCell字段，就可以控制单元格的合并，customCell接收一个对象，对象内的rowSpan即为合并的格子数量。在生成columns数据时通过对当前行数据的获取，可以读取到cellConfig中对应的值，根据当前行的下标判断当前行是否为起始行，如果不是则设置rowSpan为0，如果是则将其设置为合并的总长度。
 
 基于此描述，就可以大致将该功能点实现，不过缺陷还是有的，假如未来需要引入第五第六列的合并列，就不得不再一次对代码进行维护了。而且代码相对较复杂，后期维护起来也比较麻烦。
+
+
+## NoCode低代码
+
+灵感来源于低代码平台，与viewport页面有点类似，在此基础上得到改进。用户在界面上的操作就可以得到需要的页面样式结构。后续类似导出生成代码等的操作还需要研究研究。
+
+页面主要分为三个部分，左侧的节点树和组件面板，中间的操作区域，右侧的属性面板。页面默认存在一个根节点，用户可以拖拽组件面板中需要的组件进入到面板区域，通过选中对应的组件，可以在右侧属性面板中定义对应的组件属性。
+
+- 数据结构就是一个对象，类似于虚拟dom，在这个对象中描述了组件的类型(div/span/img/...)，组件的样式属性，组件特有属性等，假设当前组件为容器组件且需要插入子节点或者存在子节点时，该对象还会有children属性。
+- 基于目前的demo，组件仅封装提供了5种，其中view、text、image组件是通过原生的html标签来构建的，button和input标签则使用了antDesignVue组件库的组件。在递归遍历时，使用vue的动态component，将当前对象中的组件类型传入，即可根据定义的类型渲染对应的组件。
+- 操作区域集成了面板拖拽移动的方法，依然是通过mousedown/mousemove/mouseup三种方法来完成的。操作面板中的放大缩小恢复默认则是通过控制scale的变量来实现的。切换分辨率则是通过控制根节点对象的样式尺寸大小来实现的。
+- 组件面板集成了组件拖拽的方法，通过dragstart/dragover/dragleave，drop方法来实现。在每一个组件上绑定了dragstart方法，同时传入对应的组件信息，在方法触发时就可以获得当前拖拽的组件信息。在根节点绑定了dragover/dragleave/drop方法，拖拽的过程中在操作区域移动会触发dragover事件，可以得知当前鼠标停留在哪一个元素上，从而进行元素节点的高亮操作，让用户知道当前组件要插入的预区域。dragleave则是取消掉已标记的高亮区域。当用户在操作区域松开了鼠标会触发drop方法，可以得知用户拖拽插入的目标节点，从而进行一个可行性判断(是否为容器节点等等)，从而完成拖拽引入节点的操作。
+- 在节点树的右侧有一个更多按钮，在按钮内可以进行删除操作，删除当前对应节点的信息。通过for循环深度优先遍历的方法找到对应的下标值，使用数组的splice方法来对节点进行删除操作(splice会改变原数据)。
+- 点击节点树中的节点，或者点击操作区域中的节点，可以进行选中节点的操作。当用户选中节点时，右侧属性面板会显示当前节点对应的信息，列举了可编辑的属性信息可供用户进行修改，同时也可以自定义样式属性，编写自己需要的特定样式。选中节点时根据自定义属性可以得到当前节点的id，通过id在数据对象中找到对应的节点从而得到对象属性，显示在右侧的属性面板中，这里涉及了一个深度优先遍历方法：
+```typescript
+public getNodeById(nodeid: string): ViewportNode {
+  const arr = [this.viewportNode]
+  let result: ViewportNode = { id: '', type: '', label: '', key: '', component: '' }
+  while (arr.length) {
+    const item = arr.pop()
+    if (item && item.nodeid === nodeid) {
+      result = item
+      break
+    } else if (item && item.children && item.children.length) {
+      arr.push(...item.children)
+    }
+  }
+  return result
+}
+```
+
+## Fabric页面
+
+fabric是一个canvas库，集成了canvas的方法，提供了很多api可以使用，基于此库写了一套简单的绘图工具。
+
+## ThreeJS页面
+
+threejs懂得都懂，引入了three的库，插入了一个3d模型，将其渲染了出来，将鼠标位置定义为光源，所以根据鼠标的移动可以看到光线的变化。算是对该库有一个基本的了解。
 
 
 <!-- 
