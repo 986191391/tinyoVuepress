@@ -53,7 +53,7 @@ module.exports = {
         {
           title: '浏览器',
           collapsable: false,
-          children: [ 'browser/browser', 'browser/inputurl', 'browser/cache', 'browser/engine' ]
+          children: [ 'browser/kernel', 'browser/processthread', 'browser/engine', 'browser/inputurl', 'browser/cache' ]
         },
         {
           title: '网络通信',
