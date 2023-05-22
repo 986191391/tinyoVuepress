@@ -29,6 +29,7 @@ module.exports = {
           title: 'Vue',
           collapsable: false,
           children: [
+            'vue/vue3upd',
             'vue/lifeCycle',
             'vue/dataBinding',
             'vue/communication',
