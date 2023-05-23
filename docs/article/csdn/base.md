@@ -12,6 +12,24 @@
  - 块级元素实际占用的宽度与它的 background 属性有关。
  - 语义化标签的使用。
 
+ **HTML5 的有什么新特性和改进？**
+
+1. 新增标签：HTML5引入了一些新的标签，如`<video>、<audio>、<canvas>、<svg>`等，使得在网页中嵌入多媒体内容和图形变得更加方便和直观。
+
+2. 语义化标签：HTML5引入了一系列语义化标签，如`<header>、<nav>、<aside>、<article>、<section>、<footer>`等，这些标签能够更准确地描述网页的结构和内容，有助于提高可访问性、搜索引擎优化和代码可读性。
+
+3. 表单增强：HTML5为表单提供了许多增强功能，如新增的输入类型（例如日期、时间、邮箱、电话等）、表单验证、自动完成和本地存储等，使得表单交互更加强大和用户友好。
+
+4. 离线应用：HTML5引入了离线应用缓存（Application Cache）机制，允许开发者将网页资源缓存到用户本地，即使在离线状态下也能访问网页，提供了更好的离线体验。
+
+5. Web存储：HTML5提供了本地存储的能力，包括Web Storage（localStorage和sessionStorage）和IndexedDB，使得网页能够在客户端存储和检索数据，提供了更高效的数据管理。
+
+6. 多媒体和图形支持：HTML5通过新增的`<video>、<audio>`和`<canvas>`标签以及SVG（可缩放矢量图形）的支持，为多媒体内容和图形绘制提供了更直接、更强大的方式。
+
+7. Web Components：HTML5引入了Web Components标准，包括自定义元素（Custom Elements）、影子DOM（Shadow DOM）和HTML模板（HTML Templates），使得开发者能够创建可重用的自定义组件，提升了代码的可维护性和复用性。
+
+
+
 ## **CSS**
 
 ### CSS盒模型 box-sizing (常问)

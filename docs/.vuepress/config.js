@@ -18,7 +18,7 @@ module.exports = {
         {
           title: '前端',
           collapsable: false,
-          children: [ 'front/webOptimize', 'front/webpack' ]
+          children: [ 'front/webOptimize', 'front/webpack', 'front/es7' ]
         },
         {
           title: 'CSS / JS',
