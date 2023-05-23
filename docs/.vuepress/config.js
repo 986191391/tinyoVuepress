@@ -43,7 +43,9 @@ module.exports = {
             'vue/directive',
             'vue/keepalive',
             'vue/set',
-            'vue/vuex'
+            'vue/vuex',
+            'vue/diff',
+            'vue/vuecompile'
           ]
         },
         {
