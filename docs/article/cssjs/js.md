@@ -1,15 +1,8 @@
 # JS 基本知识
 
-## this
-[tinyo docs - this](http://43.139.113.7:89/growth/interview/this.html)
+## 基本数据类型
 
-## 闭包
-[tinyo docs - 闭包](http://43.139.113.7:89/growth/interview/closure.html)
-
-## 原型 & 原型链
-
-[tinyo docs - 原型 & 原型链](http://43.139.113.7:89/growth/interview/prototype.html)
-
+JavaScript有几种基本数据类型，包括字符串（String）、数字（Number）、布尔值（Boolean）、对象（Object）、数组（Array）、空（Null）和未定义（Undefined）等。
 
 ## let 和 var 的区别
 
@@ -74,7 +67,7 @@ JavaScript 事件触发有三个阶段。
 > **currentTarget和target的区别是什么** < 参考文章：[currentTarget和target的区别](https://www.jianshu.com/p/1dd668ccc97a)>
 
 
-## EventLoop  JS的事件循环机制
+<!-- ## EventLoop  JS的事件循环机制
 参考文章： [阮一峰 - EventLoop](https://www.ruanyifeng.com/blog/2014/10/event-loop.html)
 
 - 所有同步任务都在主线程上执行，形成一个[执行栈](http://www.ruanyifeng.com/blog/2013/11/stack.html) (execution context stack)。
@@ -107,7 +100,7 @@ setTimeout导致往后延了才执行 是为什么呢
 setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，放到任务队列中，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。Promise的任务也是如此。
 
 **为什么Promise的then操作输出比setTimeout的先执行？**
-promise属于一种微任务，当他的代码执行完以后会推入到本次的事件循环中，而setTimeout要等到下一次的事件循环，所以promise比setTimeout先执行。
+promise属于一种微任务，当他的代码执行完以后会推入到本次的事件循环中，而setTimeout要等到下一次的事件循环，所以promise比setTimeout先执行。 -->
 
 
 ## JavaScript垃圾回收
@@ -127,7 +120,7 @@ promise属于一种微任务，当他的代码执行完以后会推入到本次�
 追踪每个变量被引用的次数，当引用数为0将可以被回收掉
 
 
-## Cookie 、LocalStorage和SessionStorage的区别
+<!-- ## Cookie 、LocalStorage和SessionStorage的区别
 参考：[JS数据存储](https://www.cnblogs.com/sylvia-Camellia/p/11589569.html)
 
 - Cookie
@@ -170,4 +163,4 @@ sessionStorage.isConfirm= "true";
 // 读取
 sessionStorage.getItem("isConfirm");
 sessionStorage.isConfirm; 
-```
+``` -->

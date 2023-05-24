@@ -11,9 +11,9 @@ module.exports = {
 		sidebar: {
       '/article/': [
         {
-          title: 'CSDN文章',
+          title: '知识记录',
           collapsable: false,
-          children: [ 'csdn/base', 'csdn/css', 'csdn/vue', 'csdn/jstype', 'csdn/browser', 'csdn/cssFun', 'csdn/promisePause', 'csdn/webOptimize' ]
+          children: [ 'csdn/base', 'csdn/jstype', 'csdn/browser', 'csdn/cssFun', 'csdn/promisePause' ]
         },
         {
           title: '前端',
@@ -23,7 +23,7 @@ module.exports = {
         {
           title: 'CSS / JS',
           collapsable: false,
-          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule', 'cssjs/this', 'cssjs/closure', 'cssjs/prototype', 'cssjs/inherit' ]
+          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule', 'cssjs/this', 'cssjs/closure', 'cssjs/prototype', 'cssjs/inherit', 'cssjs/jseventloop' ]
         },
         {
           title: 'Vue',

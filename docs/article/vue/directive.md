@@ -16,7 +16,7 @@ Vue指令是一种特殊的HTML属性，用于向Vue实例添加交互性和动�
 指令是Vue中非常重要的一部分，它们使得开发人员可以轻松地添加交互性和动态性到应用程序中。同时，Vue还提供了自定义指令的功能，允许开发人员根据自己的需求创建自定义指令。
 
 
-## 自定义指令
+## Vue2自定义指令
 
 在Vue中，自定义指令允许开发人员创建自己的自定义行为，可以应用于DOM元素。这对于添加内置指令未提供的功能或将复杂行为封装到可重用组件中非常有用。
 
@@ -44,7 +44,7 @@ Vue.directive('red-background', {
 
 - unbind：此钩子函数在指令从元素上解绑时调用。它接收两个参数：元素和绑定对象。您可以使用此钩子函数执行清理任务，例如删除事件监听器或其他DOM操作。
 
-## 举例实际场景
+### 举例实际场景
 
 
 [8个非常实用的Vue自定义指令](https://mp.weixin.qq.com/s/nBz1cxFWceU_txQhekBPZQ)
@@ -88,10 +88,56 @@ Vue.directive('tooltip', {
 ```
 
 
-## Vue3
+## Vue3自定义指令
 
-在 Vue.js 3.x 中，自定义指令的生命周期钩子分为以下几类：
+使用Vue.directive函数来创建自定义指令。它接受两个参数：指令名称和一个指令对象。指令对象可以包含一系列的钩子函数，用于定义指令的行为。
+```javascript
+Vue.directive('directive-name', {
+  // 钩子函数
+  mounted(el, binding, vnode, prevVnode) {
+    // 指令被绑定到元素上时触发
+  },
+  updated(el, binding, vnode, prevVnode) {
+    // 元素所在组件更新时触发
+  },
+  unmounted(el, binding, vnode, prevVnode) {
+    // 指令所在组件被卸载时触发
+  }
+  // ...其他钩子函数
+});
+```
 
+### 钩子函数
+
+- 主要的钩子函数
+
+mounted：指令被绑定到元素上时触发，可以在此处进行初始化操作。<br>
+updated：元素所在组件更新时触发，可以根据需要更新指令的行为。<br>
+unmounted：指令所在组件被卸载时触发，可以进行清理工作。
+
+- 钩子函数接受一些参数
+
+el：指令所绑定的元素。<br>
+binding：一个对象，包含了指令的信息，如指令的值、参数、修饰符等。<br>
+vnode：Vue编译生成的虚拟节点。<br>
+prevVnode：上一个虚拟节点。
+
+- 其他钩子函数
+
+beforeMount：在元素挂载之前触发。<br>
+beforeUpdate：在元素所在组件更新之前触发。<br>
+beforeUnmount：在指令所在组件卸载之前触发。<br>
+updated：在元素所在组件更新之后触发，与updated钩子函数不同，该钩子函数在虚拟节点更新之后触发。<br>
+render：指令所在组件的渲染函数触发时触发。<br>
+renderTracked：当与指令关联的响应式依赖被跟踪时触发。<br>
+renderTriggered：当与指令关联的响应式依赖被触发更新时触发。
+
+这些钩子函数提供了灵活的钩子机制，让你能够在不同的时机和状态下对指令进行操作和响应。根据具体的需求，你可以选择适当的钩子函数来实现自定义指令的行为和逻辑。
+
+需要注意的是，在Vue 3中，钩子函数中的this上下文已被移除，可以通过参数binding来访问指令的信息和上下文。另外，钩子函数中的el参数也可以使用ref进行包装，以获得更多的操作能力。
+
+
+<!-- 
 beforeMount：在指令挂载到元素之前被调用。
 
 mounted：在指令第一次绑定到元素并插入父节点后调用。
@@ -111,3 +157,5 @@ created：此函数在指令实例被创建时调用，可通过 binding.instanc
 注意：beforeBind 钩子是在指令绑定到元素之前执行的，而 beforeMount 是在指令绑定到元素后，准备挂载之前执行的。而 created 钩子是在指令实例被创建时调用的，与 beforeMount 和 mounted 钩子的调用时机略有不同。
 
 需要注意的是，在 Vue.js 3.x 中，除了 mounted、beforeUnmount 和 unmounted 之外，其他的钩子函数不再接受 el 参数（对应指令绑定的元素），而是通过 binding.value、binding.oldValue 或 binding.arg 等参数来访问当前指令的状态和值。
+
+-->
