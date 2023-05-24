@@ -18,7 +18,12 @@ module.exports = {
         {
           title: '前端',
           collapsable: false,
-          children: [ 'front/webOptimize', 'front/webpack', 'front/es7' ]
+          children: [
+            'front/webOptimize',
+            'front/webpack',
+            'front/es7',
+            'front/lazyload'
+          ]
         },
         {
           title: 'CSS / JS',

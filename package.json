@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "dd": "vuepress dev docs",
+    "db": "vuepress build docs"
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
