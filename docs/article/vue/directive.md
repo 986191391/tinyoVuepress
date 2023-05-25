@@ -139,7 +139,7 @@ renderTriggered：当与指令关联的响应式依赖被触发更新时触发�
 
 ### 示例
 
-cockpit页面已运用起来，编写了简易的图片懒加载指令。
+1. cockpit页面已运用起来，编写了简易的图片懒加载指令。
 
 ```ts
 import { DirectiveBinding, Directive } from 'vue';
@@ -161,6 +161,71 @@ const ImgLazyLoad: Directive<HTMLImageElement, unknown> = {
 };
 
 export default ImgLazyLoad;
+```
+
+2. 面板的拖拽改变宽度指令，nocode页面已使用。
+```ts
+import { DirectiveBinding, Directive } from 'vue';
+
+// 定义自定义指令
+const PanelDragResize: Directive<HTMLImageElement, unknown> = {
+  beforeMount(el: HTMLImageElement, binding: DirectiveBinding) {
+    let dragLock = false;
+    let downClientX = 0;
+    let onMouseMove: any = null;
+    let onMouseUp: any = null;
+
+    const { width, max, min, direction } = binding.value;
+    el.style.width = `${width}px`;
+    el.style.position = 'relative';
+
+    const indicatorDiv = document.createElement('div');
+    // indicatorDiv.className = 'drag-indicator';
+    indicatorDiv.style.content = '';
+    indicatorDiv.style.width = '5px';
+    indicatorDiv.style.height = '100vh';
+    indicatorDiv.style.position = 'absolute';
+    if (direction === 'left') indicatorDiv.style.left = '-2px';
+    if (direction === 'right') indicatorDiv.style.right = '-2px';
+    indicatorDiv.style.top = '0px';
+    indicatorDiv.style.backgroundColor = 'transparent';
+    indicatorDiv.style.cursor = 'col-resize';
+    indicatorDiv.onmousedown = (e: MouseEvent) => {
+      dragLock = true;
+      downClientX = e.clientX;
+      console.log('mousedown');
+      onMouseMove = (event: MouseEvent) => {
+        if (dragLock) {
+          let movePx = 0;
+          if (direction === 'left') movePx = downClientX - event.clientX;
+          if (direction === 'right') movePx = event.clientX - downClientX;
+          const newPanelWidth = movePx + binding.value.width;
+
+          if (newPanelWidth > min && newPanelWidth < max) downClientX = event.clientX;
+          
+          const widthVal = newPanelWidth < min ? min : (newPanelWidth > max ? max : newPanelWidth);
+
+          el.style.width = `${widthVal}px`;
+          binding.value.width = widthVal;
+        }
+      }
+      onMouseUp = () => {
+        dragLock = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        onMouseMove = null;
+        onMouseUp = null;
+        console.log('mouse up');
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    };
+    el.appendChild(indicatorDiv);
+  }
+};
+
+export default PanelDragResize;
 ```
 
 <!-- 
