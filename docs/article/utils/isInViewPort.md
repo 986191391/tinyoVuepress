@@ -28,3 +28,14 @@ export function isInViewPort (element) {
 ```
 
 因为与onscroll方法绑定使用，所以也要注意一下使用防抖和节流来限时一下触发的频率！
+
+<!-- 
+map 和 object 的区别
+map的key可以是任意类型
+map可以用for of遍历
+obj用for in  只能循环可枚举 且遍历原型上的属性值
+键值对存放的顺序
+怎样计算键值对的个数  map.size
+
+常见的微任务 promise
+宏任务 定时器 -->
