@@ -28,7 +28,18 @@ module.exports = {
         {
           title: 'CSS / JS',
           collapsable: false,
-          children: [ 'cssjs/css', 'cssjs/js', 'cssjs/jsdesignmode', 'cssjs/jsmodule', 'cssjs/this', 'cssjs/closure', 'cssjs/prototype', 'cssjs/inherit', 'cssjs/jseventloop' ]
+          children: [
+            'cssjs/css',
+            'cssjs/js',
+            'cssjs/jsdesignmode',
+            'cssjs/jsmodule',
+            'cssjs/this',
+            'cssjs/closure',
+            'cssjs/prototype',
+            'cssjs/inherit',
+            'cssjs/jseventloop',
+            'cssjs/mapObject'
+          ]
         },
         {
           title: 'Vue',
