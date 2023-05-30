@@ -86,10 +86,12 @@ export function createAppContext(): AppContext {
 }
 let uid = 0
 
+// 传入参数，调用createAppAPI方法，返回createApp函数
 export function createAppAPI<HostElement>(
   render: RootRenderFunction<HostElement>,
   hydrate?: RootHydrateFunction
 ): CreateAppFunction<HostElement> {
+  // 传入参数，调用createApp函数，返回app对象
   return function createApp(rootComponent, rootProps = null) {
     // 判断传入的rootComponent是不是方法，如果不是的话则给rootComponent包装一层
     // extend = Object.assign
@@ -129,6 +131,7 @@ export function createAppAPI<HostElement>(
     let isMounted = false
 
     // 创建app对象，同时赋值给context.app
+    // 最后将该对象导出
     const app: App = (context.app = {
       _uid: uid++,
       _component: rootComponent as ConcreteComponent,
@@ -227,6 +230,7 @@ export function createAppAPI<HostElement>(
         isHydrate?: boolean,
         isSVG?: boolean
       ): any {
+        // 判断是否已经挂载, isMounted lock
         if (!isMounted) {
           // #5571
           if (__DEV__ && (rootContainer as any).__vue_app__) {
@@ -236,9 +240,10 @@ export function createAppAPI<HostElement>(
                 ` you need to unmount the previous app by calling \`app.unmount()\` first.`
             )
           }
+          // 创建虚拟dom
+          // 传入根节点组件和props参数
           const vnode = createVNode(rootComponent, rootProps)
-          // store app context on the root VNode.
-          // this will be set on the root instance on initial mount.
+          // 将上下问对象赋值到vnode的appContext中
           vnode.appContext = context
 
           // HMR root reload
@@ -247,13 +252,15 @@ export function createAppAPI<HostElement>(
               render(cloneVNode(vnode), rootContainer, isSVG)
             }
           }
-
+          // 判断是否为服务端渲染
           if (isHydrate && hydrate) {
             hydrate(vnode as VNode<Node, Element>, rootContainer as any)
           } else {
             render(vnode, rootContainer, isSVG)
           }
+          // 执行了该方法后锁定
           isMounted = true
+          // 将rootContainer挂载到app上
           app._container = rootContainer
           // for devtools and telemetry
           ;(rootContainer as any).__vue_app__ = app
@@ -310,6 +317,7 @@ export function createAppAPI<HostElement>(
       }
     })
 
+    // 
     if (__COMPAT__) {
       installAppCompatProperties(app, context, render)
     }

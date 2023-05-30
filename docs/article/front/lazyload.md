@@ -36,13 +36,13 @@ const placeholderSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCA
 // 定义自定义指令
 const ImgLazyLoad: Directive<HTMLImageElement, unknown> = {
   beforeMount(el: HTMLImageElement, binding: DirectiveBinding) {
-    const imgUrl = el.src
-    el.src = placeholderSrc
+    const imgUrl = el.src;
+    el.src = placeholderSrc;
     
-    const lazyImg = new Image()
-    lazyImg.src = imgUrl
+    const lazyImg = new Image();
+    lazyImg.src = imgUrl;
     lazyImg.onload = (e) => {
-      el.src = imgUrl
+      el.src = imgUrl;
     }
   }
 };
