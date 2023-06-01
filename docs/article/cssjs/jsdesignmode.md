@@ -33,6 +33,8 @@ john.sayHello();
 
 ## 单例模式
 
+**实际例子：Vuex 的 store 在 Vue.js 应用中被挂载在全局，它可以被认为是一个单例模式的实现。**
+
 单例模式是一种保证一个类只有一个实例的模式。在 JavaScript 中，可以使用闭包来实现单例模式。
 
 以下是一个使用闭包实现单例模式的示例：
@@ -64,7 +66,10 @@ console.log(instance1 === instance2); // true
 
 单例模式的优点在于可以保证一个类只有一个实例，从而节省内存空间。此外，单例模式还可以提供全局访问点，方便对实例进行操作。但是，单例模式也有一些缺点，例如可能会导致代码的耦合性增加，从而降低代码的灵活性和可维护性。因此，在使用单例模式时需要权衡其优缺点，根据具体情况进行选择。
 
+
 ## 观察者模式
+
+**实际例子：Vue 的响应式数据机制可以看作是观察者模式（Observer Pattern）的一种实现。**
 
 观察者模式是一种行为型设计模式，它定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象，当主题对象发生变化时，它的所有观察者都会收到通知并进行相应的处理。在 JavaScript 中，可以使用观察者模式来实现事件驱动的编程。
 
@@ -127,32 +132,29 @@ emit(event, ...args)：触发指定事件，并将参数传递给所有监听器
 Vue.js 的发布订阅模式就是观察者模式。在 Vue.js 中，每个组件实例都是一个观察者对象，它可以监听自身的数据变化，并在数据变化时更新视图。而数据变化则是由另一个对象——数据模型（或称为“数据中心”）——来驱动的。数据模型负责维护应用程序的状态，并在状态发生变化时通知所有观察者对象。这种一对多的依赖关系就是观察者模式的经典应用。
 
 
+
 ## 装饰者模式
+
+简单的理解这个模式：写一个方法，不影响传入的原始数据，通过原始数据返回另一个包装过的新数据
 
 装饰者模式是一种结构型设计模式，它允许在不影响同一类其他对象的情况下，
 静态或动态地向单个对象添加行为。在JavaScript中，可以使用闭包和高阶函数的组合来实现装饰者模式。
 
 以下是JavaScript中装饰者模式的示例实现：
 ```javascript
-function withLogging(fn) {
-  return function(...args) {
-    console.log(`Calling function ${fn.name} with arguments ${args}`);
-    const result = fn(...args);
-    console.log(`Function ${fn.name} returned ${result}`);
-    return result;
-  };
+function wrapData(originalData) {
+  // 对原始数据进行包装或处理
+  var wrappedData = "Wrapped: " + originalData;
+  return wrappedData;
 }
 
-function add(a, b) {
-  return a + b;
-}
+// 使用装饰者函数包装原始数据
+var originalData = "Hello";
+var wrappedData = wrapData(originalData);
 
-const addWithLogging = withLogging(add);
-
-console.log(addWithLogging(2, 3)); // logs "Calling function add with arguments 2,3" and "Function add returned 5"
+console.log(originalData); // 输出 "Hello"，原始数据不受影响
+console.log(wrappedData); // 输出 "Wrapped: Hello"，经过包装的新数据
 ```
-在这个示例中，我们定义了一个高阶函数withLogging，它接受一个函数fn作为参数，并返回一个新的函数。新函数在调用原始函数之前和之后都会打印日志。我们还定义了一个简单的函数add，它将两个数字相加并返回结果。最后，我们使用withLogging函数来创建一个新函数addWithLogging，它是add函数的装饰版本。当我们调用addWithLogging函数时，它会打印日志并返回add函数的结果。
-
 装饰者模式的优点是它可以动态地添加行为，而不需要修改现有的代码。这使得它非常适合在运行时扩展对象的功能。然而，装饰者模式也有一些缺点。它可能会导致代码变得复杂，因为每个装饰器都需要实现与原始对象相同的接口。此外，如果使用过多的装饰器，可能会导致性能问题。
 
 ## 适配器模式

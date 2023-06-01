@@ -65,6 +65,29 @@ Child.prototype = new Parent(); // 原型链继承
 
 缺点：在创建子类实例时会调用两次父类构造函数，一次是在 `Parent.call(this, name)` 中，另一次是在 `new Parent()` 中。这不仅会影响性能，还可能导致父类某些属性被覆盖。
 
+**ES6的方式**
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name);
+    this.breed = breed;
+  }
+}
+
+const ad = new Dog('ad', 'breed');
+ad.speak() // ad makes a sound.
+```
+
 ## 原型式继承
 
 创建一个临时性的构造函数，将原型设置为一个父类实例对象，并返回一个该临时构造函数的新实例对象。

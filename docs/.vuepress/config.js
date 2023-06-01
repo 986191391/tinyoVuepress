@@ -38,7 +38,9 @@ module.exports = {
             'cssjs/prototype',
             'cssjs/inherit',
             'cssjs/jseventloop',
-            'cssjs/mapObject'
+            'cssjs/mapObject',
+            'cssjs/implicitConversion',
+            'cssjs/etarget'
           ]
         },
         {

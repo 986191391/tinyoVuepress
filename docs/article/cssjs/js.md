@@ -2,7 +2,20 @@
 
 ## 基本数据类型
 
-JavaScript有几种基本数据类型，包括字符串（String）、数字（Number）、布尔值（Boolean）、对象（Object）、数组（Array）、空（Null）和未定义（Undefined）等。
+1. 原始数据类型
+- 数字（Number）：整数和浮点数，例如 42 或 3.14。
+- 字符串（String）：由字符组成的文本，例如 "Hello" 或 'World'。
+- 布尔值（Boolean）：表示真（true）或假（false）的值。
+- undefined：表示未定义或未赋值的值。
+- null：表示空值。
+- Symbol（ES6引入的新类型）：表示唯一的标识符。
+
+2. 引用数据类型
+- 对象（Object）：键值对的集合，例如 { name: "John", age: 30 }。
+- 数组（Array）：有序的值的集合，例如 [1, 2, 3]。
+- 函数（Function）：可执行的代码块。
+- 日期（Date）：表示日期和时间的对象。
+- 正则表达式（RegExp）：用于匹配字符串模式的对象。
 
 ## let 和 var 的区别
 
@@ -103,7 +116,7 @@ setTimeout和setInterval的运行机制是，将指定的代码移出本次执�
 promise属于一种微任务，当他的代码执行完以后会推入到本次的事件循环中，而setTimeout要等到下一次的事件循环，所以promise比setTimeout先执行。 -->
 
 
-## JavaScript垃圾回收
+<!-- ## JavaScript垃圾回收
 参考：[阮一峰 - JavaScript 内存泄漏教程](https://www.ruanyifeng.com/blog/2017/04/memory-leak.html)<br>
 参考：[「硬核JS」你真的了解垃圾回收机制吗](https://juejin.cn/post/6981588276356317214)<br>
 
@@ -117,7 +130,7 @@ promise属于一种微任务，当他的代码执行完以后会推入到本次�
 
 - 引用计数法
 
-追踪每个变量被引用的次数，当引用数为0将可以被回收掉
+追踪每个变量被引用的次数，当引用数为0将可以被回收掉 -->
 
 
 <!-- ## Cookie 、LocalStorage和SessionStorage的区别
