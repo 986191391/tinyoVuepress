@@ -40,7 +40,8 @@ module.exports = {
             'cssjs/jseventloop',
             'cssjs/mapObject',
             'cssjs/implicitConversion',
-            'cssjs/etarget'
+            'cssjs/etarget',
+            'cssjs/jstopic'
           ]
         },
         {
