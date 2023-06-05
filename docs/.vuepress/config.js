@@ -41,7 +41,8 @@ module.exports = {
             'cssjs/mapObject',
             'cssjs/implicitConversion',
             'cssjs/etarget',
-            'cssjs/jstopic'
+            'cssjs/jstopic',
+            'cssjs/jsasync'
           ]
         },
         {
@@ -75,7 +76,14 @@ module.exports = {
         {
           title: '浏览器',
           collapsable: false,
-          children: [ 'browser/kernel', 'browser/processthread', 'browser/engine', 'browser/inputurl', 'browser/cache' ]
+          children: [
+            'browser/kernel',
+            'browser/processthread',
+            'browser/engine',
+            'browser/inputurl',
+            'browser/cache',
+            'browser/renderflow'
+          ]
         },
         {
           title: '网络通信',
