@@ -22,7 +22,8 @@ module.exports = {
             'front/webOptimize',
             'front/webpack',
             'front/es7',
-            'front/lazyload'
+            'front/lazyload',
+            'front/reactive'
           ]
         },
         {

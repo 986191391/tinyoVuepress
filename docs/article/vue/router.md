@@ -10,6 +10,16 @@ window.addEventListener("hashchange", funcRef, false)
 ```
 利用hash的以上特点，就可以来实现前端路由“更新视图但不重新请求页面”的功能了。
 
+1. 当应用程序加载时，Vue Router会初始化，并通过监听hashchange事件来响应URL的变化。
+2. 当用户点击链接或执行编程式导航时，Vue Router会更新URL的hash部分，并触发hashchange事件。
+3. Vue Router监听到hashchange事件后，会解析新的hash值，提取路由信息。
+4. 根据提取到的路由信息，Vue Router会找到对应的组件，并进行渲染。
+5. 用户在应用程序中进行路由切换时，会不断重复上述过程。
+
+hash模式的优点是它的兼容性非常好，因为它不需要对服务器进行特殊配置。但它的缺点是URL中包含了#符号，看起来不太美观。而且在SEO（搜索引擎优化）方面可能会受到一些限制，因为搜索引擎爬虫可能不会处理URL中的hash部分。
+
+
+
 - history（HTML5History）
 
 History接口 是浏览器历史记录栈提供的接口，通过back(), forward(), go()等方法，我们可以读取浏览器历史记录栈的信息，进行各种跳转操作。在控制台中输入window.history即可看到对应的属性。
@@ -22,6 +32,20 @@ window.history.replaceState(stateObject, title, URL)
 window.addEventListener("popstate", () => {})
 ```
 当浏览器跳转到新的状态时，将触发popState事件，该事件将携带stateObject参数的副本, title: 所添加记录的标题, URL: 所添加记录的URL。与hash模式一样，可以通过监听popState来实现前端路由“更新视图但不重新请求页面”的功能了。
+
+1. 在 history 模式下，URL 中的路由信息不再包含特殊字符（如 hash 模式的 # 符号）。
+
+2. 当用户在应用程序中导航到不同的路由时，Vue Router 会使用 History API 修改浏览器的历史记录，而不会发送新的请求。
+
+3. 当用户点击链接或执行编程式导航时，Vue Router 会使用 pushState() 或 replaceState() 方法更新浏览器的历史记录，并将新的路由路径添加到浏览器的地址栏中。
+
+4. 当用户通过前进或后退按钮导航时，浏览器会触发 popstate 事件。Vue Router 监听到这个事件后，会根据新的路由路径解析出路由信息，并渲染对应的组件。
+
+5. Vue Router 会根据新的路由信息找到对应的组件，并进行渲染。
+
+6. 用户在应用程序中进行路由切换时，会不断重复上述过程。
+
+
 
 - 共同点
 
