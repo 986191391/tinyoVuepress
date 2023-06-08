@@ -63,12 +63,25 @@ typeof null // 'object'
 ## JS的事件机制
 
 JavaScript 事件触发有三个阶段。 
-- CAPTURING_PHASE ，即捕获阶段 
-- AT_TARGET ，即目标阶段
-- BUBBLING_PHASE ，即冒泡阶段
+- 事件捕获阶段（Event Capturing Phase）：事件从文档的根元素开始向下传播，直到达到事件的目标元素。
+
+- 目标阶段（Target Phase）：事件到达目标元素，触发事件处理函数。
+
+- 事件冒泡阶段（Event Bubbling Phase）：事件从目标元素开始向上冒泡，直到达到文档的根元素。
+
+事件冒泡是指当一个元素上的事件被触发时，事件会从该元素开始向上冒泡到其父元素，直到到达文档的根元素（通常是 `<html>` 元素）。换句话说，事件会从最具体的元素（例如按钮）一直向上传播到最不具体的元素（文档的根元素）。
+
+事件捕获则是相反的过程。在事件捕获阶段，事件会从文档的根元素开始，逐级向下传播到最具体的元素。事件捕获阶段是事件传播的第一个阶段，而事件冒泡阶段是第二个阶段。
+
+默认情况下，事件处理会发生在事件冒泡阶段。但是，您可以使用 addEventListener 方法的第三个参数来指定事件处理发生在捕获阶段还是冒泡阶段。例如：
+
+```js
+element.addEventListener('click', handler, true); // 在捕获阶段处理事件
+element.addEventListener('click', handler, false); // 在冒泡阶段处理事件（默认）
+```
 
 
-`addEventListener(‘click’, function(){}, false); // 默认为false 冒泡阶段`
+<!-- `addEventListener(‘click’, function(){}, false); // 默认为false 冒泡阶段`
 通过addEventListener方法可以给dom元素添加事件监听函数。当事件被触发时, 通过回调函数进行响应。 
 
 **冒泡**，实际开发的场景中, 当父元素和子元素同时绑定了click方法时, 点击子元素, 父元素的click方法也会被触发。这是因为事件的冒泡导致的, 所以可以通过event.stopPropagation()方法来阻止事件的冒泡。在对图片进行拖拽时, 松开鼠标后图片会有一个回弹到原位的动作。这是属于浏览器的默认事件。同样通过e.preventDefault()可以取消元素的默认事件。
@@ -77,7 +90,7 @@ JavaScript 事件触发有三个阶段。
 
 举个例子，手写一个计算器，可以把事件绑定在父亲最外层，点击后通过currentTarget / target 来判断当前点击的元素是哪个，从而编写我处理逻辑。（个人网站中的viewport操作页面中有使用到）
 
-> **currentTarget和target的区别是什么** < 参考文章：[currentTarget和target的区别](https://www.jianshu.com/p/1dd668ccc97a)>
+> **currentTarget和target的区别是什么** < 参考文章：[currentTarget和target的区别](https://www.jianshu.com/p/1dd668ccc97a)> -->
 
 
 <!-- ## EventLoop  JS的事件循环机制

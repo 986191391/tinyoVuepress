@@ -27,4 +27,26 @@ scrollbar-width: none;
 chrome和firefox不同，穿透样式修改时，firefox不生效。
 
 
+- a标签蓝色边框
+
+- 谷歌浏览器上记住密码后输入框背景色为黄色
+
+
 - IE浏览器的各种问题
+
+
+
+## JS
+
+- 在随页面滚动展示动画的页面中有使用到
+
+scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+AJAX
+
+取消冒泡/取消默认事件的方式不同
+
+
+
+
+

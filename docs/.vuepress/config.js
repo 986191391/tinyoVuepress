@@ -23,7 +23,8 @@ module.exports = {
             'front/webpack',
             'front/es7',
             'front/lazyload',
-            'front/reactive'
+            'front/reactive',
+            'front/attack'
           ]
         },
         {
@@ -89,7 +90,11 @@ module.exports = {
         {
           title: '网络通信',
           collapsable: false,
-          children: [ 'net/tcpip', 'net/http' ]
+          children: [
+            'net/tcpip',
+            'net/http',
+            'net/httphttps'
+          ]
         },
         {
           title: '功能性全局方法',
