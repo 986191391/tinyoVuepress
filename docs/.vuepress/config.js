@@ -39,7 +39,7 @@ module.exports = {
             'cssjs/closure',
             'cssjs/prototype',
             'cssjs/inherit',
-            'cssjs/jseventloop',
+            // 'cssjs/jseventloop',
             'cssjs/mapObject',
             'cssjs/implicitConversion',
             'cssjs/etarget',

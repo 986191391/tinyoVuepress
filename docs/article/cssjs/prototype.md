@@ -15,6 +15,7 @@ func.__proto__ === Function.prototype; // true
 在这些引用数据类型的原型上，定义了一些公用的变量和方法。当我们定义对应类型的变量时，就可以通过原型链的方式继承到这些公用的属性和方法。
 
 
+## 构造函数
 原型(prototype)通常在构造函数中定义：
 ```js
 function Person(name, age) {
