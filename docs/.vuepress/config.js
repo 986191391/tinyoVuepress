@@ -52,6 +52,7 @@ module.exports = {
           collapsable: false,
           children: [
             'vue/vue3upd',
+            'vue/compositionapi',
             'vue/lifeCycle',
             'vue/dataBinding',
             'vue/communication',
