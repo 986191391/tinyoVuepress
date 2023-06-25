@@ -28,6 +28,10 @@ console.log(bool); // 输出 false
 
 ## 类型比较
 
+使用`==`进行变量的比较时，不同类型的变量之间的比较会有变量的隐式转换的概念。
+
+进行比较时通常会有几个步骤，先判断变量的类型是否相同，如果相同则直接判断值是否相同，如果不同则进行隐式的转换，转换的规则如下：
+
 **一、基本数据类型的比较(String/Number/Boolean/undefined/null)**
 
 - 第一步，将当前的变量值转换为Number类型的值
@@ -39,7 +43,12 @@ console.log(bool); // 输出 false
 '0' == undefined; // -> 0 == NaN -> false
 'asd' == null; // -> NaN == NaN -> false
 ```
-需要注意的是，不能转换为数字的值 / undefined / null最终都会变成NaN，而NaN是不等于任何值的，包括它自己。
+需要注意的是，不能转换为数字的值 / undefined / null最终都会变成NaN，而NaN是不等于任何值的，包括它自己。且以上规则不适用于null和undefined之间的比较。
+`If x is null and y is undefined, return true` 规则就是如此。
+```js
+null == undefined; // true
+null === undefined; // false
+```
 
 
 **二、引用数据类型的比较(Object/Array)**
