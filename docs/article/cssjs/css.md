@@ -44,6 +44,16 @@
 ## Flex布局
 参考：[Flex 布局教程：语法篇 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
+当使用 flex 布局时，首先想到的是两根轴线 — 主轴和交叉轴。主轴由 flex-direction 定义，另一根轴垂直于它。我们使用 flexbox 的所有属性都跟这两根轴线有关。
+
+主轴由 flex-direction 定义，可以取 4 个值：`row/row-reserve/column/column-reserve`。
+
+交叉轴垂直于主轴，所以如果你的`flex-direction` (主轴) 设成了 `row` 或者 `row-reverse` 的话，交叉轴的方向就是沿着列向下的。如果主轴方向设成了 `column` 或者 `column-reverse`，交叉轴就是水平方向。
+
+理解主轴和交叉轴的概念对于对齐 flexbox 里面的元素是很重要的；flexbox 的特性是沿着主轴或者交叉轴对齐之中的元素。
+
+
+
 Flex作为当前最流行的布局, 是否了解它的所有属性了？
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。<br>

@@ -1,5 +1,7 @@
 # Vue3 组合式API
 
+函数式编程最大的好处是其稳定性（无副作用）和可测试性（输入相同，输出一定相同）
+
 [Vue组合式API官方文档](https://cn.vuejs.org/guide/extras/composition-api-faq.html)
 
 
