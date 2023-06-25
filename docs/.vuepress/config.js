@@ -24,7 +24,8 @@ module.exports = {
             'front/es7',
             'front/lazyload',
             'front/reactive',
-            'front/attack'
+            'front/attack',
+            'front/interfacetype'
           ]
         },
         {
