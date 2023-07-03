@@ -125,7 +125,7 @@ module.exports = {
         {
           title: '首页',
           collapsable: false,
-          children: [ '/', '/home/life', '/home/interview' ]
+          children: [ '/', '/home/life' ]
         }
       ]
     }

@@ -1,7 +1,7 @@
 # Life
 
 
-值得纪念的每一天
+记录值得纪念的每一天
 
 ## 云南之旅
 2023年6月10日 - 2023年6月17日
@@ -16,7 +16,13 @@
   <img src="../assets/life/yunnan/202306103.jpg" alt="" />
   <img src="../assets/life/yunnan/202306105.jpg" alt="" />
   <img src="../assets/life/yunnan/202306106.jpg" alt="" />
+  <img src="../assets/life/yunnan/202306108.jpg" alt="" />
   <img src="../assets/life/yunnan/202306104.jpg" alt="" />
+  <img src="../assets/life/yunnan/202306107.jpg" alt="" />
+  <img src="../assets/life/yunnan/202306109.jpg" alt="" />
+  <img src="../assets/life/yunnan/2023061010.jpg" alt="" />
+  <img src="../assets/life/yunnan/2023061011.jpg" alt="" />
+  <img src="../assets/life/yunnan/2023061012.jpg" alt="" />
 </div>
 
 ## 今天，我离职了
