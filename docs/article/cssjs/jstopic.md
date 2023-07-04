@@ -27,6 +27,47 @@
 18. 实现一个函数 uniquePaths，接受两个正整数 m 和 n 作为参数，表示一个 m x n 的网格。从网格的左上角出发，每次只能向下或向右移动一步，到达网格的右下角。函数应该返回从起始位置到达终点位置的不同路径数量。例如，对于 m = 3，n = 2，函数应该返回 3，因为有三种不同的路径：向下、向右、向右。
 
 
+## 递归
+19. 阶乘计算：编写一个函数，接受一个正整数作为输入，并返回该数的阶乘。要求使用递归来解决该问题。
+20. 斐波那契数列：编写一个函数，接受一个正整数 n 作为输入，并返回斐波那契数列的第 n 个数。斐波那契数列中的每个数都是前两个数的和。要求使用递归来解决该问题
+21. 二叉树遍历：给定一个二叉树的根节点，编写三个函数来实现其前序遍历、中序遍历和后序遍历。要求使用递归来解决该问题。
+22. 目录树遍历：给定一个目录结构的根节点，每个节点包含名称和子目录的数组。编写一个函数来遍历整个目录树，并打印出所有文件的路径。要求使用递归来解决该问题。
+```js
+// 示例目录结构
+const directory = {
+  name: 'Root',
+  isFile: false,
+  children: [
+    {
+      name: 'Folder 1',
+      isFile: false,
+      children: [
+        { name: 'File 1', isFile: true },
+        { name: 'File 2', isFile: true },
+      ],
+    },
+    {
+      name: 'Folder 2',
+      isFile: false,
+      children: [
+        { name: 'File 3', isFile: true },
+        { name: 'File 4', isFile: true },
+      ],
+    },
+  ],
+};
+
+// traverseDirectory(directory);
+// 输出：
+// Root/Folder 1/File 1
+// Root/Folder 1/File 2
+// Root/Folder 2/File 3
+// Root/Folder 2/File 4
+```
+23. 汉诺塔问题：汉诺塔是一种经典的问题，包括三个塔和一些盘子，每个盘子的大小不同。目标是将所有盘子从一个塔移动到另一个塔，同时遵循以下规则：每次只能移动一个盘子，大盘子不能放在小盘子上面。编写一个函数来解决汉诺塔问题。要求使用递归来解决该问题。
+
+
+
 ## 题目合答案
 1. 编写一个函数，接受一个字符串作为参数，并返回该字符串的反转结果。例如，输入"Hello World!"，输出"!dlroW olleH"。
 ```js
@@ -187,6 +228,22 @@ console.log(flattenArray([[1, 2], [3, 4], [5, 6]]));  // 输出：[1, 2, 3, 4, 5
 function flattenArray(arr) {
   return arr.toString().spilit(',');
 }
+
+// 如果是多层级数组
+function flattenArray(arr) {
+  let flattened = [];
+  
+  arr.forEach((element) => {
+    if (Array.isArray(element)) {
+      flattened = flattened.concat(flattenArray(element));
+    } else {
+      flattened.push(element);
+    }
+  });
+  
+  return flattened;
+}
+console.log(flattenArray([1, [2, 3], [4, 5, [6, 7, 8, [9, 10]]]]))
 ```
 
 
@@ -343,3 +400,128 @@ function uniquePaths(m, n) {
 
 console.log(uniquePaths(3, 2));  // 输出：3
 ```
+
+19. 阶乘计算：编写一个函数，接受一个正整数作为输入，并返回该数的阶乘。要求使用递归来解决该问题。
+```js
+function deep(n) {
+  if (n === 1) return 1;
+  return deep(n - 1) * n;
+}
+```
+
+20. 斐波那契数列：编写一个函数，接受一个正整数 n 作为输入，并返回斐波那契数列的第 n 个数。斐波那契数列中的每个数都是前两个数的和。要求使用递归来解决该问题
+```js
+//  1  1  2  3  5  8  13
+function func(n) {
+  if (n === 1) return 1;
+  if (n === 2) return 1;
+  return func(n - 2) + func(n - 1)
+}
+
+```
+
+21. 二叉树遍历：给定一个二叉树的根节点，编写三个函数来实现其前序遍历、中序遍历和后序遍历。要求使用递归来解决该问题。
+```js
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+// 前序遍历
+function preorderTraversal(root) {
+  if (root === null) {
+    return [];
+  }
+  const result = [];
+  result.push(root.val);
+  result.push(...preorderTraversal(root.left));
+  result.push(...preorderTraversal(root.right));
+  return result;
+}
+
+// 中序遍历
+function inorderTraversal(root) {
+  if (root === null) {
+    return [];
+  }
+  const result = [];
+  result.push(...inorderTraversal(root.left));
+  result.push(root.val);
+  result.push(...inorderTraversal(root.right));
+  return result;
+}
+
+// 后序遍历
+function postorderTraversal(root) {
+  if (root === null) {
+    return [];
+  }
+  const result = [];
+  result.push(...postorderTraversal(root.left));
+  result.push(...postorderTraversal(root.right));
+  result.push(root.val);
+  return result;
+}
+
+// 创建二叉树
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+
+console.log(preorderTraversal(root)); // 输出 [1, 2, 4, 5, 3]
+console.log(inorderTraversal(root)); // 输出 [4, 2, 5, 1, 3]
+console.log(postorderTraversal(root)); // 输出 [4, 5, 2, 3, 1]
+```
+
+22. 目录树遍历：给定一个目录结构的根节点，每个节点包含名称和子目录的数组。编写一个函数来遍历整个目录树，并打印出所有文件的路径。要求使用递归来解决该问题。
+```js
+
+// 示例目录结构
+const directory = {
+  name: 'Root',
+  isFile: false,
+  children: [
+    {
+      name: 'Folder 1',
+      isFile: false,
+      children: [
+        { name: 'File 1', isFile: true },
+        { name: 'File 2', isFile: true },
+      ],
+    },
+    {
+      name: 'Folder 2',
+      isFile: false,
+      children: [
+        { name: 'File 3', isFile: true },
+        { name: 'File 4', isFile: true },
+      ],
+    },
+  ],
+};
+
+function traverseDirectory(node, path = '') {
+  if (node.isFile) {
+    console.log(path + node.name);
+  } else {
+    node.children.forEach((child) => {
+      const newPath = path + node.name + '/';
+      traverseDirectory(child, newPath);
+    });
+  }
+}
+
+traverseDirectory(directory);
+// 输出：
+// Root/Folder 1/File 1
+// Root/Folder 1/File 2
+// Root/Folder 2/File 3
+// Root/Folder 2/File 4
+```
+
+23. 汉诺塔问题：汉诺塔是一种经典的问题，包括三个塔和一些盘子，每个盘子的大小不同。目标是将所有盘子从一个塔移动到另一个塔，同时遵循以下规则：每次只能移动一个盘子，大盘子不能放在小盘子上面。编写一个函数来解决汉诺塔问题。要求使用递归来解决该问题。

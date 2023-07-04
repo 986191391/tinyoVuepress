@@ -143,11 +143,95 @@ function TodoList() {
 
 我们使用 useReducer() 来初始化任务状态（即 Task State），并且在需要更改某个任务完成状态时向 dispatch() 提供一个 action 元素，以调用对应的 reducer 代码逻辑来完成对状态更新的操作。例如，我们触发 form 元素的提交时间添加一个新任务，或者在切换任务完成状态时，通过 Action 元素之一触发 code 逻辑来更新 ourTaskState。
 
-## useCallback
+## 自定义hooks
 
-## useMemo
+- useForm 
 
+```jsx
+import { Form, Input, Button } from 'antd';
+import { useState } from 'react';
 
+function useForm(initialState) {
+  const [values, setValues] = useState(initialState);
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues(prevValues => ({ ...prevValues, [name]: value }));
+  };
+
+  const resetForm = () => {
+    setValues(initialState);
+  };
+
+  return {
+    values,
+    handleChange,
+    resetForm
+  };
+}
+
+// 使用自定义 Hook 的组件
+function MyForm() {
+  const { values, handleChange, resetForm } = useForm({ name: '', email: '' });
+
+  const handleSubmit = (values) => {
+    // 处理表单提交逻辑
+    // 使用 values.name 和 values.email 获取表单数据
+    // ...
+    resetForm();
+  };
+
+  return (
+    <Form onFinish={handleSubmit} initialValues={values}>
+      <Form.Item name="name" label="Name">
+        <Input onChange={handleChange} />
+      </Form.Item>
+      <Form.Item name="email" label="Email">
+        <Input onChange={handleChange} />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+}
+```
+
+- useLocalStorage
+
+```jsx
+import { useState, useEffect } from 'react';
+
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+
+// 使用自定义 Hook 的组件
+function App() {
+  const [name, setName] = useLocalStorage('name', '');
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={name}
+        onChange={event => setName(event.target.value)}
+      />
+      <p>Hello, {name}!</p>
+    </div>
+  );
+}
+```
 
 
