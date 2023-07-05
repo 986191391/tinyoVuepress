@@ -90,6 +90,16 @@ module.exports = {
           ]
         },
         {
+          title: 'Node.js',
+          collapsable: false,
+          children: [
+            'node/base',
+            'node/eventloop',
+            'node/error',
+            'node/advantage'
+          ]
+        },
+        {
           title: '网络通信',
           collapsable: false,
           children: [

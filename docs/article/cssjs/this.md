@@ -1,11 +1,13 @@
 # this
 
 ## 绑定方式
-this 是一个关键字，它用于引用当前函数执行时所在的对象。this 的绑定方式主要有四种：
+关键字"this"用于引用当前执行代码的上下文对象。它是一个特殊的关键字，其值在运行时动态确定，取决于代码的执行环境和调用方式。
+<!-- this 是一个关键字，它用于引用当前函数执行时所在的对象。this 的绑定方式主要有四种： -->
+this 的绑定方式主要有以下几种：
 
-1. 默认绑定：
+1. 全局环境中的this
 
-如果一个函数独立调用，则默认绑定成全局对象，即 Window 对象（浏览器环境）或 global 对象（Node.js 环境）。
+在全局环境中，"this"通常指向全局对象（在浏览器中是"window"对象）。在全局环境中使用"this"，可以访问全局对象的属性和方法。
 ```javascript
 function foo() {
   console.log(this);
@@ -14,9 +16,10 @@ function foo() {
 foo(); // 输出 Window 对象或 global 对象。
 ```
 
-2. 隐式绑定：
+2. 对象方法中的this
 
-如果函数作为对象的方法被调用，则其中的 this 就绑定了该对象本身。
+当在对象方法中使用"this"时，它指向调用该方法的对象。通过使用"this"，可以在方法内部访问和操作当前对象的属性和方法。
+
 ```javascript
 const obj = {
   name: 'Tom',
@@ -28,7 +31,20 @@ const obj = {
 obj.sayName(); // 输出 "Tom"
 ```
 
-3. 显式绑定：
+3. 构造函数中的this
+
+在构造函数中，"this"表示即将创建的实例对象。通过使用"this"，可以在构造函数中设置和初始化实例对象的属性。
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+const person = new Person('Tom');
+console.log(person.name); // 输出 "Tom"
+```
+
+4. 使用call和apply方法显式设置this
 
 可以使用 call、apply 或 bind 方法显示地指定函数内部的 this 绑定到某个对象上。
 ```javascript
@@ -44,18 +60,6 @@ greet.apply(person2); // 输出 "Hello, Bob"
 
 const greetPerson1 = greet.bind(person1);
 greetPerson1(); // 输出 "Hello, Alice"
-```
-
-4. new 绑定：
-
-当一个构造函数被 new 关键字调用时，其中的 this 绑定到新创建的对象实例上。
-```javascript
-function Person(name) {
-  this.name = name;
-}
-
-const person = new Person('Tom');
-console.log(person.name); // 输出 "Tom"
 ```
 
 总结如下：
