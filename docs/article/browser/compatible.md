@@ -24,6 +24,22 @@
 
 ```-webkit-overflow-scrolling: touch; overflow-scrolling: touch;```
 
+## 隐藏滚动条的方式不同
+
+```css
+/* chrome */
+::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
+}
+/* firefox */
+scrollbar-width: none;
+```
+
+## css权重取值不同
+
+chrome和firefox不同，穿透样式修改时，firefox不生效。
+
 ## 字体大小
 chrome的默认最小字号大小为12px, 用户可以自行通过浏览器设置最小的字号。<br>
 而safari/firefox的最小字号可以到0px, 这就导致小于12px的字体不能在chrome更好的显示。
@@ -51,4 +67,15 @@ ios设备可以较好的对vedio标签的api进行调用, 而安卓设备存在�
 
 原因: 页面内容区域用的单位是vh, 而在第一次进入加载时, 还没有对应的路由栈信息, 所以底部不会出现后退前进的操作拦, 但是当进行了路由操作后, 操作栏就出现了, 但是高度还是计算了这一部分,  导致页面无法拖动到最底部。
 
-还未解决啊
+
+
+## JS
+
+- 在随页面滚动展示动画的页面中有使用到
+
+scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+AJAX
+
+取消冒泡/取消默认事件的方式不同
+

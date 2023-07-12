@@ -119,6 +119,8 @@ gtp告诉我这样区分：
 
 ## inline-block 问题
 
+dispaly: inline-block的margintop/bottom无效
+
 1. **垂直对齐问题：**
 
 使用 inline-block 布局时，元素默认是基于基线对齐的。这可能导致在布局中出现不一致的垂直对齐，尤其是当元素的高度不同时。解决这个问题的方法之一是使用 CSS 的垂直对齐属性（如 vertical-align）来控制对齐方式。

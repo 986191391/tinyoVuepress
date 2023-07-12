@@ -11,17 +11,11 @@ module.exports = {
 		sidebar: {
       '/article/': [
         {
-          title: '知识记录',
-          collapsable: false,
-          children: [ 'csdn/base', 'csdn/jstype', 'csdn/browser', 'csdn/cssFun', 'csdn/promisePause' ]
-        },
-        {
           title: '前端',
           collapsable: false,
           children: [
             'front/webOptimize',
             'front/webpack',
-            'front/es7',
             'front/lazyload',
             'front/reactive',
             'front/attack',
@@ -33,7 +27,9 @@ module.exports = {
           collapsable: false,
           children: [
             'cssjs/css',
+            'cssjs/cssFun',
             'cssjs/js',
+            'cssjs/jstype',
             'cssjs/jsdesignmode',
             'cssjs/jsmodule',
             'cssjs/this',
@@ -42,6 +38,7 @@ module.exports = {
             'cssjs/inherit',
             // 'cssjs/jseventloop',
             'cssjs/mapObject',
+            'cssjs/es7',
             'cssjs/implicitConversion',
             'cssjs/etarget',
             'cssjs/jstopic',
@@ -69,13 +66,19 @@ module.exports = {
             'vue/set',
             'vue/vuex',
             'vue/diff',
-            'vue/vuecompile'
+            'vue/vuecompile',
+            // 'vue/originCode'
           ]
         },
         {
           title: 'React',
           collapsable: false,
-          children: [ 'react/lifeCycle', 'react/interview', 'react/communication', 'react/hooks' ]
+          children: [
+            'react/lifeCycle',
+            'react/interview',
+            'react/communication',
+            'react/hooks'
+          ]
         },
         {
           title: '浏览器',
@@ -87,7 +90,8 @@ module.exports = {
             'browser/processthread',
             'browser/engine',
             'browser/inputurl',
-            'browser/renderflow'
+            // 'browser/renderflow',
+            'browser/compatible'
           ]
         },
         {
@@ -124,7 +128,10 @@ module.exports = {
         {
           title: '花里胡哨',
           collapsable: false,
-          children: [ 'flower/bookmarks', 'flower/printWeb' ]
+          children: [
+            'flower/bookmarks',
+            'flower/printWeb'
+          ]
         }
       ],
       '/growth/': [
