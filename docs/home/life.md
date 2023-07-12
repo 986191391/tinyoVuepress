@@ -3,6 +3,21 @@
 
 记录值得纪念的每一天
 
+## 五月天，我们来啦！
+
+<div style="display: grid; grid-template-columns: repeat(2, 49%); gap: 10px">
+  <img src="../assets/life/wuyuetian/1.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/2.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/3.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/4.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/5.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/6.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/7.jpg" alt="" />
+  <img src="../assets/life/wuyuetian/8.jpg" alt="" />
+</div>
+
+
+
 ## 云南之旅
 2023年6月10日 - 2023年6月17日
 
@@ -32,7 +47,7 @@
 今天是我的离职日，很庆幸自己终于迈出了这一步，对未来充满期待！
 
 
-## 第一场五月天演唱会
+## 我抢到演唱会门票啦！
 2023年5月13日
 
 人生第一次抢票, 我的第一场五月天演唱会。
