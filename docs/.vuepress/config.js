@@ -121,6 +121,7 @@ module.exports = {
           children: [
             'utils/mybind',
             'utils/delayFetch',
+            'utils/instanceof',
             'utils/debounceThrottle',
             'utils/isInViewPort'
           ]

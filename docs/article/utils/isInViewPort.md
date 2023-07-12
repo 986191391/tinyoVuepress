@@ -29,13 +29,28 @@ export function isInViewPort (element) {
 
 因为与onscroll方法绑定使用，所以也要注意一下使用防抖和节流来限时一下触发的频率！
 
-<!-- 
-map 和 object 的区别
-map的key可以是任意类型
-map可以用for of遍历
-obj用for in  只能循环可枚举 且遍历原型上的属性值
-键值对存放的顺序
-怎样计算键值对的个数  map.size
 
-常见的微任务 promise
-宏任务 定时器 -->
+
+## IntersectionObserve
+
+图片懒加载示例
+
+```js
+const imgList = [...document.querySelectorAll('img')]
+
+var io = new IntersectionObserver((entries) =>{
+  entries.forEach(item => {
+    // isIntersecting是一个Boolean值，判断目标元素当前是否可见
+    if (item.isIntersecting) {
+      item.target.src = item.target.dataset.src
+      // 图片加载后即停止监听该元素
+      io.unobserve(item.target)
+    }
+  })
+}, {
+  root: document.querySelector('.root')
+})
+
+// observe遍历监听所有img节点
+imgList.forEach(img => io.observe(img))
+```
