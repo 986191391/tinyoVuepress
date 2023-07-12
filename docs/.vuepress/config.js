@@ -81,11 +81,12 @@ module.exports = {
           title: '浏览器',
           collapsable: false,
           children: [
+            'browser/httpcache',
+            'browser/cache',
             'browser/kernel',
             'browser/processthread',
             'browser/engine',
             'browser/inputurl',
-            'browser/cache',
             'browser/renderflow'
           ]
         },
@@ -111,9 +112,14 @@ module.exports = {
           ]
         },
         {
-          title: '功能性全局方法',
+          title: '其他',
           collapsable: false,
-          children: [ 'utils/debounceThrottle', 'utils/isInViewPort' ]
+          children: [
+            'utils/mybind',
+            'utils/delayFetch',
+            'utils/debounceThrottle',
+            'utils/isInViewPort'
+          ]
         },
         {
           title: '花里胡哨',
