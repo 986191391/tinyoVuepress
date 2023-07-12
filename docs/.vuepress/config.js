@@ -94,6 +94,7 @@ module.exports = {
           collapsable: false,
           children: [
             'node/base',
+            'node/requireImport',
             'node/eventloop',
             'node/error',
             'node/advantage'
@@ -105,7 +106,8 @@ module.exports = {
           children: [
             'net/tcpip',
             'net/http',
-            'net/httphttps'
+            'net/httphttps',
+            'net/http2http1'
           ]
         },
         {
