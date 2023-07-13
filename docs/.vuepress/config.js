@@ -127,6 +127,14 @@ module.exports = {
           ]
         },
         {
+          title: '学习',
+          collapsable: false,
+          children: [
+            'algorithm/recursion',
+            'algorithm/binaryTree'
+          ]
+        },
+        {
           title: '花里胡哨',
           collapsable: false,
           children: [
