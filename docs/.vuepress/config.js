@@ -140,7 +140,8 @@ module.exports = {
           collapsable: false,
           children: [
             'flower/bookmarks',
-            'flower/printWeb'
+            'flower/printWeb',
+            'flower/getColor'
           ]
         }
       ],
