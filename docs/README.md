@@ -1,3 +1,13 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+</style>
+
+<div style="padding: 2rem 0; display: flex;flexDirection: column; justifyContent: center;alignItems: center;background: #f1f1f1;textAlign: center;color: #e6e6e6;fontSize: 102px;fontFamily: 'Luckiest Guy'; letterSpacing: 5px; fontWeight: 300;textShadow: 1px -1px #fff, -1px 1px #999, -5px 5px 5px #808080;">
+<div style="">welcome</div>
+<div style="textAlign: center;color: #e6e6e6;fontSize: 102px;fontFamily: 'Luckiest Guy'; letterSpacing: 5px; fontWeight: 300;textShadow: 1px -1px #fff, -1px 1px #999, -5px 5px 5px #808080;">tinyo docs</div>
+</div>
+
 # Tinyo Docs
 <!-- # 关于我
 
@@ -46,7 +56,7 @@ GTP3.5免费试用 [点击跳转](https://chat.wuguokai.cn/)
 WeChat: yzfcoo1<br>
 QQ: 986191391<br>
 
-<img src="./assets/tinyo.jpg" alt="" />
+<img src="./assets/tinyo.webp" alt="" />
 
 
 <!-- ## 一段很喜欢的歌词

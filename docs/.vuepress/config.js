@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'tinyo docs',
+  title: 'Tinyo docs',
   description: 'Just playing around',
   base: '/',
   themeConfig: {
