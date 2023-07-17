@@ -43,3 +43,36 @@ function check(a, b) {
 }
 ```
 
+## 给定一个数组，每项的值可以为负数正数或0，得到连续子项相加的最大值。
+例如 arr = [1, -5, 3, 6, -3, 9, -8, 2], 最大值为  3 + 6 + -3 + 9 = 15
+
+```js
+function getMax(arr) {
+  let curMax = 0;
+  let retMax = 0;
+  for (let i = 0; i < arr.length; i++) {
+    curMax = Math.max(arr[i], arr[i] + curMax);
+    retMax = Math.max(curMax, retMax);
+  }
+  return retMax;
+}
+```
+
+## 编写一个函数，接受一个二维数组作为参数，将其转换为一个一维数组，并且保持原数组中所有元素的顺序不变。例如，输入[[1, 2], [3, 4], [5, 6, [7, 8]]]，返回 [1, 2, 3, 4, 5, 6, 7, 8]。
+
+```js
+
+// 1.
+function deconstructionArr(arr) {
+  return arr.toString().split(',');
+}
+
+// 2.递归
+function deconstructionArr(arr) {
+  let retArr = [];
+  arr.forEach((arrItm) => Array.isArray(arrItm) ? retArr.push(...deconstructionArr(arrItm)) : retArr.push(arrItm))
+  return retArr;
+}
+
+```
+
