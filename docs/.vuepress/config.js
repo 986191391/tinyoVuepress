@@ -181,5 +181,22 @@ module.exports = {
     //   //   ]
     //   // }
     // ]
-  }
+  },
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.webp$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: Infinity,
+              },
+            },
+          ],
+        }
+      ],
+    },
+  },
 }
