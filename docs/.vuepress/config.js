@@ -14,6 +14,7 @@ module.exports = {
           title: '前端',
           collapsable: false,
           children: [
+            'front/docmeta',
             'front/webOptimize',
             'front/webpack',
             'front/lazyload',

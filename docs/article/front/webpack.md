@@ -2,6 +2,17 @@
 
 Webpack是一个现代化的JavaScript应用程序的静态模块打包器。它可以将多个模块打包成一个或多个bundle，从而减少页面加载时间，提高性能。
 
+## webpack5 新特性
+
+1. 模块联邦 (Module Federation) : 模块联邦是 Webpack 5 的一个重要特性，它允许将多个独立的 Webpack 构建拆分成更小的、可独立部署的模块。这样可以实现跨应用程序共享模块的能力，从而改善了代码复用和团队协作。
+2. 改进的 Tree Shaking: Webpack 5 对 Tree Shaking 进行了优化，可以更好地消除未使用的代码，减小打包体积。
+3. 持久化缓存(Persistent Caching) : Webpack 5引入了持久化缓存机制，通过默认启用的持久化缓存，可以加快二次构建的速度，提高开发者的开发效率。
+4. 支持WebAssembly: Webpack 5 对 WebAssembly 的支持更加完善，可以将 WebAssembly模块打包到项目中，实现高性能的运行时。
+5. 改进的性能: Webpack 5 在构建速度和打包体积上进行了一些优化，提高了整体的性能表5现。
+6. 内置的模块类型识别 (Built-in Module Type Recognition) : Webpack 5 可以自动识别出常见的模块类型，例如 ES Modules 和 CommonJS，不再需要手动配置模块类型
+改进的错误处理和调试: Webpack 5 提供了更好的错误处理和调试支持，可以生成更友好的错误提示和源代码映射
+7. 默认使用ES6模块：Webpack 5默认使用ES6模块语法，而不是CommonJS模块语法。这使得Webpack可以更好地与现代的JavaScript生态系统集成，并提供更好的性能和开发体验。
+
 ## 基本配置
 
 - entry：入口文件，Webpack从这个文件开始打包。
