@@ -19,7 +19,7 @@
 
 
 ## 事件循环
-事件循环的机制就在渲染主线程中执行的，目的是为了处理异步任务。
+事件循环的机制就在渲染主线程中执行的，目的是为了处理异步任务。又被称作消息循环，是浏览器渲染主线程的工作方式。
 
 - 最开始的时候，渲染主线程会进入一个无限循环。
 - 每一次循环会检查消息队列中是否有任务存在，如果有，就取出第一个任务执行，执行完一个后进入下一次循环；如果没有，则进入休眠状态。
@@ -77,6 +77,12 @@ btn.onclick = function () {
 https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint
 
 
+在目前chrome的实现中,至少包含了下面的队列:
+
+- 延时队列: 用于存放计时器到达后的回调任务,如定时器,优先级[中]
+- 交互队列: 用于存放用户操作后产生的事件处理任务,如用户点击事件/键盘事件等,优先级[高]
+- 微队列: 用于存放需要最快执行的任务,如promise,优先级[最高]
+
 ## 总结
 
 在浏览器的地址栏中输入url并键入回车。
@@ -93,6 +99,10 @@ https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-check
 
 **当某个宏任务执行完后,会查看是否有微任务队列。如果有，先执行微任务队列中的所有任务，如果没有，会读取宏任务队列中排在最前的任务，执行宏任务的过程中，遇到微任务，依次加入微任务队列。栈空后，再次读取微任务队列里的任务，依次类推。**
 
+---
+
+题目1:
+
 ```js
 Promise.resolve().then(()=>{
   console.log('Promise1')  
@@ -108,7 +118,37 @@ setTimeout(()=>{
 },0)
 ```
 最后输出结果是Promise1，setTimeout1，Promise2，setTimeout2
+---
 
+题目2:
 
+```js
+async function async1 () {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
 
+async function async2 () {
+  console.log('async 2');
+}
 
+console.log('script start');
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+async1();
+
+new Promise((resolve) => {
+  console.log('promise 1');
+  resolve();
+}).then(() => {
+  console.log('promise 2');
+})
+
+console.log('script end');
+```
+
+script start -> async1 start -> async 2 -> promise 1 ->  script end -> async1 end -> promise 2 -> setTimeout

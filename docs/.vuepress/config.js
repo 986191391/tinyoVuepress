@@ -44,6 +44,7 @@ module.exports = {
             'cssjs/etarget',
             'cssjs/jstopic',
             'cssjs/jsasync',
+            'cssjs/jsTimeout',
             'cssjs/regExp'
           ]
         },
