@@ -43,7 +43,8 @@ module.exports = {
             'cssjs/implicitConversion',
             'cssjs/etarget',
             'cssjs/jstopic',
-            'cssjs/jsasync'
+            'cssjs/jsasync',
+            'cssjs/regExp'
           ]
         },
         {
