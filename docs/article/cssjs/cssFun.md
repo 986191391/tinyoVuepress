@@ -1,5 +1,9 @@
 # 有(坑)趣(爹)的CSS
 
+## 不可替换行盒
+
+不可替换行盒例如span标签，是不能使用transform属性的
+
 ## 竖向方向margin值重叠
 
 [codepen示例](https://codepen.io/986191391/pen/KKzQvEg)
