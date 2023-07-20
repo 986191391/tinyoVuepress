@@ -19,7 +19,6 @@ module.exports = {
             'front/webpack',
             'front/lazyload',
             'front/reactive',
-            'front/attack',
             'front/interfacetype'
           ]
         },
@@ -53,6 +52,7 @@ module.exports = {
           collapsable: false,
           children: [
             'vue/vue3upd',
+            'vue/vue3performance',
             'vue/compositionapi',
             'vue/lifeCycle',
             'vue/dataBinding',
@@ -109,13 +109,16 @@ module.exports = {
           ]
         },
         {
-          title: '网络通信',
+          title: '网络',
           collapsable: false,
           children: [
             'net/tcpip',
             'net/http',
             'net/httphttps',
-            'net/http2http1'
+            'net/http2http1',
+            'net/token',
+            'net/getpost',
+            'net/attack'
           ]
         },
         {
