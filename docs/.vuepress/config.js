@@ -36,15 +36,15 @@ module.exports = {
             'cssjs/closure',
             'cssjs/prototype',
             'cssjs/inherit',
+            'cssjs/jsasync',
+            'cssjs/jsTimeout',
+            'cssjs/implicitConversion',
             // 'cssjs/jseventloop',
             'cssjs/mapObject',
             'cssjs/es7',
-            'cssjs/implicitConversion',
             'cssjs/etarget',
-            'cssjs/jstopic',
-            'cssjs/jsasync',
-            'cssjs/jsTimeout',
-            'cssjs/regExp'
+            'cssjs/regExp',
+            'cssjs/jstopic'
           ]
         },
         {
