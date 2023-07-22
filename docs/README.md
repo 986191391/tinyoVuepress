@@ -91,8 +91,8 @@ Ant Design Mobile组件库 [Ant Design Mobile](https://mobile.ant.design/zh/guid
 Vant UI组件库 [Vant UI](https://vant-contrib.gitee.io/vant/#/zh-CN)<br>
 有道词典翻译 [点击跳转](https://fanyi.youdao.com/index.html#/)<br>
 微信公众平台 [点击跳转](https://mp.weixin.qq.com/)<br>
-opan ai GTP [点击跳转](https://chat.openai.com/)<br>
-GTP3.5免费试用 [点击跳转](https://chat.wuguokai.cn/)
+GTP OPENAI [点击跳转](https://chat.openai.com/)<br>
+GTP 国内免费站点 [点击跳转](https://chat.wuguokai.cn/)
 
 
 ## 联系我
