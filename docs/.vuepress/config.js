@@ -129,7 +129,8 @@ module.exports = {
             'utils/delayFetch',
             'utils/instanceof',
             'utils/debounceThrottle',
-            'utils/isInViewPort'
+            'utils/isInViewPort',
+            'utils/mypromise'
           ]
         },
         {
