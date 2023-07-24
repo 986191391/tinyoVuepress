@@ -399,6 +399,13 @@ function uniquePaths(m, n) {
 }
 
 console.log(uniquePaths(3, 2));  // 输出：3
+
+// 我的解法
+function uniquePaths(m, n) {
+  if (m < 1 || n < 1) return 0;
+  if (m === 1 || n === 1) return 1;
+  return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+}
 ```
 
 19. 阶乘计算：编写一个函数，接受一个正整数作为输入，并返回该数的阶乘。要求使用递归来解决该问题。

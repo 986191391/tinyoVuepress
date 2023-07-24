@@ -84,7 +84,7 @@ ios设备可以较好的对vedio标签的api进行调用, 而安卓设备存在�
 
 ## JS兼容问题
 
-**1. scrollTop取值 **
+**1. scrollTop取值**
 ```js
 scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 ```
