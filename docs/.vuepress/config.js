@@ -70,6 +70,9 @@ module.exports = {
             'vue/vuex',
             'vue/diff',
             'vue/vuecompile',
+            'vue/mvvm',
+            'vue/vueReactDiff',
+            'vue/whyVdom',
             // 'vue/originCode'
           ]
         },
