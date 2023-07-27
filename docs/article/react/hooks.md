@@ -8,6 +8,37 @@ React Hooks 的作用主要有两个方面：
 
 - 替代生命周期函数：在函数式组件中，过去的生命周期函数并不容易管理及满足全部需求，因此 Hooks 则提供了 useEffect 和 useLayoutEffect 来解决这些问题，并可以帮助用户优化组件渲染等行为。此外，useCallback、useMemo 等 Hooks 可以帮助我们避免重复执行无意义的计算或函数定义，减少不必要的组件刷新。
 
+
+## hooks的优缺点
+
+### 优点
+
+1. 更好的逻辑复用
+
+通过自定义hooks来复用状态，从而解决了类组件有些时候难以复用逻辑的问题。函数每次调用都会开辟一份独立的内存空间。
+
+2. 无副作用，代码的可读性强
+
+3. 组件层级变得更浅
+
+在使用hooks之前通常使用高阶组件HOC的方法来复用多个组件公共的状态，增强组件的功能，这样肯定是加大了组件渲染的开销，损失了性能。但是在hooks中可以通过自定义组件useXxx()的方法将多个组件之间的共享逻辑放在自定义hook中，就可以轻松的进行数据互通。
+
+
+4. 不再需要考虑class组件中this指向的问题
+
+5. 可维护性及扩展性强
+
+
+### 缺点
+
+1. 生命周期不全
+
+hooks的useEffect只包括了componentDidMount、componentDidUpdate和componentWillUnmount这三个生命周期，对于getSnapshotBeforeUpdate和componentDidCatch等其他的生命周期没有支持。
+
+2. 重复执行性能问题
+
+在hooks中注册了很多的函数，假如该组件需要频繁更新，更新时函数则会重新的创建，消耗性能。
+
 ## useState
 
 useState 是最基本、最常用的 Hook 之一，它的作用是在函数型组件中添加状态（state）。通常用一个数组来存储 state 和 setState，如下所示：
@@ -46,6 +77,11 @@ useEffect(() => {
 
 ```
 
+## useCallback useMemo
+
+[彻底理解 React hook useCallback和useMemo的区别](https://juejin.cn/post/6844904032113278990)
+
+上文很好的讲解了他们的使用场景及区别。二者都是用于缓存，useCallback用于缓存函数，useMemo用于缓存变量，它们都可以根据监听值的改变来重新触发回调函数，以此来更新值。
 ## useContext
 
 React 中的 useContext() Hook 是用于方便地共享组件树中数据的方法，它可以让我们在不必通过中间层组件传递 props 的情况下获取全局状态，提高了应用程序的整体效率和可读性。
