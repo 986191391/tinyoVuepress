@@ -1,4 +1,4 @@
-# keepalive
+# keep-alive
 
 在Vue中，keep-alive是一个抽象组件，用于缓存动态组件或组件树。它可以在组件切换时保留组件状态或避免重新渲染组件。
 
