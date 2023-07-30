@@ -4,9 +4,17 @@
 ## 水平居中的方法
 [codepen例子](https://codepen.io/986191391/pen/oNYEzxd)
 1. margin: 0 auto;
-2. display: flex; justify-content: center
-3. position: absolute
-4. transform: translateX()
+2. display: flex; justify-content: center;
+3. position: absolute;
+4. transform: translateX();
+
+
+## 垂直方向居中
+
+1. display: flex; align-items: center;
+2. position: absolute; top: 50%; transform: translateY(50%);
+3. display: grid; align-items: center;
+4. height: 100px; line-height: 100px; // 只包含文本, 将高度设置为父元素高度
 
 ## dom元素消失的方法
 1. 透明度 opacity: 0
@@ -78,6 +86,9 @@ flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 au
 
 
 ## CSS 盒模型
+
+由 box-sizing 属性定义, 可选值为 content-box 和 border-box, 默认值为 content-box
+
 -  标准盒模型 content-box
 width 只等于内容区域，不包括border和padding
 -  怪异(IE)盒模型 border-box

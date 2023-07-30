@@ -151,8 +151,9 @@ Function.prototype.myBind = function (obj) {
 let getFooName = getName.myBind(foo)
 getFooName() // jill
 ```
-4. vue2双向绑定的原理，for in遍历data数据劫持的过程中，定义的变量取得的当前值也是通过闭包来保存，不会被清除， get/set时修改的也是该值。
-5. 以下以前的写法
+4. vue 的data 是一个函数的原因
+5. vue2双向绑定的原理，for in遍历data数据劫持的过程中，定义的变量取得的当前值也是通过闭包来保存，不会被清除， get/set时修改的也是该值。
+6. 以下以前的写法
 ```javascript
 for (var i = 0; i < 5; i++) {
   console.log('直接打印', i);
