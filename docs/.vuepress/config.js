@@ -33,6 +33,7 @@ module.exports = {
             'cssjs/jsdesignmode',
             'cssjs/jsmodule',
             'cssjs/this',
+            'cssjs/callapplybind',
             'cssjs/closure',
             'cssjs/prototype',
             'cssjs/inherit',

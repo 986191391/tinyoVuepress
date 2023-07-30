@@ -104,3 +104,75 @@ console.log(foo.bar);
 主要考察的是对象和数组此类引用数据类型值的引用，最后的输出结果为 false  true  4
 
 
+## 申明提前和new字符
+
+1. 考察变量和函数的申明提前的优先级
+2. 考察new字符的使用
+
+需要注意的是，函数的申明提前优先于变量，当var定义的变量和function定义的函数名重复时，function的函数名会优先申明提前。而var定义的变量申明提前存在一个前提，就是需要查看定义的变量是否已经存在，如果不存在则申明提前，如果已经存在，则进行重新赋值的操作。
+
+```js
+function Foo() {
+    getName = function() { console.log(2) };
+    return this;
+}
+Foo.getName = function() { console.log(1) };
+Foo.prototype.getName = function() { console.log(6) }
+var getName = function () { console.log(5) };
+function getName () { console.log(4) }
+
+// 写出一下结果的输出
+new Foo.getName()
+Foo.getName()
+getName()
+Foo().getName()
+getName()
+new Foo().getName()
+new new Foo().getName()
+```
+
+该题输出的结果是：1 1 5 2 2 6 6
+
+
+## 考察严格模式 this指向
+
+
+1. 考察call、apply的使用。
+2. 考察严格模式下的使用。
+
+```js
+// 正常情况
+(function () {
+    var obj = { age: 18 }
+    function people () {
+        console.log(this.age);
+        function student() {
+            obj.age++;
+            console.log(obj.age);
+        }
+        return student;
+    }
+    people.call(null, { age: 20 });
+    people.apply(obj, [obj])();
+})()
+```
+```js
+// 使用严格模式
+'use strict';
+(function () {
+    var obj = { age: 18 }
+    function people () {
+        console.log(this.age);
+        function student() {
+            obj.age++;
+            console.log(obj.age);
+        }
+        return student;
+    }
+    people.call(null, { age: 20 });
+    people.apply(obj, [obj])();
+})()
+```
+
+正常模式下，call输出undefined，apply输出18 19。<br>
+严格模式下，call会报错。
