@@ -144,6 +144,7 @@ module.exports = {
           children: [
             'algorithm/recursion',
             'algorithm/binaryTree',
+            'algorithm/sort',
             'algorithm/code',
             'algorithm/js'
           ]
