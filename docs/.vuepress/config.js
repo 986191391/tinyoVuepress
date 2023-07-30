@@ -16,10 +16,11 @@ module.exports = {
           children: [
             'front/docmeta',
             'front/webOptimize',
-            'front/webpack',
+            'front/permission',
             'front/lazyload',
             'front/reactive',
-            'front/interfacetype'
+            'front/interfacetype',
+            'front/webpack'
           ]
         },
         {
