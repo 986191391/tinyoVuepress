@@ -118,6 +118,7 @@ module.exports = {
           collapsable: false,
           children: [
             'net/tcpip',
+            'net/tcpudp',
             'net/http',
             'net/httphttps',
             'net/http2http1',
