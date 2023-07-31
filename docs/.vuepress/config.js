@@ -124,7 +124,8 @@ module.exports = {
             'net/http2http1',
             'net/token',
             'net/getpost',
-            'net/attack'
+            'net/attack',
+            'net/ajax'
           ]
         },
         {
