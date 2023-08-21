@@ -1,4 +1,7 @@
 
+注：基于vuePress的文档更新已停止，现已在另一工程(vitePress)中同步更新。
+
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
   @keyframes move {
